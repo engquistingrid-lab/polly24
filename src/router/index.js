@@ -1,5 +1,6 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import StartView from '../views/StartView.vue'
+import StartView1 from '../views/StartView1.vue'
 import AdministratorGroupPage from '../views/AdministratorGroupPage.vue'
 import GroupPage from '../views/GroupPage.vue'
 
@@ -15,6 +16,11 @@ const router = createRouter({
       path:'/login/',
       name: 'loginView',
       component: () => import ('../views/loginView.vue')},
+
+      {
+      path:'/signup/',
+      name: 'Signupview',
+      component: () => import ('../views/SignupView.vue')},
 
       {path: '/homepage/',
       name: 'HomePage',
