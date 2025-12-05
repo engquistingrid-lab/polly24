@@ -1,13 +1,19 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import StartView from '../views/StartView.vue'
+import HomePage from '../views/HomePage.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
     {
       path: '/',
-      name: 'Start',
+      name: 'StartView',
       component: StartView
+    },
+    {
+      path: '/homepage/',
+      name: 'HomePage',
+      component: () => import('../views/HomePage.vue')
     },
       {
       path: '/poll/:id',
