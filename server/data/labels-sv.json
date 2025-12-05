@@ -14,5 +14,9 @@
 	"CreateGroup": "Skapa grupp",
 	"login": "Logga in",
 	"signup": "Registera dig",
-	"password": "Lösenord"
+	"password": "Lösenord",
+	"JoinGroup": "Gå med i grupp",
+	"ReturnToHomepage": "Återvänd till startsidan",
+	"EnterYourCode": "Ange din gruppkod:",
+	"Continue": "Fortsätt"
 }

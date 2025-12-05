@@ -14,7 +14,12 @@
 	"CreateGroup":"Create group",
 	"login":"Log in",
 	"signup": "Sign up",
-	"password": "Password"
+	"password": "Password",
+	"JoinGroup":"Join group",
+	"ReturnToHomepage":"Return to homepage",
+	"EnterYourCode":"Enter your group code:",
+	"Continue":"Continue"
+
 
 
 }
