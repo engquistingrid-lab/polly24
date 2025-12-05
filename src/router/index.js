@@ -10,6 +10,14 @@ const router = createRouter({
       name: 'AdministratorStart',
       component: AdministratorStart
     },
+    {
+      path:'/login/',
+      name: 'loginView',
+      component: () => import ('../views/loginView.vue')
+      path: '/homepage/',
+      name: 'HomePage',
+      component: () => import('../views/HomePage.vue')
+    },
       {
       path: '/poll/:id',
       name: 'PollView',

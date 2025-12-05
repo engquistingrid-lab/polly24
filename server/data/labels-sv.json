@@ -12,4 +12,7 @@
 	"PriceRange": "Prisintervall",
 	"GroupName": "Gruppnamn:",
 	"CreateGroup": "Skapa grupp"
+	"login": "Logga in",
+	"signup": "Registera dig",
+	"password": "Lösenord"
 }
