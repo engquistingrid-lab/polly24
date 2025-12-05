@@ -7,17 +7,31 @@ const router = createRouter({
   routes: [
     {
       path: '/',
-      name: 'StartView',
-      component: StartView
+      name: 'StartView1',
+      component: StartView1
     },
     {
       path:'/login/',
       name: 'loginView',
-      component: () => import ('../views/loginView.vue')
+      component: () => import ('../views/loginView.vue')},
+
+    {
       path: '/homepage/',
       name: 'HomePage',
       component: () => import('../views/HomePage.vue')
     },
+
+    {
+      path: '/assignedpage/',
+      name: 'AssignedPage',
+      component: () => import('../views/AssignedPage.vue')
+    },
+    {
+      path: '/mygroupspage/',
+      name: 'MyGroupsPage',
+      component: () => import('../views/AssignedPage.vue')
+    },
+
       {
       path: '/poll/:id',
       name: 'PollView',

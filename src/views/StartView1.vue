@@ -50,7 +50,7 @@ const socket = io("localhost:3000");
     }
 </script>
 
-<style scoped>
+<style>
 
 .wrapper{
     position: relative;
