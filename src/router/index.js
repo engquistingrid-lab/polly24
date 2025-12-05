@@ -1,19 +1,19 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import StartView from '../views/AdministratorStart.vue'
-import AdministratorStart from '../views/AdministratorStart.vue'
+import JoinGroup from '../views/JoinGroup.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
     {
       path: '/',
-      name: 'AdministratorStart',
-      component: AdministratorStart
+      name: 'JoinGroup',
+      component: JoinGroup => import('../views/JoinGroup.vue')
     },
     {
       path:'/login/',
       name: 'loginView',
-      component: () => import ('../views/loginView.vue')
+      component: () => import ('../views/loginView.vue'),
       path: '/homepage/',
       name: 'HomePage',
       component: () => import('../views/HomePage.vue')
