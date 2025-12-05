@@ -20,6 +20,18 @@ const router = createRouter({
       name: 'HomePage',
       component: () => import('../views/HomePage.vue')
     },
+
+    {
+      path: '/assignedpage/',
+      name: 'AssignedPage',
+      component: () => import('../views/AssignedPage.vue')
+    },
+    {
+      path: '/mygroupspage/',
+      name: 'MyGroupsPage',
+      component: () => import('../views/AssignedPage.vue')
+    },
+
       {
       path: '/poll/:id',
       name: 'PollView',
