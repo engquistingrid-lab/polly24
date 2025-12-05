@@ -11,6 +11,8 @@
         <router-link to="/login/" class="login"> 
             {{ uiLabels.signup }}
         </router-link>
+
+
         </div>
 
     </div>
@@ -19,8 +21,7 @@
 
 </template>
 
-<script>
-import io from 'socket.io-client';
+<script>import io from 'socket.io-client';
 const socket = io("localhost:3000");
     export default {
         name:"StartView1",
@@ -50,7 +51,7 @@ const socket = io("localhost:3000");
     }
 </script>
 
-<style scoped>
+<style>
 
 .wrapper{
     position: relative;

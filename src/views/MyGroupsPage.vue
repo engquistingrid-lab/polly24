@@ -1,25 +1,13 @@
+
 <template>
     <header>
-        <h1>Secret Santa</h1>
-        <button class="langbtn" v-on:click="switchLanguage">
-            {{ uiLabels.changeLanguage  }}
-        </button>
-        <button class="logoutbtn" v-on:click="">
-            Logga ut
-        </button>
+        <button>Återgå till startsida</button>
     </header>
    
     <div>
-        <h1>Välkommen, Gruppnamn</h1>
-        <button >
-            Starta ny grupp
-        </button>
-        <button >
-            Gå med i grupp
-        </button>
-        <button >
-            Visa mina grupper
-        </button>
+        <h1>Dina grupper</h1>
+         <button>Grupp 1</button>
+       
     </div>
 
 </template>
@@ -57,9 +45,5 @@ const socket = io("localhost:3000");
 </script>
 
 <style>
-
-h1 {
-    color:black;
-}
 
 </style>
