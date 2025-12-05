@@ -8,8 +8,17 @@ const router = createRouter({
   routes: [
     {
       path: '/',
-      name: 'GroupPage',
-      component: GroupPage
+      name: 'StartView1',
+      component: StartView1
+    },
+    {
+      path:'/login/',
+      name: 'loginView',
+      component: () => import ('../views/loginView.vue')},
+
+      {path: '/homepage/',
+      name: 'HomePage',
+      component: () => import('../views/HomePage.vue')
     },
       {
       path: '/poll/:id',
