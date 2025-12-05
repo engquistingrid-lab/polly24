@@ -6,10 +6,10 @@
             <input type="email" v-model="email">
             <label>{{ uiLabels.password }}</label>
             <input type="password" v-model="password">
-            <router-link to="/homepage" class="login">
-                Logga in
-            </router-link>
-        
+            <router-link to="/homepage/" class="login"> 
+            Logga in
+        </router-link>
+
         </div>
     </div>
 

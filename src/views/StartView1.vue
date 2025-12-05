@@ -11,6 +11,8 @@
         <router-link to="/login/" class="login"> 
             {{ uiLabels.signup }}
         </router-link>
+
+
         </div>
 
     </div>
