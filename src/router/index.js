@@ -1,14 +1,14 @@
 import { createRouter, createWebHistory } from 'vue-router'
-import StartView from '../views/StartView.vue'
-import StartView1 from '../views/StartView1.vue'
+import StartView from '../views/AdministratorStart.vue'
+import AdministratorStart from '../views/AdministratorStart.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
     {
       path: '/',
-      name: 'StartView',
-      component: StartView
+      name: 'AdministratorStart',
+      component: AdministratorStart
     },
     {
       path:'/login/',

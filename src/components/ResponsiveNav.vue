@@ -11,6 +11,28 @@ export default {
   name: 'ResponsiveNav',
   props: {
       hideNav: Boolean
+  },
+  data: function () {
+    return {
+      uiLabels: {},
+      lang: localStorage.getItem("lang") || "en"
+    }
+  },
+  created: function () {
+    socket.on("uiLabels", labels => this.uiLabels = labels);
+    socket.emit("getUILabels", this.lang);
+  },
+  methods: {
+    switchLanguage: function() {
+      if (this.lang === "en") {
+        this.lang = "sv"
+      }
+      else {
+        this.lang = "en"
+      }
+      localStorage.setItem( "lang", this.lang );
+      socket.emit( "getUILabels", this.lang );
+    },
   }
 }
 </script>
