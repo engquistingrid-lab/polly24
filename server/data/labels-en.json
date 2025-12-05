@@ -8,6 +8,10 @@
 	"changeLanguage": "Byt till svenska",
 	"about": "About",
 	"participateInPoll": "Participate in poll",
+	"StartNewGroup": "Start new group",
+	"PriceRange":"Price range:",
+	"GroupName":"Group name:",
+	"CreateGroup":"Create group"
 	"login":"Log in",
 	"signup": "Sign up",
 	"password": "Password"
