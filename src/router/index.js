@@ -27,11 +27,20 @@ const router = createRouter({
       component: () => import('../views/HomePage.vue')
     },
 
+     {
+      path:'/joingroup/',
+      name: 'JoinGroup',
+      component: () => import ('../views/JoinGroup.vue')},
+
     {
       path: '/yourassignedpage/',
       name: 'YourAssignedPage',
       component: () => import('../views/YourAssignedPage.vue')
     },
+      {
+      path:'/administratorstart/',
+      name: 'AdministratorStart',
+      component: () => import ('../views/AdministratorStart.vue')},
     {
       path: '/mygroupspage/',
       name: 'MyGroupsPage',

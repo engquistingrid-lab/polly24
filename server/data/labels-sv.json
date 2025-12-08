@@ -13,6 +13,7 @@
 	"GroupName": "Gruppnamn:",
 	"CreateGroup": "Skapa grupp",
 	"login": "Logga in",
+	"Logout": "Logga ut",
 	"signup": "Registera dig",
 	"password": "Lösenord",
 	"JoinGroup": "Gå med i grupp",
@@ -27,4 +28,13 @@
 	"GoToWishlist": "🎁Gå till önskelista🎁",
 	"BackToHomepage": "🥵 Tillbaka till startsidan",
 	"WaitingForAdmin": "Väntar på att administratör ska generera Secret Santa..."
+	"Returntostart":"Tillbaka till start",
+	"Yourname": "Ditt namn",
+	"Password": "Lösenord",
+	"Confirmpassword": "Bekräfta Lösenord",
+	"Joingroup": "Gå med i grupp",
+	"Showmygroup": "Visa mina grupper",
+	"Startnewgroup": "Starta en ny grupp",
+	"Welcome": "Välkommen"
+
 }
