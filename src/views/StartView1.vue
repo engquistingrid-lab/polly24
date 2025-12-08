@@ -6,10 +6,10 @@
 
         <h1> SecretSanta </h1>
         <div class="options">
-        <button class="signin">
-             {{ uiLabels.login }}</button>
+        <router-link to="/signup/" class="signin">
+             {{ uiLabels.signup }}</router-link>
         <router-link to="/login/" class="login"> 
-            {{ uiLabels.signup }}
+            {{ uiLabels.login }}
         </router-link>
 
 

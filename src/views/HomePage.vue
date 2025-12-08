@@ -17,9 +17,9 @@
         <button >
             Gå med i grupp
         </button>
-        <button >
+        <router-link to="/mygroupspage/">
             Visa mina grupper
-        </button>
+      </router-link>
     </div>
 
 </template>

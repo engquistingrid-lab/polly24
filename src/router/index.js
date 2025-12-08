@@ -35,7 +35,7 @@ const router = createRouter({
     {
       path: '/mygroupspage/',
       name: 'MyGroupsPage',
-      component: () => import('../views/AssignedPage.vue')
+      component: () => import('../views/MyGroupsPage.vue')
     },
 
       {
