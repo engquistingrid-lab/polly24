@@ -18,5 +18,13 @@
 	"JoinGroup": "Gå med i grupp",
 	"ReturnToHomepage": "Återvänd till startsidan",
 	"EnterYourCode": "Ange din gruppkod:",
-	"Continue": "Fortsätt"
+	"Continue": "Fortsätt",
+	"AdministratorGroupPage": "Administratörsgruppssida",
+	"ParticipantGroupPage": "Deltagargruppssida",
+	"Members": "Medlemmar",
+	"Generate": "Generera Secret Santa tilldelning",
+	"YourAssigned": "Du har blivit tilldelad:",
+	"GoToWishlist": "🎁Gå till önskelista🎁",
+	"BackToHomepage": "🥵 Tillbaka till startsidan",
+	"WaitingForAdmin": "Väntar på att administratör ska generera Secret Santa..."
 }

@@ -2,7 +2,7 @@
 
 <header>
     <router-link to="/homepage">{{ uiLabels.BackToHomePage }}</router-link>
-    <h1>{{ uiLabels.AdministratorGroupPage }}</h1>
+    <h1>{{ uiLabels.ParticipantGroupPage }}</h1>
 </header>
 
 <div class="ParticipantWrapper">
@@ -15,7 +15,7 @@
             <li>Medlem 3</li>
         </ul>
     </div>
-<router-link to="/yourassignedpage">{{uiLabels.Generate}}</router-link>
+<p>{{ uiLabels.WaitingForAdmin }}</p>
 </div>
 
 </template>
@@ -24,7 +24,7 @@
 import io from 'socket.io-client';
 const socket = io("localhost:3000");
     export default {
-            name:"AdministratorGroupPage",
+            name:"ParticipantGroupPage",
         data: function () {
         return {
             uiLabels: {},
@@ -38,5 +38,5 @@ const socket = io("localhost:3000");
 }
 </script>
 
-<style scoped>
+<style >
 </style>
