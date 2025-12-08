@@ -1,5 +1,6 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import StartView from '../views/StartView.vue'
+import WishlistGame from '../views/WishlistGame.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -28,7 +29,12 @@ const router = createRouter({
       path: '/result/:id',
       name: 'ResultView',
       component: () => import('../views/ResultView.vue')
-    }
+    },
+    {
+    path: '/wishlist',
+    name: 'WishlistGame',
+    component: WishlistGame
+  }
   ]
 })
 
