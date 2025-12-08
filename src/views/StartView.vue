@@ -30,6 +30,12 @@
   <router-link v-bind:to="'/lobby/' + newPollId">
     {{ uiLabels.participatePoll }}
   </router-link>
+
+  <br><br> <router-link to="/wishlist">
+    <button style="background-color: blue; color: white;">
+      Gå till WishlistGame
+    </button>
+  </router-link>
 </template>
 
 <script>
