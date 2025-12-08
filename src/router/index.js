@@ -1,15 +1,44 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import StartView from '../views/StartView.vue'
 import WishlistGame from '../views/WishlistGame.vue'
+import StartView1 from '../views/StartView1.vue'
+import AdministratorGroupPage from '../views/AdministratorGroupPage.vue'
+import GroupPage from '../views/GroupPage.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
     {
       path: '/',
-      name: 'Start',
-      component: StartView
+      name: 'StartView1',
+      component: StartView1
     },
+    {
+      path:'/login/',
+      name: 'loginView',
+      component: () => import ('../views/loginView.vue')},
+
+      {
+      path:'/signup/',
+      name: 'Signupview',
+      component: () => import ('../views/SignupView.vue')},
+
+      {path: '/homepage/',
+      name: 'HomePage',
+      component: () => import('../views/HomePage.vue')
+    },
+
+    {
+      path: '/assignedpage/',
+      name: 'AssignedPage',
+      component: () => import('../views/AssignedPage.vue')
+    },
+    {
+      path: '/mygroupspage/',
+      name: 'MyGroupsPage',
+      component: () => import('../views/AssignedPage.vue')
+    },
+
       {
       path: '/poll/:id',
       name: 'PollView',
