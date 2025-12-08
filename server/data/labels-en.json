@@ -13,13 +13,20 @@
 	"GroupName":"Group name:",
 	"CreateGroup":"Create group",
 	"login":"Log in",
+	"Logout":"Log out",
 	"signup": "Sign up",
 	"password": "Password",
 	"JoinGroup":"Join group",
 	"ReturnToHomepage":"Return to homepage",
 	"EnterYourCode":"Enter your group code:",
-	"Continue":"Continue"
-
-
+	"Continue":"Continue",
+	"Returntostart": "Return to start",
+	"Yourname": "Your name",
+	"Password": "Password",
+	"Confirmpassword": "Confirm password ",
+	"Joingroup":"Join group",
+	"Showmygroup": "Show my groups",
+	"Startnewgroup": "Start new group",
+	"Welcome": "Welcome"
 
 }
