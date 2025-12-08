@@ -20,6 +20,16 @@
 	"ReturnToHomepage":"Return to homepage",
 	"EnterYourCode":"Enter your group code:",
 	"Continue":"Continue",
+	"AdministratorGroupPage": "Administrator Group Page",
+	"ParticipantGroupPage": "Participant Group Page",
+	"Members":"Members",
+	"Generate": "Generate Secret Santa assignment",
+	"YourAssigned": "You have been assigned:",
+	"GoToWishlist": "🎁Go to wishlist🎁",
+	"BackToHomepage": "🥵 Back to homepage",
+	"WaitingForAdmin": "Waiting for admin to generate Secret Santa..."
+
+
 	"Returntostart": "Return to start",
 	"Yourname": "Your name",
 	"Password": "Password",

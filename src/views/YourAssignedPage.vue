@@ -1,30 +1,26 @@
 <template>
-
-<header>
+    <main>
+    <header>
     <router-link to="/homepage">{{ uiLabels.BackToHomePage }}</router-link>
-    <h1>{{ uiLabels.AdministratorGroupPage }}</h1>
-</header>
+    <h1>{{uiLabels.YourAssigned}}</h1>
+    
+    </header>
 
-<div class="ParticipantWrapper">
-    <div class="ParticipantList">
-        <h1>{{ uiLabels.GroupName }}</h1>
-        <h2>{{ uiLabels.Members }}</h2>
-        <ul>    
-            <li>Medlem 1</li>
-            <li>Medlem 2</li>
-            <li>Medlem 3</li>
-        </ul>
+    <div>
+        
+         <h1>Namn</h1>
+         <img src="/img/ElvinsGlad.jpeg" class="AssignedImg"></img>
+         <router-link to="/wishlist">{{uiLabels.GoToWishList}}</router-link>
+       
     </div>
-<router-link to="/yourassignedpage">{{uiLabels.Generate}}</router-link>
-</div>
-
+</main>
 </template>
 
 <script>    
 import io from 'socket.io-client';
 const socket = io("localhost:3000");
     export default {
-            name:"AdministratorGroupPage",
+            name:"YourAssignedPage",
         data: function () {
         return {
             uiLabels: {},
@@ -36,7 +32,15 @@ const socket = io("localhost:3000");
      socket.emit( "getUILabels", this.lang )
     }
 }
+
 </script>
 
 <style scoped>
+
+.AssignedImg {
+    width: 300px;
+    height: auto;
+    border-radius: 10px;
+    margin-top: 20px;
+}
 </style>
