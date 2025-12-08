@@ -1,5 +1,6 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import StartView from '../views/StartView.vue'
+import WishlistGame from '../views/WishlistGame.vue'
 import StartView1 from '../views/StartView1.vue'
 import AdministratorGroupPage from '../views/AdministratorGroupPage.vue'
 import GroupPage from '../views/GroupPage.vue'
@@ -57,7 +58,12 @@ const router = createRouter({
       path: '/result/:id',
       name: 'ResultView',
       component: () => import('../views/ResultView.vue')
-    }
+    },
+    {
+    path: '/wishlist',
+    name: 'WishlistGame',
+    component: WishlistGame
+  }
   ]
 })
 
