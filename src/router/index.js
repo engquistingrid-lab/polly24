@@ -1,17 +1,16 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import StartView from '../views/StartView.vue'
-import WishlistGame from '../views/WishlistGame.vue'
 import StartView1 from '../views/StartView1.vue'
-import AdministratorGroupPage from '../views/AdministratorGroupPage.vue'
-import GroupPage from '../views/GroupPage.vue'
+
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
     {
       path: '/',
-      name: 'StartView1',
+      name: 'startView1',
       component: StartView1
+    
     },
     {
       path:'/login/',
@@ -28,15 +27,24 @@ const router = createRouter({
       component: () => import('../views/HomePage.vue')
     },
 
+     {
+      path:'/joingroup/',
+      name: 'JoinGroup',
+      component: () => import ('../views/JoinGroup.vue')},
+
     {
-      path: '/assignedpage/',
-      name: 'AssignedPage',
-      component: () => import('../views/AssignedPage.vue')
+      path: '/yourassignedpage/',
+      name: 'YourAssignedPage',
+      component: () => import('../views/YourAssignedPage.vue')
     },
+      {
+      path:'/administratorstart/',
+      name: 'AdministratorStart',
+      component: () => import ('../views/AdministratorStart.vue')},
     {
       path: '/mygroupspage/',
       name: 'MyGroupsPage',
-      component: () => import('../views/AssignedPage.vue')
+      component: () => import('../views/MyGroupsPage.vue')
     },
 
       {
@@ -60,9 +68,19 @@ const router = createRouter({
       component: () => import('../views/ResultView.vue')
     },
     {
-    path: '/wishlist',
+    path: '/wishlist/',
     name: 'WishlistGame',
-    component: WishlistGame
+    component: () => import('../views/WishlistGame.vue')
+  },
+  {
+    path: '/administratorgrouppage/',
+    name: 'AdministratorGroupPage',
+    component: () => import('../views/AdministratorGroupPage.vue')
+  },
+  { 
+    path: '/participantgrouppage/',
+    name: 'ParticipantGroupPage',
+    component: () => import('../views/ParticipantGroupPage.vue')
   }
   ]
 })

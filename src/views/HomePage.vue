@@ -5,21 +5,22 @@
             {{ uiLabels.changeLanguage  }}
         </button>
         <button class="logoutbtn" v-on:click="">
-            Logga ut
+            {{ uiLabels.Logout }}
         </button>
     </header>
    
     <div>
-        <h1>Välkommen, Gruppnamn</h1>
-        <button >
-            Starta ny grupp
-        </button>
-        <button >
-            Gå med i grupp
-        </button>
-        <button >
-            Visa mina grupper
-        </button>
+        <h1>{{ uiLabels.Welcome }}, Gruppnamn</h1>
+        <router-link to ='/administratorstart/'>
+            {{ uiLabels.Startnewgroup }}
+        </router-link>
+    
+        <router-link to="/joingroup/">
+          {{uiLabels.Joingroup}}
+        </router-link>
+        <router-link to="/mygroupspage/">
+            {{ uiLabels.Showmygroup }}
+      </router-link>
     </div>
 
 </template>
@@ -28,7 +29,7 @@
 import io from 'socket.io-client';
 const socket = io("localhost:3000");
     export default {
-        name:"StartView1",
+        name:"HomePage",
 
     data: function () {
     return {
@@ -62,4 +63,10 @@ h1 {
     color:black;
 }
 
+.logoutbtn{
+  display: flex;
+  top: 0px;
+  left: 10px;
+
+}
 </style>

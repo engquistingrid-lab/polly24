@@ -13,6 +13,7 @@
 	"GroupName":"Group name:",
 	"CreateGroup":"Create group",
 	"login":"Log in",
+	"Logout":"Log out",
 	"signup": "Sign up",
 	"password": "Password",
 	"JoinGroup":"Join group",
@@ -31,7 +32,23 @@
 	"Incorrect":"Incorrect",
 	"AddWishPlaceholder":"Enter your wish here...",
 	"NoSpacielChars":"No special characters!"
+	"AdministratorGroupPage": "Administrator Group Page",
+	"ParticipantGroupPage": "Participant Group Page",
+	"Members":"Members",
+	"Generate": "Generate Secret Santa assignment",
+	"YourAssigned": "You have been assigned:",
+	"GoToWishlist": "🎁Go to wishlist🎁",
+	"BackToHomepage": "🥵 Back to homepage",
+	"WaitingForAdmin": "Waiting for admin to generate Secret Santa..."
 
 
+	"Returntostart": "Return to start",
+	"Yourname": "Your name",
+	"Password": "Password",
+	"Confirmpassword": "Confirm password ",
+	"Joingroup":"Join group",
+	"Showmygroup": "Show my groups",
+	"Startnewgroup": "Start new group",
+	"Welcome": "Welcome"
 
 }

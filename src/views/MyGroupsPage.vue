@@ -16,7 +16,7 @@
 import io from 'socket.io-client';
 const socket = io("localhost:3000");
     export default {
-        name:"StartView1",
+        name:"MyGroupsPage",
 
     data: function () {
     return {
