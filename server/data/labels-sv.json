@@ -18,5 +18,17 @@
 	"JoinGroup": "Gå med i grupp",
 	"ReturnToHomepage": "Återvänd till startsidan",
 	"EnterYourCode": "Ange din gruppkod:",
-	"Continue": "Fortsätt"
+	"Continue": "Fortsätt",
+	"Assigned": "Du är Secret Santa till:",
+	"AddWish": "Lägg till önskan",
+	"Wishes": "Önskningar",
+	"TimeState": "Återstående tid",
+	"Leaderboard": "Topplista",
+	"WhosWish": "Vem önskar sig detta:",
+	"Guess": "Gissa",
+	"Cancel": "Avbryt",
+	"Correct": "Rätt",
+	"Incorrect": "Fel",
+	"AddWishPlaceholder": "Skriv din önskan här...",
+	"NoSpacielChars": "Inga specialtecken!"
 }

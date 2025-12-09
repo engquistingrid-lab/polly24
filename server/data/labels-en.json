@@ -18,7 +18,19 @@
 	"JoinGroup":"Join group",
 	"ReturnToHomepage":"Return to homepage",
 	"EnterYourCode":"Enter your group code:",
-	"Continue":"Continue"
+	"Continue":"Continue",
+	"Assigned":"You have been assigned to:",
+	"AddWish":"Add Wish",
+	"Wishes":"Wishes",
+	"TimeState":"Time Remaining",
+	"Leaderboard":"Leaderboard",
+	"WhosWish":"Who wishes for this:",
+	"Guess":"Guess",
+	"Cancel":"Cancel",
+	"Correct":"Correct",
+	"Incorrect":"Incorrect",
+	"AddWishPlaceholder":"Enter your wish here...",
+	"NoSpacielChars":"No special characters!"
 
 
 
