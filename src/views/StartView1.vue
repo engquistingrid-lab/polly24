@@ -11,6 +11,11 @@
         <router-link to="/login/" class="login"> 
             {{ uiLabels.login }}
         </router-link>
+        <router-link to="/wishlist">
+            <button class="wishGame">
+              Gå till WishlistGame
+            </button>
+        </router-link>
 
 
         </div>
