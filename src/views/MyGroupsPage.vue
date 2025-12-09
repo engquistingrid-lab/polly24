@@ -1,15 +1,25 @@
 
 <template>
+  <div class="wrapper">
     <header>
-        <button>Återgå till startsida</button>
+      <div class="header-content">
+      <h1> 
+        {{ uiLabels.YourGroups }}
+      </h1>
+        <button class="langbtn" v-on:click="returnToHomepage ">
+            <router-link to="/homepage/"> 
+              {{ uiLabels.ReturnToHomepage }}
+            </router-link>     
+        </button>
+      </div>
     </header>
-   
+    
     <div>
-        <h1>Dina grupper</h1>
+        
          <button>Grupp 1</button>
        
     </div>
-
+  </div>
 </template>
 
 <script>
