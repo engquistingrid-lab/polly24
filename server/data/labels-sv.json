@@ -31,7 +31,7 @@
 	"Correct": "Rätt",
 	"Incorrect": "Fel",
 	"AddWishPlaceholder": "Skriv din önskan här...",
-	"NoSpacielChars": "Inga specialtecken!"
+	"NoSpacielChars": "Inga specialtecken!",
 	"AdministratorGroupPage": "Administratörsgruppssida",
 	"ParticipantGroupPage": "Deltagargruppssida",
 	"Members": "Medlemmar",
@@ -39,7 +39,7 @@
 	"YourAssigned": "Du har blivit tilldelad:",
 	"GoToWishlist": "🎁Gå till önskelista🎁",
 	"BackToHomepage": "🥵 Tillbaka till startsidan",
-	"WaitingForAdmin": "Väntar på att administratör ska generera Secret Santa..."
+	"WaitingForAdmin": "Väntar på att administratör ska generera Secret Santa...",
 	"Returntostart":"Tillbaka till start",
 	"Yourname": "Ditt namn",
 	"Password": "Lösenord",

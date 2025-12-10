@@ -15,7 +15,9 @@
             <li>Medlem 3</li>
         </ul>
     </div>
-<router-link to="/yourassignedpage">{{uiLabels.Generate}}</router-link>
+    <button v-on:click="youreassigned">
+    <router-link to="/yourassignedpage">{{uiLabels.Generate}}</router-link>
+    </button>
 </div>
 
 </template>

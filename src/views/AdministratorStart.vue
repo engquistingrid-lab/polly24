@@ -16,7 +16,9 @@
         </label> 
     </div>
     <button v-on:click="CreateGroup">
-        {{ uiLabels.CreateGroup }}
+        <router-link to='/administratorgrouppage/'>
+            {{ uiLabels.CreateGroup }}
+      </router-link>
     </button>
 
 </template>
