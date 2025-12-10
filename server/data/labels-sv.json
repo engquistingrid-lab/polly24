@@ -27,7 +27,7 @@
 	"YourAssigned": "Du har blivit tilldelad:",
 	"GoToWishlist": "🎁Gå till önskelista🎁",
 	"BackToHomepage": "🥵 Tillbaka till startsidan",
-	"WaitingForAdmin": "Väntar på att administratör ska generera Secret Santa..."
+	"WaitingForAdmin": "Väntar på att administratör ska generera Secret Santa...",
 	"Returntostart":"Tillbaka till start",
 	"Yourname": "Ditt namn",
 	"Password": "Lösenord",
@@ -35,6 +35,7 @@
 	"Joingroup": "Gå med i grupp",
 	"Showmygroup": "Visa mina grupper",
 	"Startnewgroup": "Starta en ny grupp",
-	"Welcome": "Välkommen"
+	"Welcome": "Välkommen",
+	"FillAllFields": "Vänligen fyll i alla fält"
 
 }

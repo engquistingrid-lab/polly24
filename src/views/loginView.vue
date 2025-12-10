@@ -11,9 +11,11 @@
             <input type="email" v-model="email">
             <label>{{ uiLabels.password }}</label>
             <input type="password" v-model="password">
+            <button @click="login">
             <router-link to="/homepage/" class="login"> 
             Logga in
-        </router-link>
+            </router-link>
+            </button>
         </div>
     </div>
 
@@ -34,6 +36,13 @@ export default {
    created: function () {
      socket.on( "uiLabels", labels => this.uiLabels = labels );
      socket.emit( "getUILabels", this.lang )
+    },
+
+    methods: {
+        login: function() {
+            
+        }
+        
     }
 }
    

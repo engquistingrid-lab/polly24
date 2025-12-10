@@ -27,9 +27,7 @@
 	"YourAssigned": "You have been assigned:",
 	"GoToWishlist": "🎁Go to wishlist🎁",
 	"BackToHomepage": "🥵 Back to homepage",
-	"WaitingForAdmin": "Waiting for admin to generate Secret Santa..."
-
-
+	"WaitingForAdmin": "Waiting for admin to generate Secret Santa...",
 	"Returntostart": "Return to start",
 	"Yourname": "Your name",
 	"Password": "Password",
@@ -37,6 +35,7 @@
 	"Joingroup":"Join group",
 	"Showmygroup": "Show my groups",
 	"Startnewgroup": "Start new group",
-	"Welcome": "Welcome"
+	"Welcome": "Welcome",
+	"FillAllFields": "Please fill in all fields"
 
 }

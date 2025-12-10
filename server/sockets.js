@@ -1,8 +1,19 @@
-function sockets(io, socket, data) {
+function sockets(io, socket, data, users) {
   
   socket.on('getUILabels', function(lang) {
     socket.emit('uiLabels', data.getUILabels(lang));
   });
+
+  socket.on('signup', function(d) {
+    const result = users.addUser(d.name, d.email, d.password);
+    socket.emit('signupResponse', result);
+  });
+
+
+
+
+
+  //kom ihåg att radera alla nedanstående sen när all kod är klar, det är gammal kod//
 
   socket.on('createPoll', function(d) {
     data.createPoll(d.pollId, d.lang)
@@ -38,5 +49,7 @@ function sockets(io, socket, data) {
     io.to(d.pollId).emit('submittedAnswersUpdate', data.getSubmittedAnswers(d.pollId));
   }); 
 }
+
+//kom ihåg att radera alla ovanstående sen när all kod är klar, det är gammal kod//
 
 export { sockets };
