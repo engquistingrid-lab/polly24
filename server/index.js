@@ -14,7 +14,7 @@ const io = new Server(httpServer, {
 // If you need to change how data is handled, check the Data.js file!
 
 import { Data } from "./Data.js";
-import { Users } from "./users.js";
+import { Users } from "./data/users.js";
 //
 import { sockets } from "./sockets.js";
 

@@ -42,12 +42,14 @@ export default {
         yourname: '',
         email: '',
         password: '',
+        confirmpassword: '',
         message: ''
     }
    },
    created: function () {
      socket.on( "uiLabels", labels => this.uiLabels = labels );
-     socket.emit( "getUILabels", this.lang )
+     socket.emit( "getUILabels", this.lang );
+     socket.on("signupResponse", this.handleSignupResponse);
     },
 
     methods: {
@@ -73,6 +75,7 @@ export default {
             if(result.success) {
                 alert(result.message);
                 this.$router.push('/homepage/');
+                console.log("Konto skapat", "Medlemmar:", this.users);
             } else {
                 this.message = result.message || 'Kunde inte registrera kontot.';
                 console.error("Registreringsfel:", result.message);
