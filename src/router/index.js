@@ -86,7 +86,7 @@ const router = createRouter({
     path: '/participantgrouppage/',
     name: 'ParticipantGroupPage',
     component: () => import('../views/ParticipantGroupPage.vue')
-  }
+  },
   ]
 })
 
