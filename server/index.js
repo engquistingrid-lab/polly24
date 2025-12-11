@@ -5,7 +5,7 @@ const httpServer = createServer();
 const io = new Server(httpServer, {
     cors: {
       origin: "http://localhost:5173",
-      methods: ["GET"],
+      methods: ["GET", "POST"],
       credentials: true
   }
 });
@@ -14,14 +14,15 @@ const io = new Server(httpServer, {
 // If you need to change how data is handled, check the Data.js file!
 
 import { Data } from "./Data.js";
-
+import { Users } from "./users.js";
 //
 import { sockets } from "./sockets.js";
 
 let data = new Data();
+let users = new Users();
 
 io.on('connection', function (socket) {
-  sockets(this, socket, data);
+  sockets(this, socket, data, users);
 });
 
 const PORT = process.env.PORT || 3000;

@@ -11,17 +11,18 @@
 <div class="login-wrapper">
 <div class="login-box">
 <label>Email</label>
- <input type="email" v-model="email">
+ <input type="email" v-model="email" required>
  <label>{{uiLabels.Yourname }}</label>
- <input type="name" v-model="yourname">
+ <input type="name" v-model="yourname" required>
  <label>{{uiLabels.Password }}</label>
- <input type="password" v-model="password">
+ <input type="password" v-model="password" required>
  <label>{{uiLabels.Confirmpassword }}</label>
- <input type="password" v-model="password">
+ <input type="password" v-model="confirmpassword" required>
 </div>
-<router-link to="/homepage/" class="signin">
+
+<button @click="signup">
         {{uiLabels.signup}}
-    </router-link>
+</button>
 </div>
 
 </body>
@@ -37,16 +38,55 @@ export default {
     data: function () {
     return {
         uiLabels: {},
-        lang: localStorage.getItem("lang") || "en"
+        lang: localStorage.getItem("lang") || "en",
+        yourname: '',
+        email: '',
+        password: '',
+        confirmpassword: '',
+        message: '',
+        users: []
     }
    },
    created: function () {
      socket.on( "uiLabels", labels => this.uiLabels = labels );
-     socket.emit( "getUILabels", this.lang )
+     socket.emit( "getUILabels", this.lang );
+     socket.on("signupResponse", this.handleSignupResponse);
+    },
+
+    methods: {
+        signup: function() {
+            if ( !this.email || !this.yourname || !this.password || !this.confirmpassword ) {
+                alert(this.uiLabels.FillAllFields);
+                return;
+            }
+
+            if (this.password !== this.confirmpassword) {
+                alert("Passwords do not match");
+                return;
+            }
+
+            socket.emit("signup", {
+                name: this.yourname,
+                email: this.email,
+                password: this.password
+            });
+
+        },
+        handleSignupResponse: function(result) {
+            if(result.success) {
+                alert(result.message);
+
+                console.log("Konto skapat", "Medlemmar:", result.users);
+
+                this.$router.push('/homepage/');
+
+            } else {
+                this.message = result.message || 'Kunde inte registrera kontot.';
+                console.error("Registreringsfel:", result.message);
+            }
+        }
     }
 }
-
-
 
 </script>
 
