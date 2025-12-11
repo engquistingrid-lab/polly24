@@ -20,6 +20,18 @@
 	"ReturnToHomepage":"Return to homepage",
 	"EnterYourCode":"Enter your group code:",
 	"Continue":"Continue",
+	"Assigned":"You have been assigned to:",
+	"AddWish":"Add Wish",
+	"Wishes":"Wishes",
+	"TimeState":"Time Remaining",
+	"Leaderboard":"Leaderboard",
+	"WhosWish":"Who wishes for this:",
+	"Guess":"Guess",
+	"Cancel":"Cancel",
+	"Correct":"Correct",
+	"Incorrect":"Incorrect",
+	"AddWishPlaceholder":"Enter your wish here...",
+	"NoSpacielChars":"No special characters!",
 	"AdministratorGroupPage": "Administrator Group Page",
 	"ParticipantGroupPage": "Participant Group Page",
 	"Members":"Members",
@@ -28,6 +40,8 @@
 	"GoToWishlist": "🎁Go to wishlist🎁",
 	"BackToHomepage": "🥵 Back to homepage",
 	"WaitingForAdmin": "Waiting for admin to generate Secret Santa...",
+
+
 	"Returntostart": "Return to start",
 	"Yourname": "Your name",
 	"Password": "Password",
@@ -36,6 +50,7 @@
 	"Showmygroup": "Show my groups",
 	"Startnewgroup": "Start new group",
 	"Welcome": "Welcome",
-	"FillAllFields": "Please fill in all fields"
+	"FillAllFields": "Please fill in all fields",
+	"YourGroups": "Your groups"
 
 }
