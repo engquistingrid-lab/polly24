@@ -16,6 +16,11 @@
               Gå till WishlistGame
             </button>
         </router-link>
+        <router-link to="/wishlistAdmin">
+            <button class="wishGameAdmin">
+              Gå till WishlistGame Admin
+            </button>
+        </router-link>
 
 
         </div>

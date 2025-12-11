@@ -1,6 +1,5 @@
 <template>
-  <div class="game-container">
-    <div class="game-header"> 
+  <div class="game-container admin-theme"> <div class="game-header"> 
       
       <div class="game-leaderboard">
         <h2>{{ uiLabels.Leaderboard }}</h2>
@@ -12,8 +11,21 @@
       </div>
 
       <div class="game-timer">
-        <h3>{{ uiLabels.TimeState }}</h3>
-        <p>{{ formattedTime }}</p>
+        <h3>{{ uiLabels.TimeState }} (Admin)</h3>
+        <p class="timer-display">{{ formattedTime }}</p>
+        
+        <div class="admin-timer-controls">
+            <div class="quick-buttons">
+                <button @click="adjustTimer(-60)">-1 min</button>
+                <button @click="togglePause">{{ isPaused ? '▶ Start' : '⏸ Paus' }}</button>
+                <button @click="adjustTimer(60)">+1 min</button>
+            </div>
+            
+            <div class="manual-set">
+                <input type="number" v-model.number="manualTimeInput" placeholder="Sekunder">
+                <button @click="setTimerManual">Sätt tid</button>
+            </div>
+        </div>
       </div>
 
       <div class="game-main">
@@ -42,7 +54,8 @@
               'guessed-incorrect': wish.status === 'incorrect',
               'clickable': wish.userId !== currentUserId && wish.status === 'pending'
             }"
-            @click="openGuessModal(wish)"> <p>{{ wish.text }}</p>
+            @click="openGuessModal(wish)"> 
+            <p>{{ wish.text }}</p>
 
             <span v-if="wish.status === 'correct'">🟢 {{ uiLabels.Correct }} ({{ wish.ownerName }})</span>
             <span v-if="wish.status === 'incorrect'">🔴 {{ uiLabels.Incorrect }}</span>
@@ -89,14 +102,14 @@ import io from 'socket.io-client';
 const socket = io("localhost:3000");
 
 export default {
-  name: "WishlistGame",
+  name: "WishlistGameAdmin", // Uppdaterat namn
 
   data: function () {
     return {
       uiLabels: {},
       lang: localStorage.getItem("lang") || "en",
       
-      currentUserId: 1,
+      currentUserId: 1, // I ett riktigt scenario är admin kanske ID 0 eller liknande
       assignedPersonName: 'Elvin',
       
       members: [
@@ -121,7 +134,10 @@ export default {
       selectedWish: null,
       selectedMemberId: null,
 
+      // --- TIMER INSTÄLLNINGAR ---
       timeRemaining: 600, 
+      manualTimeInput: null, // För admin-inputfältet
+      isPaused: false, // För att kunna pausa
     };
   },
 
@@ -145,8 +161,13 @@ export default {
     socket.on("uiLabels", labels => this.uiLabels = labels);
     socket.emit("getUILabels", this.lang);
 
+    // Timer-loop
     setInterval(() => {
-      if (this.timeRemaining > 0) this.timeRemaining--;
+      if (!this.isPaused && this.timeRemaining > 0) {
+        this.timeRemaining--;
+        // Här kan du senare skicka tiden till servern så alla ser samma:
+        // socket.emit("syncTimer", this.timeRemaining);
+      }
     }, 1000);
   },
 
@@ -161,6 +182,37 @@ export default {
       socket.emit("getUILabels", this.lang);
     },
 
+    // --- NYA ADMIN METODER ---
+    
+    // Lägg till eller dra bort tid (sekunder)
+    adjustTimer(seconds) {
+        this.timeRemaining += seconds;
+        if (this.timeRemaining < 0) this.timeRemaining = 0;
+        this.emitTimerUpdate();
+    },
+
+    // Sätt tiden exakt från input-fältet
+    setTimerManual() {
+        if (this.manualTimeInput !== null && this.manualTimeInput >= 0) {
+            this.timeRemaining = this.manualTimeInput;
+            this.manualTimeInput = null; // Rensa fältet
+            this.emitTimerUpdate();
+        }
+    },
+
+    // Pausa/Starta
+    togglePause() {
+        this.isPaused = !this.isPaused;
+        // socket.emit("adminPauseTimer", this.isPaused);
+    },
+
+    // Hjälpfunktion för att meddela servern (förberett)
+    emitTimerUpdate() {
+        // socket.emit("adminUpdateTimer", this.timeRemaining);
+        console.log("Admin ändrade tiden till: " + this.timeRemaining);
+    },
+
+    // --- BEFINTLIGA SPELMETODER ---
     addWish() {
       this.errorMessage = "";
       this.hasInputError = false;
@@ -191,7 +243,6 @@ export default {
     },
 
     openGuessModal(wish) {
-        // Man får inte klicka på sina egna eller redan avklarade
         if (wish.userId === this.currentUserId || wish.status !== 'pending') return;
         
         this.selectedWish = wish;
