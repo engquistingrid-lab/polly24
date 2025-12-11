@@ -73,6 +73,11 @@ const router = createRouter({
     component: () => import('../views/WishlistGame.vue')
   },
   {
+    path: '/wishlistAdmin/',
+    name: 'WishlistGameAdmin',
+    component: () => import('../views/WishlistGameAdmin.vue')
+  },
+  {
     path: '/administratorgrouppage/',
     name: 'AdministratorGroupPage',
     component: () => import('../views/AdministratorGroupPage.vue')

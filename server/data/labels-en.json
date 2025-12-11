@@ -31,7 +31,7 @@
 	"Correct":"Correct",
 	"Incorrect":"Incorrect",
 	"AddWishPlaceholder":"Enter your wish here...",
-	"NoSpacielChars":"No special characters!"
+	"NoSpacielChars":"No special characters!",
 	"AdministratorGroupPage": "Administrator Group Page",
 	"ParticipantGroupPage": "Participant Group Page",
 	"Members":"Members",
@@ -39,9 +39,7 @@
 	"YourAssigned": "You have been assigned:",
 	"GoToWishlist": "🎁Go to wishlist🎁",
 	"BackToHomepage": "🥵 Back to homepage",
-	"WaitingForAdmin": "Waiting for admin to generate Secret Santa..."
-
-
+	"WaitingForAdmin": "Waiting for admin to generate Secret Santa...",
 	"Returntostart": "Return to start",
 	"Yourname": "Your name",
 	"Password": "Password",
