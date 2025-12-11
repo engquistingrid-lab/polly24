@@ -18,7 +18,9 @@ Users.prototype.addUser = function (name, email, password) {
 
         this.users.push(newUser);
 
+        console.log(this.users);
         return {success: true, message: 'Konto skapat'};
+        
     }
 
 }

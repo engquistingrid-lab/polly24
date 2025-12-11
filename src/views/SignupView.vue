@@ -43,7 +43,8 @@ export default {
         email: '',
         password: '',
         confirmpassword: '',
-        message: ''
+        message: '',
+        users: []
     }
    },
    created: function () {
@@ -74,8 +75,11 @@ export default {
         handleSignupResponse: function(result) {
             if(result.success) {
                 alert(result.message);
+
+                console.log("Konto skapat", "Medlemmar:", result.users);
+
                 this.$router.push('/homepage/');
-                console.log("Konto skapat", "Medlemmar:", this.users);
+
             } else {
                 this.message = result.message || 'Kunde inte registrera kontot.';
                 console.error("Registreringsfel:", result.message);

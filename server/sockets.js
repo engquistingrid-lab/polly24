@@ -6,7 +6,7 @@ function sockets(io, socket, data, users) {
 
   socket.on('signup', function(d) {
     const result = users.addUser(d.name, d.email, d.password);
-    socket.emit('signupResponse', result);
+    socket.emit('signupResponse', {success: result.success, message: result.message, users: users.users});
   });
 
 
