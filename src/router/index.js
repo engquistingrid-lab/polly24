@@ -46,6 +46,11 @@ const router = createRouter({
       name: 'MyGroupsPage',
       component: () => import('../views/MyGroupsPage.vue')
     },
+    {
+      path: '/AdministratorGroupPage/',
+      name: 'AdministratorGroupPage',
+      component: () => import('../views/AdministratorGroupPage.vue')
+    },
 
       {
       path: '/poll/:id',

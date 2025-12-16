@@ -56,6 +56,7 @@ export default {
 
          handleLoginResponse(response) {
             if (response.success){
+                localStorage.setItem("currentUser", JSON.stringify(response.user));
                 localStorage.setItem("isLoggedIn", "true");
                 localStorage.setItem("userEmail", this.email);
                 this.$router.push("/homepage/");

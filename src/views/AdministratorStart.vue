@@ -15,10 +15,8 @@
             <input type="text" v-model="GroupName">
         </label> 
     </div>
-    <button v-on:click="CreateGroup">
-        <router-link to='/administratorgrouppage/'>
+    <button v-on:click="CreateGroupFunction">
             {{ uiLabels.CreateGroup }}
-      </router-link>
     </button>
 
 </template>
@@ -49,10 +47,23 @@ export default{
             console.log(labels) ;
         });
         socket.emit( "getUILabels", this.lang );
-    },
+        socket.on("createGroupResponse", (result)=>{
+            if(result.success){
+                alert(this.uiLabels.GroupCreatedSuccessfully);
+                this.$router.push('/AdministratorGroupPage/');
+            } else {
+                alert(this.uiLabels.GroupCreationFailed + ": " + result.message);
+            }
+        });
+    },// + result.group.groupCode detta för att få fram gruppkoden
     methods:{
         CreateGroupFunction:function(){
-            socket.emit("CreateGroup",{PriceRange:this.ChoosePriceRange,GroupName:this.GroupName});
+            const currentUser = JSON.parse(localStorage.getItem("currentUser"));
+
+            socket.emit("CreateGroup",{
+                email:currentUser.email,
+                groupName:this.GroupName,
+                priceRange:this.ChoosePriceRange});
         }
     },
 

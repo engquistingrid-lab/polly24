@@ -51,6 +51,8 @@
 	"Startnewgroup": "Start new group",
 	"Welcome": "Welcome",
 	"FillAllFields": "Please fill in all fields",
-	"YourGroups": "Your groups"
+	"YourGroups": "Your groups",
+	"GroupCreationFailed": "Group creation failed",
+	"GroupCreatedSuccessfully": "Group created successfully"
 
 }

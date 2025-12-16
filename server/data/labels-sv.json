@@ -49,6 +49,8 @@
 	"Startnewgroup": "Starta en ny grupp",
 	"Welcome": "Välkommen",
 	"FillAllFields": "Vänligen fyll i alla fält",
-	"YourGroups": "Dina grupper"
+	"YourGroups": "Dina grupper",
+	"GroupCreationFailed": "Gruppen misslyckades att skapas",
+	"GroupCreatedSuccessfully": "Gruppen är skapad"
 
 }

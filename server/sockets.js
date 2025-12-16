@@ -14,6 +14,10 @@ function sockets(io, socket, data, users) {
     socket.emit('loginResponse', result);
     
   });
+  socket.on('CreateGroup', function(d) {
+    const result = users.createGroup(d.email, d.groupName, d.priceRange);
+    socket.emit('createGroupResponse', result);
+  });
 
 
   //kom ihåg att radera alla nedanstående sen när all kod är klar, det är gammal kod//
