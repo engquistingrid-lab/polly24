@@ -1,7 +1,7 @@
 'use strict';
 
 function Users() {
-    this.users = [];
+    this.users = {};
 }
 
 Users.prototype.addUser = function (name, email, password) {
