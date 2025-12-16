@@ -9,8 +9,11 @@ function sockets(io, socket, data, users) {
     socket.emit('signupResponse', {success: result.success, message: result.message, users: users.users});
   });
 
-
-
+  socket .on ('login', async function(d) {
+    const result = await users.validateUser(d.email, d.password);
+    socket.emit('loginResponse', result);
+    
+  });
 
 
   //kom ihåg att radera alla nedanstående sen när all kod är klar, det är gammal kod//

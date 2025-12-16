@@ -12,9 +12,7 @@
             <label>{{ uiLabels.password }}</label>
             <input type="password" v-model="password">
             <button @click="login">
-            <router-link to="/homepage/" class="login"> 
-            Logga in
-            </router-link>
+            {{ uiLabels.login }}
             </button>
         </div>
     </div>
@@ -30,19 +28,41 @@ export default {
     data: function () {
     return {
         uiLabels: {},
-        lang: localStorage.getItem("lang") || "en"
+        lang: localStorage.getItem("lang") || "en",
+        email: "",
+        password: ""
+
     }
    },
    created: function () {
      socket.on( "uiLabels", labels => this.uiLabels = labels );
-     socket.emit( "getUILabels", this.lang )
+     socket.emit( "getUILabels", this.lang );
+     socket.on ("loginResponse", this.handleLoginResponse);
     },
 
     methods: {
         login: function() {
+            if ( !this.email || !this.password ) {
+                alert(this.uiLabels.FillAllFields);
+                return;
+            }
+            socket.emit("login", {
+                email: this.email,
+                password: this.password
+
+            })
             
+        },
+
+         handleLoginResponse(response) {
+            if (response.success){
+                localStorage.setItem("isLoggedIn", "true");
+                localStorage.setItem("userEmail", this.email);
+                this.$router.push("/homepage/");
+            } else {
+                alert(response.message ||"Login Failed");
+            }
         }
-        
     }
 }
    

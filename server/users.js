@@ -20,9 +20,19 @@ Users.prototype.addUser = function (name, email, password) {
 
         console.log(this.users);
         return {success: true, message: 'Konto skapat'};
-        
-    }
+    };
+};
+ Users.prototype.validateUser = function(email, password) {
+        const user= this.users.find(u=> u.email === email);
+        if (!user) {
+            return {success:false, message: "No user with that email" };
 
-}
+        }
+         if (user.password !== password) {
+            return {success:false, message: "wrong password" };
+         }
+        return {success:true, message: "login succesful"};
+    };
+
 
 export { Users };

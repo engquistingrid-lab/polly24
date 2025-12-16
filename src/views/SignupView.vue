@@ -51,6 +51,7 @@ export default {
      socket.on( "uiLabels", labels => this.uiLabels = labels );
      socket.emit( "getUILabels", this.lang );
      socket.on("signupResponse", this.handleSignupResponse);
+     
     },
 
     methods: {

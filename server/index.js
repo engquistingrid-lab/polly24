@@ -15,7 +15,6 @@ const io = new Server(httpServer, {
 
 import { Data } from "./Data.js";
 import { Users } from "./users.js";
-//
 import { sockets } from "./sockets.js";
 
 let data = new Data();
