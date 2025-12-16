@@ -1,24 +1,24 @@
 <template>
 <header>
-<div>
-    <h1>{{uiLabels.signup}}</h1>
-    <router-link to="/" class="langbtn">
-        {{uiLabels.Returntostart}}
-    </router-link>
-</div>
+    <div>
+        <h1>{{uiLabels.signup}}</h1>
+        <router-link to="/" class="langbtn">
+            {{uiLabels.Returntostart}}
+        </router-link>
+    </div>
 </header>
 <body>
-<div class="login-wrapper">
-<div class="login-box">
-<label>Email</label>
- <input type="email" v-model="email" required>
- <label>{{uiLabels.Yourname }}</label>
- <input type="name" v-model="yourname" required>
- <label>{{uiLabels.Password }}</label>
- <input type="password" v-model="password" required>
- <label>{{uiLabels.Confirmpassword }}</label>
- <input type="password" v-model="confirmpassword" required>
-</div>
+    <div class="login-wrapper">
+        <div class="login-box">
+            <label>Email</label>
+                <input type="email" v-model="email" required>
+                <label>{{uiLabels.Yourname }}</label>
+                <input type="name" v-model="yourname" required>
+                <label>{{uiLabels.Password }}</label>
+                <input type="password" v-model="password" required>
+                <label>{{uiLabels.Confirmpassword }}</label>
+                <input type="password" v-model="confirmpassword" required>
+        </div>
 
 <button @click="signup">
         {{uiLabels.signup}}
