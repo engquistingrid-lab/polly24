@@ -1,26 +1,31 @@
 <template>
     <header>
         <h1>{{ uiLabels.StartNewGroup }}</h1>
+        <button v-on:click="ReturnToHomepage">  
+            <router-link to='/'>{{ uiLabels.ReturnToHomepage}}</router-link>
+        </button>
    
     </header>
-     <div>
+    <div>
         <label>
-        {{ uiLabels.PriceRange }}
-            <input type="text" v-model="ChoosePriceRange">
+            {{ uiLabels.EnterNameBox }}
+            <input type="text" v-model="GroupName">
         </label>
+
     </div>
     <div>
         <label>
-            {{uiLabels.GroupName}}
-            <input type="text" v-model="GroupName">
-        </label> 
+            {{ uiLabels.YourWishes }}
+            <input type="text" v-model="Wish1">
+            <input type="text" v-model="Wish2">
+            <input type="text" v-model="Wish3"> 
+        </label>
     </div>
     <button v-on:click="CreateGroup">
         <router-link to='/administratorgrouppage/'>
             {{ uiLabels.CreateGroup }}
       </router-link>
     </button>
-
 </template>
 
 <script>

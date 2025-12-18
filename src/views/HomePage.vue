@@ -10,17 +10,16 @@
     </header>
    
     <div>
-        <h1>{{ uiLabels.Welcome }}, Gruppnamn</h1>
-        <router-link to ='/administratorstart/'>
+      <button> 
+        <router-link to ='/StartNewGroup/'>
             {{ uiLabels.Startnewgroup }}
         </router-link>
-    
+      </button>
+      <button>
         <router-link to="/joingroup/">
           {{uiLabels.Joingroup}}
         </router-link>
-        <router-link to="/mygroupspage/">
-            {{ uiLabels.Showmygroup }}
-      </router-link>
+      </button>
     </div>
 
 </template>

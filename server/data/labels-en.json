@@ -9,13 +9,7 @@
 	"about": "About",
 	"participateInPoll": "Participate in poll",
 	"StartNewGroup": "Start new group",
-	"PriceRange":"Price range:",
-	"GroupName":"Group name:",
 	"CreateGroup":"Create group",
-	"login":"Log in",
-	"Logout":"Log out",
-	"signup": "Sign up",
-	"password": "Password",
 	"JoinGroup":"Join group",
 	"ReturnToHomepage":"Return to homepage",
 	"EnterYourCode":"Enter your group code:",
@@ -51,6 +45,14 @@
 	"Startnewgroup": "Start new group",
 	"Welcome": "Welcome",
 	"FillAllFields": "Please fill in all fields",
-	"YourGroups": "Your groups"
+	"YourGroups": "Your groups",
+
+	"EnterNameBox": "Enter your name:",
+	"YourWishes": "Write three cristmas wishes:",
+	"AllWishes": "All Wishes",
+	"GoToGame": "Go to wishlistgame",
+	"OBSaboutGenerating ": "Note! Once you have generated the assignment you can no longer play the game"
+
+
 
 }

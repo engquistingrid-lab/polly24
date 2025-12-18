@@ -1,6 +1,6 @@
 import { createRouter, createWebHistory } from 'vue-router'
-import StartView from '../views/StartView.vue'
-import StartView1 from '../views/StartView1.vue'
+
+import HomePage from '../views/HomePage.vue'
 
 
 const router = createRouter({
@@ -8,24 +8,18 @@ const router = createRouter({
   routes: [
     {
       path: '/',
-      name: 'startView1',
-      component: StartView1
+      name: 'HomePage',
+      component: HomePage
     
     },
-    {
-      path:'/login/',
-      name: 'loginView',
-      component: () => import ('../views/loginView.vue')},
 
-      {
-      path:'/signup/',
-      name: 'Signupview',
-      component: () => import ('../views/SignupView.vue')},
 
-      {path: '/homepage/',
-      name: 'HomePage',
-      component: () => import('../views/HomePage.vue')
-    },
+    ///{
+    ///  path: '/homepage/',
+   ///  name: 'HomePage',
+    ///  component: () => import('../views/HomePage.vue')
+    ///}
+    
 
      {
       path:'/joingroup/',
@@ -38,14 +32,9 @@ const router = createRouter({
       component: () => import('../views/YourAssignedPage.vue')
     },
       {
-      path:'/administratorstart/',
-      name: 'AdministratorStart',
-      component: () => import ('../views/AdministratorStart.vue')},
-    {
-      path: '/mygroupspage/',
-      name: 'MyGroupsPage',
-      component: () => import('../views/MyGroupsPage.vue')
-    },
+      path:'/StartNewGroup/',
+      name: 'StartNewGroup',
+      component: () => import ('../views/StartNewGroup.vue')},
 
       {
       path: '/poll/:id',
