@@ -3,7 +3,7 @@
 
 import {readFileSync} from "fs";
 
-function Groups(){
+export function Groups(){
   this.groups ={};
 }
 
@@ -38,7 +38,7 @@ Groups.prototype.createGroup = function (groupName) {
 
 
 // Store data in an object to keep the global namespace clean. In an actual implementation this would be interfacing a database...
-function Data() {
+export function Data() {
   this.polls = {};
   this.polls['test'] = {
     lang: "en",
@@ -160,7 +160,7 @@ Data.prototype.submitAnswer = function(pollId, answer) {
   }
 }
 
-export { Data, Groups };
-
+//export { Data, Groups };
+//module.exports = Groups ;
 
 

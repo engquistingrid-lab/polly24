@@ -1,5 +1,5 @@
 
-function sockets(io, socket, groups, data) {
+function sockets(io, socket, data, users, groups ) {
   
   socket.on('getUILabels', function(lang) {
     socket.emit('uiLabels', data.getUILabels(lang));
@@ -14,12 +14,14 @@ function sockets(io, socket, groups, data) {
   socket.on("getGroupInfo", (inputData)=>{
     const group = groups.getGroup(inputData.groupCode);
     if (group) {
+      console.log("Group found: ", group);
       socket.emit("groupInfo",{
         success:true,
         groupName: group.name
       });
     }
     else {
+      console.log("Group not found: ", inputData.groupCode);
       socket.emit("groupInfo", {
         success: false,
         message: "Group not found"

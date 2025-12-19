@@ -1,9 +1,11 @@
 <template>
     <header>
         <h1>{{ uiLabels.StartNewGroup }}</h1>
-        <button v-on:click="ReturnToHomepage">  
-            <router-link to='/'>{{ uiLabels.ReturnToHomepage}}</router-link>
-        </button>
+         
+            <router-link to='/'>
+                <button> {{ uiLabels.ReturnToHomepage}}</button>
+            </router-link>
+        
    
     </header>
     <div>
