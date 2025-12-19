@@ -51,7 +51,9 @@
 	"YourWishes": "Write three cristmas wishes:",
 	"AllWishes": "All Wishes",
 	"GoToGame": "Go to wishlistgame",
-	"OBSaboutGenerating ": "Note! Once you have generated the assignment you can no longer play the game"
+	"OBSaboutGenerating ": "Note! Once you have generated the assignment you can no longer play the game",
+	"PleaseEnterGroupName": "Please Enter Groupname",
+	"EnterGroupName": "Enter groupname:"
 
 
 

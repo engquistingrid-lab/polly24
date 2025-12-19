@@ -8,9 +8,14 @@
     </header>
     <div>
         <label>
-            {{ uiLabels.EnterNameBox }}
+            {{ uiLabels.EnterNameBox}}
+            <input type="text" v-model="UserName">
+        </label>
+        <label>
+            {{ uiLabels.EnterGroupName }}
             <input type="text" v-model="GroupName">
         </label>
+
 
     </div>
     <div>
@@ -22,9 +27,8 @@
         </label>
     </div>
     <button v-on:click="CreateGroup">
-        <router-link to='/administratorgrouppage/'>
             {{ uiLabels.CreateGroup }}
-      </router-link>
+   
     </button>
 </template>
 
@@ -34,21 +38,23 @@ import io from 'socket.io-client';
 const socket = io("localhost:3000");
 
 export default{
-    name:'AdministratorStart',
+    name:'StartNewGroup',
     components:{
         ResponsiveNav
     },
     data:function(){
         return{
-            StartNewGroup:"",
-            ChoosePriceRange:"",
+            UserName:"",
             GroupName:"",
-            CreateGroup:"",
             uiLabels: {},
             lang: localStorage.getItem( "lang") || "en",
         }
     },
     created:function(){
+        socket.on("groupCreated", (data)=> {
+
+            this.$router.push('/administratorgrouppage/'+ data.groupCode);
+        });
         socket.on( "uiLabels", labels => {
             this.uiLabels = labels;
             console.log(labels) ;
@@ -56,9 +62,15 @@ export default{
         socket.emit( "getUILabels", this.lang );
     },
     methods:{
-        CreateGroupFunction:function(){
-            socket.emit("CreateGroup",{PriceRange:this.ChoosePriceRange,GroupName:this.GroupName});
-        }
+        CreateGroup:function () {
+            if (!this.GroupName) {
+                alert(this.uiLabels.PleaseEnterGroupName);
+                return;
+            }
+            socket.emit("createGroup", {
+                groupName: this.GroupName
+            });
+        },
     },
 
 }

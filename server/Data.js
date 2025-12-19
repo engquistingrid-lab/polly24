@@ -1,5 +1,41 @@
 'use strict';
+
+
 import {readFileSync} from "fs";
+
+function Groups(){
+  this.groups ={};
+}
+
+function generateGroupCode() {
+  return Math.floor(1000 + Math.random() * 9000).toString();
+}
+
+Groups.prototype.getGroup = function (code) {
+  return this.groups[code] || null;
+};
+
+Groups.prototype.groupExists = function (groupCode) {
+  return typeof this.groups[groupCode] !== "undefined"
+};
+
+Groups.prototype.createGroup = function (groupName) {
+  let code;
+  do {
+    code = generateGroupCode();
+  } while (this.groupExists(code));
+
+  const group = {
+    name: groupName,
+    code: code,
+    members: []
+  };
+  this.groups[code] = group;
+  return group;
+};
+
+
+
 
 // Store data in an object to keep the global namespace clean. In an actual implementation this would be interfacing a database...
 function Data() {
@@ -124,7 +160,7 @@ Data.prototype.submitAnswer = function(pollId, answer) {
   }
 }
 
-export { Data };
+export { Data, Groups };
 
 
 

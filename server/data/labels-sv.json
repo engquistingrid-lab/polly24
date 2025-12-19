@@ -49,6 +49,8 @@
 	"YourWishes": "Skriv tre julönskningar:",
 	"AllWishes": "Alla önskningar",
 	"GoToGame": "Gå till önskelistespelet",
-	"OBSaboutGenerating ": "OBS! När du har genererat tilldelningen kan du inte längre spela spelet"
+	"OBSaboutGenerating ": "OBS! När du har genererat tilldelningen kan du inte längre spela spelet",
+	"PleaseEnterGroupName":"Vänligen ange gruppnamn",
+	"EnterGroupName":"Skriv in gruppnamn:"
 
 }

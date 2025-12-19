@@ -1,12 +1,30 @@
-function sockets(io, socket, data, users) {
+
+function sockets(io, socket, groups, data) {
   
   socket.on('getUILabels', function(lang) {
     socket.emit('uiLabels', data.getUILabels(lang));
   });
 
-  socket.on('signup', function(d) {
-    const result = users.addUser(d.name, d.email, d.password);
-    socket.emit('signupResponse', {success: result.success, message: result.message, users: users.users});
+  socket.on("createGroup", (inputData)=> {
+    const group = groups.createGroup(inputData.groupName);
+    socket.emit("groupCreated", {
+      groupCode:group.code, groupName:group.name});
+  });
+
+  socket.on("getGroupInfo", (inputData)=>{
+    const group = groups.getGroup(inputData.groupCode);
+    if (group) {
+      socket.emit("groupInfo",{
+        success:true,
+        groupName: group.name
+      });
+    }
+    else {
+      socket.emit("groupInfo", {
+        success: false,
+        message: "Group not found"
+      });
+    }
   });
 
 

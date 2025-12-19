@@ -4,6 +4,8 @@
     <h1>Secret Santa</h1>
     <router-link to='/'>{{ uiLabels.BackToHomePage }}</router-link>
     <h1>{{ uiLabels.AdministratorGroupPage }}</h1>
+    <h2>{{ groupCode }}</h2>
+    <p>{{ groupName }}</p>
 </header>
 
 <div class="ParticipantWrapper">
@@ -39,13 +41,25 @@ const socket = io("localhost:3000");
             name:"AdministratorGroupPage",
         data: function () {
         return {
+            groupCode: this.$route.params.groupCode,
+            groupName: "",
             uiLabels: {},
             lang: localStorage.getItem("lang") || "en"
     }
    },
    created: function () {
      socket.on( "uiLabels", labels => this.uiLabels = labels );
-     socket.emit( "getUILabels", this.lang )
+     socket.emit( "getUILabels", this.lang );
+     socket.emit("getGroupInfo", {groupCode: this.groupCode});
+     socket.on("groupInfo", (data)=>{
+        if (data.success) {
+            this.groupName=data.groupName;
+        }
+        else {console.error(data.message)}
+     });
+    },
+    beforeUnmount() {
+        socket.off("groupInfo");
     }
 }
 </script>

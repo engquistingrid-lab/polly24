@@ -14,15 +14,18 @@ const io = new Server(httpServer, {
 // If you need to change how data is handled, check the Data.js file!
 
 import { Data } from "./Data.js";
+import {Groups} from "./Data.js";
 import { Users } from "./users.js";
 //
 import { sockets } from "./sockets.js";
 
 let data = new Data();
 let users = new Users();
+let groups = new Groups();
+
 
 io.on('connection', function (socket) {
-  sockets(this, socket, data, users);
+  sockets(this, socket, data,  users, groups);
 });
 
 const PORT = process.env.PORT || 3000;
