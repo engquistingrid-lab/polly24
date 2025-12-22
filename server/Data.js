@@ -19,7 +19,7 @@ Groups.prototype.groupExists = function (groupCode) {
   return typeof this.groups[groupCode] !== "undefined"
 };
 
-Groups.prototype.createGroup = function (groupName, adminName) {
+Groups.prototype.createGroup = function (groupName, adminName, wishes) {
   let code;
   do {
     code = generateGroupCode();
@@ -27,7 +27,7 @@ Groups.prototype.createGroup = function (groupName, adminName) {
 
   const admin = {
     name: adminName,
-    wishes: [],
+    wishes: wishes || [],
     assignedTo: null,
     isAdmin: true
   }
@@ -40,11 +40,11 @@ Groups.prototype.createGroup = function (groupName, adminName) {
   this.groups[code] = group;
   return group;
 };
-Groups.prototype.joinGroup = function (code, memberName,wishes) {
+Groups.prototype.joinGroup = function (code, memberName, wishes) {
   if (this.groupExists(code)) {
     const member = {
       name: memberName,
-      wishes: wishes,
+      wishes: wishes || [],
       assignedTo: null,
       isAdmin: false
     };
