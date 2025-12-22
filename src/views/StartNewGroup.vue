@@ -58,7 +58,7 @@ export default{
     created:function(){
         socket.on("groupCreated", (data)=> {
 
-            this.$router.push('/administratorgrouppage/'+ data.groupCode);
+            this.$router.push('/grouppage/'+ data.groupCode);
         });
         socket.on( "uiLabels", labels => {
             this.uiLabels = labels;
@@ -80,11 +80,16 @@ export default{
                 alert(this.uiLabels.PleaseEnterWish);
                 return;
             }
+            
+            localStorage.setItem("myName", this.UserName);
+
             socket.emit("createGroup", {
                 groupName: this.GroupName,
-                userName: this.UserName
+                userName: this.UserName,
+                wishes: [this.Wish1, this.Wish2, this.Wish3].filter(w => w.trim() !== "")
             });
-        },
+
+        }
     },
 
 }

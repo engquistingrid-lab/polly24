@@ -57,7 +57,7 @@ export default {
         if (data.success) {
             console.log("You have joined the group");
             localStorage.setItem("myName", this.userName);
-            this.$router.push('/participantgrouppage/' + this.groupCode);
+            this.$router.push('/grouppage/' + this.groupCode);
         }
         else {
             console.error(data.message);
@@ -69,8 +69,12 @@ export default {
             this.$router.push('/');
         },
         Continue:function(){
-            if (!this.groupCode || !this.userName) {
-                alert(this.uiLabels.PleaseEnterGroupName);
+            if (!this.groupCode) {
+                alert(this.uiLabels.PleaseEnterGroupCode);
+                return;
+            }
+            if (!this.userName) {
+                alert(this.uiLabels.PleaseEnterName);
                 return;
             }
             socket.emit("joinGroup", {
