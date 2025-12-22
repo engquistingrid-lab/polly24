@@ -10,9 +10,9 @@
     <div class="ParticipantList">
         <h2>{{ uiLabels.Members }}</h2>
         <ul>    
-            <li>Medlem 1</li>
-            <li>Medlem 2</li>
-            <li>Medlem 3</li>
+            <li v-for="member in members" :key="member.name">
+                {{ member.name }}
+            </li>
         </ul>
     </div>
     <div class="AllWishes">

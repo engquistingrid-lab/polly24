@@ -42,15 +42,17 @@
 	"Showmygroup": "Visa mina grupper",
 	"Startnewgroup": "Starta en ny grupp",
 	"Welcome": "Välkommen",
-	"FillAllFields": "Vänligen fyll i alla fält",
-	"YourGroups": "Dina grupper",
 
 	"EnterNameBox": "Ange ditt namn:",
 	"YourWishes": "Skriv tre julönskningar:",
 	"AllWishes": "Alla önskningar",
 	"GoToGame": "Gå till önskelistespelet",
 	"OBSaboutGenerating ": "OBS! När du har genererat tilldelningen kan du inte längre spela spelet",
-	"PleaseEnterGroupName":"Vänligen ange gruppnamn",
-	"EnterGroupName":"Skriv in gruppnamn:"
+	"PleaseEnterGroupName":"Vänligen ange gruppnamn och användarnamn",
+	"EnterGroupName":"Skriv in gruppnamn:",
+	"GroupIs": "Gruppkoden är: ",
+	"ShareWith":"dela denna med de medlemmar som vill vara med!",
+	"Group": "Grupp: ",
+	"GroupNotFound": "Gruppen hittades inte"
 
 }
