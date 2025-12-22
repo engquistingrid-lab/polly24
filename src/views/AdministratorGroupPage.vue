@@ -12,9 +12,9 @@
     <div class="ParticipantList">
         <h2>{{ uiLabels.Members }}</h2>
         <ul>    
-            <li>Medlem 1</li>
-            <li>Medlem 2</li>
-            <li>Medlem 3</li>
+            <li v-for="member in members" :key="member.id">
+                {{ member.name }}
+            </li>
         </ul>
     </div>
     <div class="AllWishes">
@@ -43,6 +43,7 @@ const socket = io("localhost:3000");
         return {
             groupCode: this.$route.params.groupCode,
             groupName: "",
+            members: [],
             uiLabels: {},
             lang: localStorage.getItem("lang") || "en"
     }
@@ -54,6 +55,7 @@ const socket = io("localhost:3000");
      socket.on("groupInfo", (data)=>{
         if (data.success) {
             this.groupName=data.groupName;
+            this.members = data.members;
         }
         else {console.error(data.message)}
      });

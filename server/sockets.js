@@ -6,7 +6,7 @@ function sockets(io, socket, data, users, groups ) {
   });
 
   socket.on("createGroup", (inputData)=> {
-    const group = groups.createGroup(inputData.groupName);
+    const group = groups.createGroup(inputData.groupName, inputData.userName);
     socket.emit("groupCreated", {
       groupCode:group.code, groupName:group.name});
   });
@@ -17,7 +17,8 @@ function sockets(io, socket, data, users, groups ) {
       console.log("Group found: ", group);
       socket.emit("groupInfo",{
         success:true,
-        groupName: group.name
+        groupName: group.name,
+        members: group.members
       });
     }
     else {

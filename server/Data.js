@@ -19,7 +19,7 @@ Groups.prototype.groupExists = function (groupCode) {
   return typeof this.groups[groupCode] !== "undefined"
 };
 
-Groups.prototype.createGroup = function (groupName) {
+Groups.prototype.createGroup = function (groupName, userName) {
   let code;
   do {
     code = generateGroupCode();
@@ -28,7 +28,10 @@ Groups.prototype.createGroup = function (groupName) {
   const group = {
     name: groupName,
     code: code,
-    members: []
+    members: [{
+      name: userName,
+      id: Date.now()
+    }]
   };
   this.groups[code] = group;
   return group;
