@@ -53,7 +53,9 @@
 	"GoToGame": "Go to wishlistgame",
 	"OBSaboutGenerating ": "Note! Once you have generated the assignment you can no longer play the game",
 	"PleaseEnterGroupName": "Please Enter Groupname",
-	"EnterGroupName": "Enter groupname:"
+	"EnterGroupName": "Enter groupname:", 
+	"PleaseEnterUserName": "Please enter your name",
+	"PleaseEnterWish": "Please enter at least one wish"
 
 
 

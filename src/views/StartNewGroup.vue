@@ -48,6 +48,9 @@ export default{
         return{
             UserName:"",
             GroupName:"",
+            Wish1:"",
+            Wish2:"",
+            Wish3:"",
             uiLabels: {},
             lang: localStorage.getItem( "lang") || "en",
         }
@@ -67,6 +70,14 @@ export default{
         CreateGroup:function () {
             if (!this.GroupName) {
                 alert(this.uiLabels.PleaseEnterGroupName);
+                return;
+            }
+            if (!this.UserName) {
+                alert(this.uiLabels.PleaseEnterUserName);
+                return;
+            }
+            if (!this.Wish1 && !this.Wish2 && !this.Wish3) {
+                alert(this.uiLabels.PleaseEnterWish);
                 return;
             }
             socket.emit("createGroup", {
