@@ -43,23 +43,43 @@ export default {
     return {
         uiLabels: {},
         lang: localStorage.getItem("lang") || "en",
-        JoinGroup:"",
-        ReturnToHomepage:"",
-        EnterYourCode:"",   
-        Continue:"",
         groupCode: "",
+        userName: "",
+        Wish1: "",
+        Wish2: "",
+        Wish3: ""  
     }
    },
    created: function () {
      socket.on( "uiLabels", labels => this.uiLabels = labels );
      socket.emit( "getUILabels", this.lang )
+     socket.on("joinedGroup", (data)=> {
+        if (data.success) {
+            console.log("You have joined the group");
+            localStorage.setItem("myName", this.userName);
+            this.$router.push('/participantgrouppage/' + this.groupCode);
+        }
+        else {
+            console.error(data.message);
+        }
+     });
     },
     methods:{
         ReturnToHomepage:function(){
             this.$router.push('/');
         },
         Continue:function(){
-            this.$router.push('/lobby/' + this.groupCode); 
+            if (!this.groupCode || !this.userName) {
+                alert(this.uiLabels.PleaseEnterGroupName);
+                return;
+            }
+            socket.emit("joinGroup", {
+                groupCode: this.groupCode,
+                userName: this.userName,
+                wish1: this.Wish1,
+                wish2: this.Wish2,
+                wish3: this.Wish3
+            });
         } 
 }
 }

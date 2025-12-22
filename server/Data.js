@@ -19,24 +19,40 @@ Groups.prototype.groupExists = function (groupCode) {
   return typeof this.groups[groupCode] !== "undefined"
 };
 
-Groups.prototype.createGroup = function (groupName, userName) {
+Groups.prototype.createGroup = function (groupName, adminName) {
   let code;
   do {
     code = generateGroupCode();
   } while (this.groupExists(code));
 
+  const admin = {
+    name: adminName,
+    wishes: [],
+    assignedTo: null,
+    isAdmin: true
+  }
+
   const group = {
     name: groupName,
     code: code,
-    members: [{
-      name: userName,
-      id: Date.now()
-    }]
+    members: [admin]
   };
   this.groups[code] = group;
   return group;
 };
-
+Groups.prototype.joinGroup = function (code, memberName,wishes) {
+  if (this.groupExists(code)) {
+    const member = {
+      name: memberName,
+      wishes: wishes,
+      assignedTo: null,
+      isAdmin: false
+    };
+    this.groups[code].members.push(member);
+    return true;
+  }
+  return false;
+}
 
 
 

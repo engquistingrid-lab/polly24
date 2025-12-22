@@ -72,7 +72,7 @@ const router = createRouter({
     component: () => import('../views/AdministratorGroupPage.vue')
   },
   { 
-    path: '/participantgrouppage/',
+    path: '/participantgrouppage/:groupCode',
     name: 'ParticipantGroupPage',
     component: () => import('../views/ParticipantGroupPage.vue')
   },

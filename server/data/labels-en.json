@@ -44,18 +44,19 @@
 	"Showmygroup": "Show my groups",
 	"Startnewgroup": "Start new group",
 	"Welcome": "Welcome",
-	"FillAllFields": "Please fill in all fields",
-	"YourGroups": "Your groups",
 
 	"EnterNameBox": "Enter your name:",
 	"YourWishes": "Write three cristmas wishes:",
 	"AllWishes": "All Wishes",
 	"GoToGame": "Go to wishlistgame",
 	"OBSaboutGenerating ": "Note! Once you have generated the assignment you can no longer play the game",
-	"PleaseEnterGroupName": "Please Enter Groupname",
-	"EnterGroupName": "Enter groupname:", 
-	"PleaseEnterUserName": "Please enter your name",
-	"PleaseEnterWish": "Please enter at least one wish"
+	"PleaseEnterGroupName": "Please Enter Groupname and username",
+	"EnterGroupName": "Enter groupname:",
+	"GroupIs": "The group code is: ",
+	"ShareWith": "share this with the members who want to join!",
+	"Group": "Group: ",
+	"GroupNotFound": "Group not found"
+	
 
 
 

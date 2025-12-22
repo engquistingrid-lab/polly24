@@ -3,16 +3,16 @@
 <header>
     <h1>Secret Santa</h1>
     <router-link to='/'>{{ uiLabels.BackToHomePage }}</router-link>
-    <h1>{{ uiLabels.AdministratorGroupPage }}</h1>
-    <h2>{{ groupCode }}</h2>
-    <p>{{ groupName }}</p>
+    <h3>{{ uiLabels.AdministratorGroupPage }}</h3>
+    <h2>{{ uiLabels.GroupIs }} {{ groupCode }}, {{ uiLabels.ShareWith }}</h2>
+    <h4>{{ uiLabels.Group }} {{ groupName }}</h4>
 </header>
 
-<div class="ParticipantWrapper">
-    <div class="ParticipantList">
+<div class="MembersWrapper">
+    <div class="MembersList">
         <h2>{{ uiLabels.Members }}</h2>
         <ul>    
-            <li v-for="member in members" :key="member.id">
+            <li v-for="member in members" :key="member.name">
                 {{ member.name }}
             </li>
         </ul>
@@ -45,6 +45,7 @@ const socket = io("localhost:3000");
             groupName: "",
             members: [],
             uiLabels: {},
+            members: [],
             lang: localStorage.getItem("lang") || "en"
     }
    },
@@ -55,7 +56,7 @@ const socket = io("localhost:3000");
      socket.on("groupInfo", (data)=>{
         if (data.success) {
             this.groupName=data.groupName;
-            this.members = data.members;
+            this.members=data.members;
         }
         else {console.error(data.message)}
      });

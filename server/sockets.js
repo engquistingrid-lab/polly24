@@ -6,29 +6,47 @@ function sockets(io, socket, data, users, groups ) {
   });
 
   socket.on("createGroup", (inputData)=> {
-    const group = groups.createGroup(inputData.groupName, inputData.userName);
+    const group = groups.createGroup(inputData.groupName,inputData.userName);
     socket.emit("groupCreated", {
-      groupCode:group.code, groupName:group.name});
+      groupCode:group.code, 
+      groupName:group.name
+    });
   });
 
   socket.on("getGroupInfo", (inputData)=>{
     const group = groups.getGroup(inputData.groupCode);
     if (group) {
-      console.log("Group found: ", group);
       socket.emit("groupInfo",{
-        success:true,
-        groupName: group.name,
-        members: group.members
+      success:true,
+      groupName: group.name,
+      members: group.members
       });
     }
     else {
-      console.log("Group not found: ", inputData.groupCode);
       socket.emit("groupInfo", {
-        success: false,
-        message: "Group not found"
+      success: false,
+      message: "Group not found"
       });
     }
   });
+
+  socket.on("joinGroup", (inputData)=>{
+    const wishes = [inputData.wish1, inputData.wish2, inputData.wish3].filter(w => w);//gör så att tomma "önskningar inte skickas med
+    const joined = groups.joinGroup(inputData.groupCode, inputData.userName, wishes);
+    if(joined) {
+      socket.join(inputData.groupCode);
+
+      socket.emit("joinedGroup", {
+        success:true,
+        groupCode: inputData.groupCode
+      });
+    } else { 
+      socket.emit("joinedGroup", {
+        success:false,
+        message: "{{uiLabels.GroupNotFound}}"
+      });
+    }
+  }); 
 
 
 
