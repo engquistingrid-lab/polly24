@@ -65,12 +65,13 @@ export default{
     },
     methods:{
         CreateGroup:function () {
-            if (!this.GroupName) {
+            if (!this.GroupName || !this.UserName) {
                 alert(this.uiLabels.PleaseEnterGroupName);
                 return;
             }
             socket.emit("createGroup", {
-                groupName: this.GroupName
+                groupName: this.GroupName,
+                userName: this.UserName
             });
         },
     },
