@@ -7,7 +7,7 @@ import { sockets } from "./sockets.js";
 const httpServer = createServer();
 const io = new Server(httpServer, {
     cors: {
-      origin: "http://localhost:5173",
+      origin: "*", //tillåter alla anslutningar, ex. mobil
       methods: ["GET", "POST"],
       credentials: true
   }

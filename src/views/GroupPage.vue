@@ -34,12 +34,17 @@
         </button>
     </div>
     <div v-if="amIAdmin">
-        <button v-on:click="youreassigned">
-            <router-link to="/yourassignedpage">{{uiLabels.Generate}}</router-link>
+        <button v-on:click="generateSecretSanta">
+            {{uiLabels.Generate}}
         </button>
 
     <p>{{ uiLabels.OBSaboutGenerating }}</p>
 
+    </div>
+    <div v-if="!amIAdmin && myAssignment">
+         <button v-on:click="goToAssignment">
+            {{uiLabels.YourAssigned}}
+        </button>
     </div>
 
     <div v-else>
@@ -52,7 +57,9 @@
 
 <script>    
 import io from 'socket.io-client';
-const socket = io("localhost:3000");
+const socket = io(sessionStorage.getItem("serverIP"));
+
+
     export default {
             name:"GroupPage",
         data: function () {
@@ -71,10 +78,23 @@ const socket = io("localhost:3000");
         amIAdmin() {
             const me = this.members.find(m => m.name === this.myName);
             return me ? me.isAdmin : false;
+        },
+        myAssignment() {
+            const me = this.members.find(m => m.name === this.myName);
+            return me ? me.assignedTo : null;
         }
     },
+methods: {
+        generateSecretSanta: function() {
+            socket.emit("generateSecretSanta", { groupCode: this.groupCode });
+            
+        },
+        goToAssignment: function() {
+            this.$router.push('/yourassignedpage/' + this.groupCode);
+        },
 
-   created: function () {
+},
+ created: function () {
      socket.on( "uiLabels", labels => this.uiLabels = labels );
 
      socket.emit( "getUILabels", this.lang );
@@ -90,6 +110,11 @@ const socket = io("localhost:3000");
         }
         else {console.error(data.message)}
      });
+
+     socket.on("secretSantaGenerated", (data)=> {
+        this.$router.push('/yourassignedpage/' + this.groupCode);
+     });
+
     },
     beforeUnmount() {
         socket.off("groupInfo");

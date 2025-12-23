@@ -6,6 +6,7 @@ function sockets(io, socket, data, users, groups ) {
   });
 
   socket.on("createGroup", (inputData)=> {
+    const wishes = [inputData.wish1, inputData.wish2, inputData.wish3].filter(w => w);
     const group = groups.createGroup(inputData.groupName, inputData.userName, inputData.wishes);
     socket.emit("groupCreated", {
       groupCode: group.code, 
@@ -65,6 +66,22 @@ function sockets(io, socket, data, users, groups ) {
     });
   }); 
 
+  // server/sockets.js
+
+  socket.on("generateSecretSanta", (inputData) => {
+    const success = groups.assignSecretSanta(inputData.groupCode);
+    if (success) {
+      const group = groups.getGroup(inputData.groupCode);
+      io.to(inputData.groupCode).emit("groupInfo", {
+        success: true,
+        groupName: group.name,
+        members: group.members,
+        wishes: group.wishes
+      });
+
+      io.to(inputData.groupCode).emit("secretSantaGenerated");
+    }
+  });
 
 
 

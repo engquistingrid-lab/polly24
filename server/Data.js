@@ -53,7 +53,29 @@ Groups.prototype.joinGroup = function (code, memberName, wishes) {
   }
   return false;
 }
+// server/Data.js
 
+Groups.prototype.assignSecretSanta = function (groupCode) {
+  const group = this.groups[groupCode];
+  if (!group || group.members.length < 2) return false;
+
+  const members = group.members;
+
+  let shuffled = [...members];
+  for (let i = shuffled.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
+  }
+
+  for (let i = 0; i < shuffled.length; i++) {
+    const giver = shuffled[i];
+    const receiver = shuffled[(i + 1) % shuffled.length];
+    
+    giver.assignedTo = receiver.name;
+  }
+  
+  return true;
+};
 
 
 // Store data in an object to keep the global namespace clean. In an actual implementation this would be interfacing a database...

@@ -31,7 +31,7 @@
 
 import ResponsiveNav from '@/components/ResponsiveNav.vue';
 import io from 'socket.io-client';
-const socket = io("localhost:3000"); 
+const socket = io(sessionStorage.getItem("serverIP"));
 
 export default {
     name:"JoinGroup",
