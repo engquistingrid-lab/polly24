@@ -35,7 +35,7 @@
     </div>
     <div v-if="amIAdmin">
         <button v-on:click="generateSecretSanta">
-            <router-link to="/yourassignedpage">{{uiLabels.Generate}}</router-link>
+            {{uiLabels.Generate}}
         </button>
 
     <p>{{ uiLabels.OBSaboutGenerating }}</p>
@@ -57,7 +57,9 @@
 
 <script>    
 import io from 'socket.io-client';
-const socket = io("localhost:3000");
+const socket = io(sessionStorage.getItem("serverIP"));
+
+
     export default {
             name:"GroupPage",
         data: function () {
@@ -85,7 +87,7 @@ const socket = io("localhost:3000");
 methods: {
         generateSecretSanta: function() {
             socket.emit("generateSecretSanta", { groupCode: this.groupCode });
-            this.$router.push('/yourassignedpage/' + this.groupCode);
+            
         },
         goToAssignment: function() {
             this.$router.push('/yourassignedpage/' + this.groupCode);
@@ -108,6 +110,11 @@ methods: {
         }
         else {console.error(data.message)}
      });
+
+     socket.on("secretSantaGenerated", (data)=> {
+        this.$router.push('/yourassignedpage/' + this.groupCode);
+     });
+
     },
     beforeUnmount() {
         socket.off("groupInfo");

@@ -26,7 +26,10 @@
 
 <script>
 import io from 'socket.io-client';
-const socket = io("localhost:3000");
+
+sessionStorage.setItem("serverIP", "http://10.0.0.10:3000") //Måste ändras till din lokala IP-adress
+
+const socket = io(sessionStorage.getItem("serverIP"));
     export default {
         name:"HomePage",
 

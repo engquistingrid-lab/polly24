@@ -6,19 +6,21 @@
             
     </header>
 
-    <div> 
-        <h1>{{ assignedPerson.name }}</h1>
-        <img src="/img/ElvinsGlad.jpeg" class="AssignedImg"></img>
-        <router-link to="/wishlist">{{uiLabels.GoToWishList}}</router-link>
+    <div v-if="assignedPerson"> 
+        <div>
+            <h1>{{ assignedPerson.name }}</h1>
+            <img src="/img/ElvinsGlad.jpeg" class="AssignedImg"></img>
+            <router-link to="/wishlist">{{uiLabels.GoToWishList}}</router-link>
+        </div>
+
+        <div>
+        Dina vänner tror att {{ assignedPerson.name }} vill ha detta i julklapp:
+           
+        </div>
     </div>
 
-    <div>
-        Dina vänner tror NAMN vill ha detta i julklapp:
-        <ul>
-            <li>Önskning 1</li>
-            <li>Önskning 2</li>
-            <li>Önskning 3</li>
-        </ul>
+     <div v-else>
+        <p>Hämtar din hemliga vän...</p>
     </div>
 
 </main>
@@ -26,7 +28,7 @@
 
 <script>    
 import io from 'socket.io-client';
-const socket = io("localhost:3000");
+const socket = io(sessionStorage.getItem("serverIP"));
 
 export default {
     name: "YourAssignedPage",
@@ -49,12 +51,15 @@ export default {
             if (data.success) {
                 console.log("Medlemmar mottagna från server:", data.members); // DEBUG
                 this.members = data.members;
-                this.findMyAssignment();
+                this.findMyAssigned();
             }
         });
     },
+        beforeUnmount() {
+            socket.off("groupInfo");
+    },
    methods: {
-        findMyAssignment: function() {
+        findMyAssigned: function() {
             // 1. Hitta mig själv i listan
             const me = this.members.find(m => m.name === this.myName);
             
