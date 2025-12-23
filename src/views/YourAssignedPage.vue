@@ -1,29 +1,31 @@
 <template>
-    <main>
     <header>
         <router-link to='/'>{{ uiLabels.BackToHomePage }}</router-link>
             <h1>{{uiLabels.YourAssigned}}</h1>
             
     </header>
 
-    <div v-if="assignedPerson"> 
-        <div>
-            <h1>{{ assignedPerson.name }}</h1>
-            <img src="/img/ElvinsGlad.jpeg" class="AssignedImg"></img>
-            <router-link to="/wishlist">{{uiLabels.GoToWishList}}</router-link>
+    <div class="main-wrapper">
+        <div class="assigned-section" v-if="assignedPerson"> 
+            <div>
+                <h1>{{ assignedPerson.name }}</h1>
+                <img src="/img/ElvinsGlad.jpeg" class="AssignedImg"></img>
+                <router-link to='/wishlist'>
+                    <button class="wishlist-game-button"> 
+                        {{uiLabels.GoToWishlist}}
+                    </button>
+                </router-link>
         </div>
 
-        <div>
-        Dina vänner tror att {{ assignedPerson.name }} vill ha detta i julklapp:
-           
+            <div>
+            Dina vänner tror att {{ assignedPerson.name }} vill ha detta i julklapp:
+            </div>
+        </div>
+
+        <div v-else>
+            <p>Hämtar din hemliga vän...</p>
         </div>
     </div>
-
-     <div v-else>
-        <p>Hämtar din hemliga vän...</p>
-    </div>
-
-</main>
 </template>
 
 <script>    

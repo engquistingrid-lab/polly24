@@ -1,58 +1,65 @@
 <template>
+    <header>
+        <h2>Secret Santa</h2>
+        <div class="header-buttons">
+            <router-link to='/'>
+                <button class="return-home-button"> 
+                    {{ uiLabels.ReturnToHomepage}}
+                </button>
+            </router-link>
+        </div>
+            <h1>{{ groupName }}</h1>
+            <h3>{{ uiLabels.GroupIs }} {{ groupCode }}, {{ uiLabels.ShareWith }}</h3>
+    </header>
 
-<header>
-    <h1>Secret Santa</h1>
-    <router-link to='/'>{{ uiLabels.BackToHomePage }}</router-link>
-    <h3>{{ uiLabels.GroupPage }}</h3>
-    <h2>{{ uiLabels.GroupIs }} {{ groupCode }}, {{ uiLabels.ShareWith }}</h2>
-    <h4>{{ uiLabels.Group }} {{ groupName }}</h4>
-</header>
-
-<div class="MembersWrapper">
-    <div class="MembersList">
-        <h2>{{ uiLabels.Members }}</h2>
-        <ul>    
-            <li v-for="member in members" :key="member.name">
-                {{ member.name }}
-            </li>
-        </ul>
-    </div>
-    <div class="AllWishes">
-        <h2>{{ uiLabels.AllWishes }}</h2>
-        <ul>
-        <li v-for="member in members" :key="member.name">
+    <div class="main-wrapper">
+        <div class="member-section">
+            <div class="member-list">
+                <h2>{{ uiLabels.Members }}</h2>
+                <ul>    
+                    <li v-for="member in members" :key="member.name">
+                        {{ member.name }}
+                    </li>
+                </ul>
+            </div>
             
-                <li v-for="(wish, index) in member.wishes" :key="index">
-                    {{ wish }}
-                </li>
-            
-        </li>
-    </ul>   
+            <div class="all-wishes-list">
+                <h2>{{ uiLabels.AllWishes }}</h2>
+                <ul>
+                    <template v-for="member in members" :key="member.name">
+                        <li v-for="(wish, index) in member.wishes" :key="member.name + index">
+                            {{ wish }}
+                        </li>
+                    </template>
+                </ul>   
+            </div>
+        </div>
 
-        <button v-on:click="GoToGame">
-        <router-link to='/wishlist/'>{{uiLabels.GoToGame}}</router-link>
-        </button>
-    </div>
-    <div v-if="amIAdmin">
-        <button v-on:click="generateSecretSanta">
-            {{uiLabels.Generate}}
-        </button>
-
-    <p>{{ uiLabels.OBSaboutGenerating }}</p>
-
-    </div>
-    <div v-if="!amIAdmin && myAssignment">
-         <button v-on:click="goToAssignment">
-            {{uiLabels.YourAssigned}}
-        </button>
-    </div>
-
-    <div v-else>
-        <p>{{ uiLabels.WaitingForAdmin }}</p>
+        <div class="button-section">
+            <router-link to='/wishlist/'>
+                <button class="game-button">
+                    {{uiLabels.GoToGame}}
+                </button>
+            </router-link>
     
-    
+            <div v-if="amIAdmin">
+                <button class="generate-button" v-on:click="generateSecretSanta">
+                    {{uiLabels.Generate}}
+                </button>
+                <p>{{ uiLabels.ObsAboutGenerating }}</p>
+            </div>
+
+            <!-- <div v-if="!amIAdmin && myAssignment">
+                <button v-on:click="goToAssignment">
+                    {{uiLabels.YourAssigned}}
+                </button>
+            </div> -->
+
+            <div v-else>
+                <p>{{ uiLabels.WaitingForAdmin }}</p>
+            </div>
+        </div>
     </div>
-</div>
 </template>
 
 <script>    

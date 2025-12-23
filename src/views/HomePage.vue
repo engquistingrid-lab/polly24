@@ -1,27 +1,25 @@
 <template>
     <header>
         <h1>Secret Santa</h1>
-        <button class="langbtn" v-on:click="switchLanguage">
-            {{ uiLabels.changeLanguage  }}
-        </button>
-        <button class="logoutbtn" v-on:click="">
-            {{ uiLabels.Logout }}
-        </button>
+        <div class="header-buttons">
+          <button class="lang-button" v-on:click="switchLanguage">
+              {{ uiLabels.ChangeLanguage  }}
+          </button>
+        </div>
     </header>
    
-    <div>
-      <button> 
+    <div class="main-wrapper">
+      <button class="start-new-button"> 
         <router-link to ='/StartNewGroup/'>
-            {{ uiLabels.Startnewgroup }}
+            {{ uiLabels.StartNewGroup }}
         </router-link>
       </button>
-      <button>
+      <button class="join-button">
         <router-link to="/joingroup/">
-          {{uiLabels.Joingroup}}
+          {{uiLabels.JoinGroup}}
         </router-link>
       </button>
     </div>
-
 </template>
 
 <script>

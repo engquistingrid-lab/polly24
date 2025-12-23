@@ -1,29 +1,35 @@
 <template>
     <header>
         <h1>{{ uiLabels.JoinGroup }}</h1>
-        <button v-on:click="ReturnToHomepage">
-            <router-link to='/'>{{ uiLabels.ReturnToHomepage}}</router-link>
-        </button>
+        <div class="header-buttons">
+            <router-link to='/'>
+                <button class="return-home-button"> 
+                    {{ uiLabels.ReturnToHomepage}}
+                </button>
+            </router-link>
+        </div>
     </header>
-    <div>
-        <h3>{{ uiLabels.EnterNameBox }}</h3>
-        <input type="text" v-model="userName">
-        <h3>{{ uiLabels.EnterYourCode }}</h3>
-        <input type="text" v-model="groupCode">
-        
-    </div>
-    <div>
-        <label>
-            {{ uiLabels.YourWishes }}
-            <input type="text" v-model="Wish1">
-            <input type="text" v-model="Wish2">
-            <input type="text" v-model="Wish3"> 
-        </label>
-    </div>
-    <div>
-        <button v-on:click="Continue">
-            {{ uiLabels.Continue}}
-        </button>
+
+    <div class="main-wrapper">
+        <div class="input-section">
+            <h3>{{ uiLabels.EnterNameBox }}</h3>
+                <input type="text" v-model="userName">
+            <h3>{{ uiLabels.EnterYourCode }}</h3>
+                <input type="text" v-model="groupCode">
+        </div>
+
+        <div class="wish-section">
+            <h3>{{ uiLabels.YourWishes }}</h3>
+                <input type="text" v-model="wish1">
+                <input type="text" v-model="wish2">
+                <input type="text" v-model="wish3"> 
+        </div>
+
+        <div>
+            <button class="continue-button" v-on:click="Continue">
+                {{ uiLabels.Continue}}
+            </button>
+        </div>
     </div>
 </template>
 
@@ -45,9 +51,9 @@ export default {
         lang: localStorage.getItem("lang") || "en",
         groupCode: "",
         userName: "",
-        Wish1: "",
-        Wish2: "",
-        Wish3: ""  
+        wish1: "",
+        wish2: "",
+        wish3: ""  
     }
    },
    created: function () {
@@ -80,9 +86,9 @@ export default {
             socket.emit("joinGroup", {
                 groupCode: this.groupCode,
                 userName: this.userName,
-                wish1: this.Wish1,
-                wish2: this.Wish2,
-                wish3: this.Wish3
+                wish1: this.wish1,
+                wish2: this.wish2,
+                wish3: this.wish3
             });
         } 
 }
