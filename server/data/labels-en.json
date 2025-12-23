@@ -1,65 +1,57 @@
 {
-	"sales-pitch": "Simply. Great. Polling.",
-	"subHeading": "A simple polling tool",
-	"invite": "Invite participants with this link:",
-	"createPoll": "Create poll",
-	"participatePoll": "Participate in poll",
-	"question": "Question",
-	"changeLanguage": "Byt till svenska",
-	"about": "About",
-	"participateInPoll": "Participate in poll",
-	"StartNewGroup": "Start new group",
-	"CreateGroup":"Create group",
-	"JoinGroup":"Join group",
-	"ReturnToHomepage":"Return to homepage",
-	"EnterYourCode":"Enter your group code:",
-	"Continue":"Continue",
-	"Assigned":"You have been assigned to:",
-	"AddWish":"Add Wish",
-	"Wishes":"Wishes",
-	"TimeState":"Time Remaining",
-	"Leaderboard":"Leaderboard",
-	"WhosWish":"Who wishes for this:",
-	"Guess":"Guess",
-	"Cancel":"Cancel",
-	"Correct":"Correct",
-	"Incorrect":"Incorrect",
-	"AddWishPlaceholder":"Enter your wish here...",
-	"NoSpacielChars":"No special characters!",
-	"GroupPage": "Group Page",
-	"ParticipantGroupPage": "Participant Group Page",
-	"Members":"Members",
-	"Generate": "Generate Secret Santa assignment",
-	"YourAssigned": "You have been assigned:",
-	"GoToWishlist": "🎁Go to wishlist🎁",
-	"BackToHomepage": "🥵 Back to homepage",
-	"WaitingForAdmin": "Waiting for admin to generate Secret Santa...",
-
-
-	"Returntostart": "Return to start",
-	"Yourname": "Your name",
-	"Password": "Password",
-	"Confirmpassword": "Confirm password ",
-	"Joingroup":"Join group",
-	"Showmygroup": "Show my groups",
-	"Startnewgroup": "Start new group",
-	"Welcome": "Welcome",
-
-	"EnterNameBox": "Enter your name:",
-	"YourWishes": "Write three cristmas wishes:",
+	"AddWish": "Add Wish",
+	"AddWishPlaceholder": "Enter your wish here...",
 	"AllWishes": "All Wishes",
+	"Assigned": "You have been assigned to:",
+
+	"BackToHomepage": "🥵 Back to homepage",
+
+	"Cancel": "Cancel",
+	"ChangeLanguage": "Byt till svenska",
+	"Continue": "Continue",
+	"Correct": "Correct",
+	"CreateGroup": "Create group",
+	
+	"EnterGroupName": "Enter groupname:",
+	"EnterNameBox": "Enter your name:",
+	"EnterYourCode": "Enter your group code:",
+	
+	"Generate": "Generate Secret Santa assignment",
 	"GoToGame": "Go to wishlistgame",
-	"OBSaboutGenerating ": "Note! Once you have generated the assignment you can no longer play the game",
+	"GoToWishlist": "🎁Go to wishlist🎁",
+	"Group": "Group: ",
+	"GroupIs": "The group code is: ",
+	"Guess": "Guess",
+	
+	"Incorrect": "Incorrect",
+
+	"JoinGroup": "Join group",
+
+	"Leaderboard": "Leaderboard",
+
+	"Members": "Members",
+
+	"NoSpecialChars": "No special characters!",
+
+	"ObsAboutGenerating": "Note! Once you have generated the assignment you can no longer play the game",
+
+	"PleaseEnterGroupCode": "Please Enter Groupcode",
 	"PleaseEnterGroupName": "Please Enter Groupname",
 	"PleaseEnterName": "Please enter your name",
-	"EnterGroupName": "Enter groupname:",
-	"PleaseEnterGroupCode": "Please Enter Groupcode",
-	"GroupIs": "The group code is: ",
-	"ShareWith": "share this with the members who want to join!",
-	"Group": "Group: ",
-	"GroupNotFound": "Group not found"
-	
 
+	"ReturnToHomepage": "Return to homepage",
 
+	"ShareWith": "Share this with the members who want to join!",
+	"ShowMyGroup": "Show my groups",
+	"StartNewGroup": "Start new group",
 
+	"TimeState": "Time Remaining",
+
+	"WaitingForAdmin": "Waiting for admin to generate Secret Santa...",
+	"WhosWish": "Who wishes for this:",
+	"Wishes": "Wishes",
+
+	"YourAssigned": "You have been assigned:",
+	"YourName": "Your name",
+	"YourWishes": "Write three christmas wishes:"
 }

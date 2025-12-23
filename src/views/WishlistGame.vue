@@ -170,7 +170,7 @@ export default {
     
       const regex = /^[a-zA-Z0-9 åäöÅÄÖ]*$/;
       if (!regex.test(text)) {
-          this.triggerError(this.uiLabels.NoSpacielChars || "Inga specialtecken");
+          this.triggerError(this.uiLabels.NoSpecialChars || "Inga specialtecken");
           return;
       }
 

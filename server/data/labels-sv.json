@@ -1,60 +1,57 @@
 {
-	"sales-pitch": "Svar. Helt. Enkelt.",
-	"subHeading": "Ett enkelt enkätverktyg",
-	"invite": "Bjud in deltagare med den här länken:",
-	"createPoll": "Skapa röstning",
-	"participatePoll": "Delta i röstning",
-	"question": "Fråga",
-	"changeLanguage": "Change to English",
-	"about": "Om oss",
-	"participateInPoll": "Delta i enkäten",
-	"StartNewGroup": "Skapa en ny grupp",
-	"CreateGroup": "Skapa grupp",
-	"JoinGroup": "Gå med i grupp",
-	"ReturnToHomepage": "Återvänd till startsidan",
-	"EnterYourCode": "Ange din gruppkod:",
-	"Continue": "Fortsätt",
-	"Assigned": "Du är Secret Santa till:",
 	"AddWish": "Lägg till önskan",
-	"Wishes": "Önskningar",
-	"TimeState": "Återstående tid",
-	"Leaderboard": "Topplista",
-	"WhosWish": "Vem önskar sig detta:",
-	"Guess": "Gissa",
-	"Cancel": "Avbryt",
-	"Correct": "Rätt",
-	"Incorrect": "Fel",
 	"AddWishPlaceholder": "Skriv din önskan här...",
-	"NoSpacielChars": "Inga specialtecken!",
-	"GroupPage": "Gruppsida",
-	"ParticipantGroupPage": "Deltagargruppssida",
-	"Members": "Medlemmar",
-	"Generate": "Generera Secret Santa tilldelning",
-	"YourAssigned": "Du har blivit tilldelad:",
-	"GoToWishlist": "🎁Gå till önskelista🎁",
-	"BackToHomepage": "🥵 Tillbaka till startsidan",
-	"WaitingForAdmin": "Väntar på att administratör ska generera Secret Santa...",
-	"Returntostart":"Tillbaka till start",
-	"Yourname": "Ditt namn",
-	"Password": "Lösenord",
-	"Confirmpassword": "Bekräfta Lösenord",
-	"Joingroup": "Gå med i grupp",
-	"Showmygroup": "Visa mina grupper",
-	"Startnewgroup": "Starta en ny grupp",
-	"Welcome": "Välkommen",
-
-	"EnterNameBox": "Ange ditt namn:",
-	"YourWishes": "Skriv tre julönskningar:",
 	"AllWishes": "Alla önskningar",
-	"GoToGame": "Gå till önskelistespelet",
-	"OBSaboutGenerating ": "OBS! När du har genererat tilldelningen kan du inte längre spela spelet",
-	"PleaseEnterGroupName":"Vänligen ange gruppnamn",
-	"PleaseEnterName":"Vänligen ange ditt namn",
-	"EnterGroupName":"Skriv in gruppnamn:",
-	"GroupIs": "Gruppkoden är: ",
-	"PleaseEnterGroupCode":"Vänligen ange gruppkod",
-	"ShareWith":"dela denna med de medlemmar som vill vara med!",
-	"Group": "Grupp: ",
-	"GroupNotFound": "Gruppen hittades inte"
+	"Assigned": "Du är Secret Santa till:",
+	
+	"BackToHomepage": "🥵 Tillbaka till startsidan",
 
+	"Cancel": "Avbryt",
+	"ChangeLanguage": "Change to English",
+	"Continue": "Fortsätt",
+	"Correct": "Rätt",
+	"CreateGroup": "Skapa grupp",
+
+	"EnterGroupName": "Skriv in gruppnamn:",
+	"EnterNameBox": "Ange ditt namn:",
+	"EnterYourCode": "Ange din gruppkod:",
+
+	"Generate": "Generera Secret Santa tilldelning",
+	"GoToGame": "Gå till önskelistespelet",
+	"GoToWishlist": "🎁Gå till önskelista🎁",
+	"Group": "Grupp: ",
+	"GroupIs": "Gruppkoden är: ",
+	"Guess": "Gissa",
+	
+	"Incorrect": "Fel",
+
+	"JoinGroup": "Gå med i grupp",
+
+	"Leaderboard": "Topplista",
+
+	"Members": "Medlemmar",
+
+	"NoSpecialChars": "Inga specialtecken!",
+
+	"ObsAboutGenerating": "OBS! När du har genererat tilldelningen kan du inte längre spela spelet",
+
+	"PleaseEnterGroupCode": "Vänligen ange gruppkod",
+	"PleaseEnterGroupName": "Vänligen ange gruppnamn",
+	"PleaseEnterName": "Vänligen ange ditt namn",
+	
+	"ReturnToHomepage": "Återvänd till startsidan",
+
+	"ShareWith": "Dela denna med de medlemmar som vill vara med!",
+	"ShowMyGroup": "Visa mina grupper",
+	"StartNewGroup": "Skapa en ny grupp",
+
+	"TimeState": "Återstående tid",
+
+	"WaitingForAdmin": "Väntar på att administratör ska generera Secret Santa...",
+	"WhosWish": "Vem önskar sig detta:",
+	"Wishes": "Önskningar",
+
+	"YourAssigned": "Du har blivit tilldelad:",
+	"YourName": "Ditt namn",
+	"YourWishes": "Skriv tre julönskningar:"
 }
