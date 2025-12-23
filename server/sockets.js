@@ -65,6 +65,20 @@ function sockets(io, socket, data, users, groups ) {
     });
   }); 
 
+  // server/sockets.js
+
+  socket.on("generateSecretSanta", (inputData) => {
+    const success = groups.assignSecretSanta(inputData.groupCode);
+    if (success) {
+      const group = groups.getGroup(inputData.groupCode);
+      io.to(inputData.groupCode).emit("groupInfo", {
+        success: true,
+        groupName: group.name,
+        members: group.members,
+        wishes: group.wishes
+      });
+    }
+  });
 
 
 

@@ -34,12 +34,17 @@
         </button>
     </div>
     <div v-if="amIAdmin">
-        <button v-on:click="youreassigned">
+        <button v-on:click="generateSecretSanta">
             <router-link to="/yourassignedpage">{{uiLabels.Generate}}</router-link>
         </button>
 
     <p>{{ uiLabels.OBSaboutGenerating }}</p>
 
+    </div>
+    <div v-if="!amIAdmin && myAssignment">
+         <button v-on:click="goToAssignment">
+            {{uiLabels.YourAssigned}}
+        </button>
     </div>
 
     <div v-else>
@@ -71,10 +76,23 @@ const socket = io("localhost:3000");
         amIAdmin() {
             const me = this.members.find(m => m.name === this.myName);
             return me ? me.isAdmin : false;
+        },
+        myAssignment() {
+            const me = this.members.find(m => m.name === this.myName);
+            return me ? me.assignedTo : null;
         }
     },
+methods: {
+        generateSecretSanta: function() {
+            socket.emit("generateSecretSanta", { groupCode: this.groupCode });
+            this.$router.push('/yourassignedpage/' + this.groupCode);
+        },
+        goToAssignment: function() {
+            this.$router.push('/yourassignedpage/' + this.groupCode);
+        },
 
-   created: function () {
+},
+ created: function () {
      socket.on( "uiLabels", labels => this.uiLabels = labels );
 
      socket.emit( "getUILabels", this.lang );

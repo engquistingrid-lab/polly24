@@ -27,7 +27,7 @@ const router = createRouter({
       component: () => import ('../views/JoinGroup.vue')},
 
     {
-      path: '/yourassignedpage/',
+      path: '/yourassignedpage/:id',
       name: 'YourAssignedPage',
       component: () => import('../views/YourAssignedPage.vue')
     },
