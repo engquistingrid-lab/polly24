@@ -1,128 +1,76 @@
-
-function sockets(io, socket, data, users, groups ) {
+function sockets(io, socket, users, groups) {
   
   socket.on('getUILabels', function(lang) {
-    socket.emit('uiLabels', data.getUILabels(lang));
+    socket.emit('uiLabels', groups.getUILabels(lang));
   });
 
-  socket.on("createGroup", (inputData)=> {
-    const wishes = [inputData.wish1, inputData.wish2, inputData.wish3].filter(w => w);
-    const group = groups.createGroup(inputData.groupName, inputData.userName, inputData.wishes);
-    socket.emit("groupCreated", {
-      groupCode: group.code, 
-      groupName: group.name,
-      wishes: group.wishes
-    });
-  });
-
-  socket.on("getGroupInfo", (inputData)=>{
-    const group = groups.getGroup(inputData.groupCode);
-    if (group) {
-
-      socket.join(inputData.groupCode);
-
-      socket.emit("groupInfo",{
-      success:true,
-      groupName: group.name,
-      members: group.members,
-      wishes: group.wishes
-      });
-    }
-    else {
-      socket.emit("groupInfo", {
-      success: false,
-      message: "Group not found"
-      });
-    }
-  });
-
-  socket.on("joinGroup", (inputData)=>{
-    const wishes = [inputData.wish1, inputData.wish2, inputData.wish3].filter(w => w);//gör så att tomma "önskningar inte skickas med
-    const joined = groups.joinGroup(inputData.groupCode, inputData.userName, wishes);
-
-    if(joined) {
-
-      socket.join(inputData.groupCode);
-
-      socket.emit("joinedGroup", {
-        success:true,
-        groupCode: inputData.groupCode
-      });
-
-    } else { 
-      socket.emit("joinedGroup", {
-        success:false,
-        message: "{{uiLabels.GroupNotFound}}"
-      });
-    }
-
-    const group = groups.getGroup(inputData.groupCode);
+  // Skapa grupp först, sen Gå med
+  socket.on("createGroup", (d) => {
+    // 1. Skapa tom grupp
+    const group = groups.createGroup(d.groupName);
     
-    io.to(inputData.groupCode).emit("groupInfo", {
-      success: true,
-      groupName: group.name,
-      members: group.members,
-      wishes: group.wishes
-    });
-  }); 
+    // 2. Låt Admin gå med i den
+    groups.joinGroup(group.code, socket.id, d.userName, d.wishes);
+    
+    socket.join(group.code);
+    socket.emit("groupCreated", { groupCode: group.code });
+    io.to(group.code).emit("updateGame", group);
+  });
 
-  // server/sockets.js
+  socket.on("joinGame", (d) => {
+    console.log(`--> Tar emot joinGame för grupp: ${d.groupCode} från ${d.userName}`);
 
-  socket.on("generateSecretSanta", (inputData) => {
-    const success = groups.assignSecretSanta(inputData.groupCode);
-    if (success) {
-      const group = groups.getGroup(inputData.groupCode);
-      io.to(inputData.groupCode).emit("groupInfo", {
-        success: true,
-        groupName: group.name,
-        members: group.members,
-        wishes: group.wishes
-      });
-
-      io.to(inputData.groupCode).emit("secretSantaGenerated");
+    const group = groups.joinGroup(d.groupCode, socket.id, d.userName, d.wishes);
+    
+    if (group) {
+        socket.join(d.groupCode);
+        socket.emit("joinedSuccess", { groupCode: group.code });
+        io.to(d.groupCode).emit("updateGame", group);
+    } else {
+        socket.emit("joinedError", { message: "Koden finns inte." });
     }
   });
 
-
-
-
-  //kom ihåg att radera alla nedanstående sen när all kod är klar, det är gammal kod//
-
-  socket.on('createPoll', function(d) {
-    data.createPoll(d.pollId, d.lang)
-    socket.emit('pollData', data.getPoll(d.pollId));
+  socket.on("getGroupInfo", (d) => {
+    const group = groups.getGroup(d.groupCode);
+    if(group) {
+        // Om användaren laddar om sidan, se till att de hamnar i rummet igen
+        socket.join(d.groupCode); 
+        socket.emit("updateGame", group);
+        socket.emit("groupInfo", { success: true, groupName: group.name, members: group.members }); 
+    }
   });
 
-  socket.on('addQuestion', function(d) {
-    data.addQuestion(d.pollId, {q: d.q, a: d.a});
-    socket.emit('questionUpdate', data.activateQuestion(d.pollId));
+  socket.on("getInspiration", (d) => {
+      const topWishes = groups.getInspirationFor(d.groupCode, d.targetName);
+      socket.emit("inspirationData", topWishes);
   });
 
-  socket.on('joinPoll', function(pollId) {
-    socket.join(pollId);
-    socket.emit('questionUpdate', data.activateQuestion(pollId))
-    socket.emit('submittedAnswersUpdate', data.getSubmittedAnswers(pollId));
+  socket.on("generateSecretSanta", (d) => {
+    groups.assignSecretSanta(d.groupCode);
+    io.to(d.groupCode).emit("secretSantaGenerated");
   });
 
-  socket.on('participateInPoll', function(d) {
-    data.participateInPoll(d.pollId, d.name);
-    io.to(d.pollId).emit('participantsUpdate', data.getParticipants(d.pollId));
-  });
-  socket.on('startPoll', function(pollId) {
-    io.to(pollId).emit('startPoll');
-  })
-  socket.on('runQuestion', function(d) {
-    let question = data.activateQuestion(d.pollId, d.questionNumber);
-    io.to(d.pollId).emit('questionUpdate', question);
-    io.to(d.pollId).emit('submittedAnswersUpdate', data.getSubmittedAnswers(d.pollId));
+  socket.on("getMyAssignment", (d) => {
+     const group = groups.getGroup(d.groupCode);
+     if(group) {
+         const me = group.members.find(m => m.id === socket.id);
+         if(me && me.assignedTo) {
+             socket.emit("assignmentData", { targetName: me.assignedTo });
+         }
+     }
   });
 
-  socket.on('submitAnswer', function(d) {
-    data.submitAnswer(d.pollId, d.answer);
-    io.to(d.pollId).emit('submittedAnswersUpdate', data.getSubmittedAnswers(d.pollId));
-  }); 
+  socket.on("submitGuesses", (d) => {
+    groups.submitGuesses(d.groupCode, d.userName, d.guesses);
+    groups.calculateScores(d.groupCode);
+    const group = groups.getGroup(d.groupCode);
+    io.to(d.groupCode).emit("updateGame", group);
+  });
+
+  socket.on("endGame", (d) => {
+      io.to(d.groupCode).emit("gameEnded");
+  });
 }
-
-//kom ihåg att radera alla ovanstående sen när all kod är klar, det är gammal kod//
 
 export { sockets };

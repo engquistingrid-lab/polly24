@@ -1,13 +1,12 @@
 {
   "name": "polly24",
   "version": "0.0.0",
-  "type":"module",
+  "type": "module",
   "private": true,
   "scripts": {
-    "dev:frontend": "vite ",
-    "dev:frontendhost": "vite --host", 
+    "dev:frontend": "vite --host", 
     "dev:backend": "nodemon server/index.js",
-    "dev": "concurrently 'npm:dev:frontend' 'npm:dev:backend'",
+    "dev": "concurrently \"npm:dev:frontend\" \"npm:dev:backend\"",
     "build": "vite build",
     "preview": "vite preview",
     "lint": "eslint . --ext .vue,.js,.jsx,.cjs,.mjs --fix --ignore-path .gitignore"

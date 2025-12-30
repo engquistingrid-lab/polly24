@@ -13,14 +13,6 @@ const router = createRouter({
     
     },
 
-
-    ///{
-    ///  path: '/homepage/',
-   ///  name: 'HomePage',
-    ///  component: () => import('../views/HomePage.vue')
-    ///}
-    
-
      {
       path:'/joingroup/',
       name: 'JoinGroup',
@@ -60,11 +52,6 @@ const router = createRouter({
     path: '/wishlist/',
     name: 'WishlistGame',
     component: () => import('../views/WishlistGame.vue')
-  },
-  {
-    path: '/wishlistAdmin/',
-    name: 'WishlistGameAdmin',
-    component: () => import('../views/WishlistGameAdmin.vue')
   },
   {
     path: '/grouppage/:groupCode',

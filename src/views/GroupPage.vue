@@ -3,131 +3,97 @@
         <h2>Secret Santa</h2>
         <div class="header-buttons">
             <router-link to='/'>
-                <button class="return-home-button"> 
-                    {{ uiLabels.ReturnToHomepage}}
-                </button>
+                <button class="return-home-button">Hem</button>
             </router-link>
         </div>
-            <h1>{{ groupName }}</h1>
-            <h3>{{ uiLabels.GroupIs }} {{ groupCode }}, {{ uiLabels.ShareWith }}</h3>
+        <h1>Grupp: {{ groupName }}</h1>
+        <h3>Kod: {{ groupCode }}</h3>
     </header>
 
     <div class="main-wrapper">
-        <div class="member-section">
-            <div class="member-list">
-                <h2>{{ uiLabels.Members }}</h2>
-                <ul>    
-                    <li v-for="member in members" :key="member.name">
-                        {{ member.name }}
-                    </li>
-                </ul>
-            </div>
-            
-            <div class="all-wishes-list">
-                <h2>{{ uiLabels.AllWishes }}</h2>
-                <ul>
-                    <template v-for="member in members" :key="member.name">
-                        <li v-for="(wish, index) in member.wishes" :key="member.name + index">
-                            {{ wish }}
-                        </li>
-                    </template>
-                </ul>   
-            </div>
+        <div class="member-list">
+            <h2>Deltagare i lobbyn:</h2>
+            <ul>    
+                <li v-for="member in members" :key="member.id || member.name">
+                    {{ member.name }}
+                    <span v-if="member.isAdmin"> (Admin)</span>
+                </li>
+            </ul>
         </div>
 
-        <div class="button-section">
-            <router-link to='/wishlist/'>
-                <button class="game-button">
-                    {{uiLabels.GoToGame}}
-                </button>
-            </router-link>
-    
-            <div v-if="amIAdmin">
-                <button class="generate-button" v-on:click="generateSecretSanta">
-                    {{uiLabels.Generate}}
-                </button>
-                <p>{{ uiLabels.ObsAboutGenerating }}</p>
-            </div>
-
-            <!-- <div v-if="!amIAdmin && myAssignment">
-                <button v-on:click="goToAssignment">
-                    {{uiLabels.YourAssigned}}
-                </button>
-            </div> -->
-
-            <div v-else>
-                <p>{{ uiLabels.WaitingForAdmin }}</p>
-            </div>
+        <div class="admin-section" v-if="amIAdmin">
+            <h3>👑 Admin Panel</h3>
+            <p>Du styr spelet! Vänta tills alla vänner syns i listan ovan.</p>
+            <p>När alla är med, klicka på knappen för att starta:</p>
+            
+            <button class="generate-button" @click="generateSecretSanta">
+                Dela ut tomtar & Starta spelet
+            </button>
+        </div>
+        
+        <div v-else class="waiting-message">
+            <h3>Väntar på att Admin ska starta spelet...</h3>
+            <p>Stanna kvar på denna sida. Sidan uppdateras automatiskt.</p>
+            <div class="spinner">🎁</div>
         </div>
     </div>
 </template>
 
 <script>    
-import io from 'socket.io-client';
-const socket = io(sessionStorage.getItem("serverIP"));
+import socket from '@/socket';
 
-
-    export default {
-            name:"GroupPage",
-        data: function () {
+export default {
+    name: "GroupPage",
+    data: function () {
         return {
             groupCode: this.$route.params.groupCode,
             groupName: "",
-            members: [],
-            wishes: [],
-            uiLabels: {},
-            lang: localStorage.getItem("lang") || "en",
+            // Måste vara en tom lista från början för att undvika krasch
+            members: [], 
             myName: localStorage.getItem("myName") || ""
-    }
+        }
    },
-
    computed: {
         amIAdmin() {
+            // Om listan inte laddat än, returnera false
+            if (!this.members || this.members.length === 0) return false;
+
             const me = this.members.find(m => m.name === this.myName);
             return me ? me.isAdmin : false;
-        },
-        myAssignment() {
-            const me = this.members.find(m => m.name === this.myName);
-            return me ? me.assignedTo : null;
         }
     },
-methods: {
-        generateSecretSanta: function() {
-            socket.emit("generateSecretSanta", { groupCode: this.groupCode });
-            
-        },
-        goToAssignment: function() {
+    created: function () {
+        // 1. Gå med i rummet för att lyssna
+        socket.emit("getGroupInfo", {groupCode: this.groupCode});
+
+        // 2. Ta emot grundinfo
+        socket.on("groupInfo", (data)=>{
+            if (data.success) {
+                this.groupName = data.groupName;
+                this.members = data.members || []; // Skydd om det är tomt
+            }
+        });
+
+        // 3. LYSSNA PÅ UPPDATERINGAR 
+        socket.on("updateGame", (group) => {
+             console.log("Uppdatering mottagen!", group);
+             this.groupName = group.name;
+             this.members = group.members || [];
+        });
+
+        // 4. Starta spelet
+        socket.on("secretSantaGenerated", () => {
             this.$router.push('/yourassignedpage/' + this.groupCode);
-        },
-
-},
- created: function () {
-     socket.on( "uiLabels", labels => this.uiLabels = labels );
-
-     socket.emit( "getUILabels", this.lang );
-
-     socket.emit("getGroupInfo", {groupCode: this.groupCode});
-
-     socket.on("groupInfo", (data)=>{
-        if (data.success) {
-            this.groupName=data.groupName;
-            this.members=data.members;
-            this.wishes=data.wishes;
-            console.log(this.wishes);
-        }
-        else {console.error(data.message)}
-     });
-
-     socket.on("secretSantaGenerated", (data)=> {
-        this.$router.push('/yourassignedpage/' + this.groupCode);
-     });
-
+        });
     },
-    beforeUnmount() {
-        socket.off("groupInfo");
+    methods: {
+        generateSecretSanta() {
+            socket.emit("generateSecretSanta", { groupCode: this.groupCode });
+        }
     }
 }
 </script>
 
-<style scoped>
+<style>
+
 </style>

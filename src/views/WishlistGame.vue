@@ -1,223 +1,164 @@
 <template>
   <div class="game-container">
-    <div class="game-header"> 
+    <div class="game-header">
       
-      <div class="game-leaderboard">
-        <h2>{{ uiLabels.Leaderboard }}</h2>
+      <div class="header-left">
+          <router-link to="/">
+              <button class="nav-btn home-btn">Hem</button>
+          </router-link>
+          
+          <router-link :to="'/yourassignedpage/' + groupCode">
+              <button class="nav-btn santa-btn">🎅 Min Secret Santa</button>
+          </router-link>
+      </div>
+
+      <div class="leaderboard-section">
+        <h3>Topplista</h3>
         <ul>
-          <li v-for="(player, index) in sortedLeaderboard" :key="player.id">
-            #{{ index + 1 }} {{ player.name }} - {{ player.points }}p
-          </li>
+            <li v-for="m in sortedMembers" :key="m.name">
+                {{ m.name }}: {{ m.score || 0 }}%
+            </li>
         </ul>
       </div>
 
-      <div class="game-timer">
-        <h3>{{ uiLabels.TimeState }}</h3>
-        <p>{{ formattedTime }}</p>
+      <div v-if="amIAdmin" class="admin-controls">
+          <button @click="endGame" class="end-btn">AVSLUTA SPELET</button>
       </div>
 
-      <div class="game-main">
-        <h1>{{ uiLabels.Wishes }}</h1>
-
-        <div class="wish-input">
-          <input 
-            v-model="newWishText"
-            @keyup.enter="addWish"
-            :placeholder="uiLabels.AddWishPlaceholder"
-            :class="{ 'input-error': hasInputError }" 
-          />
-          <button @click="addWish">{{ uiLabels.AddWish }}</button>
-        </div>
-
-        <p v-if="errorMessage">{{ errorMessage }}</p>
-
-        <div class="wish-list">
-          <div
-            v-for="wish in wishes"
-            :key="wish.id"
-            class="wish-guesseble"
-            :class="{
-              'my-wish': wish.userId === currentUserId, 
-              'guessed-correct': wish.status === 'correct',
-              'guessed-incorrect': wish.status === 'incorrect',
-              'clickable': wish.userId !== currentUserId && wish.status === 'pending'
-            }"
-            @click="openGuessModal(wish)"> <p>{{ wish.text }}</p>
-
-            <span v-if="wish.status === 'correct'">🟢 {{ uiLabels.Correct }} ({{ wish.ownerName }})</span>
-            <span v-if="wish.status === 'incorrect'">🔴 {{ uiLabels.Incorrect }}</span>
-          </div>
-        </div>
-      </div>
-
-      <div class="assigned-person">
-        <h4>{{ uiLabels.Assigned }} {{ assignedPersonName }}</h4>
-      </div>
-
-      <div v-if="showModal" class="guess-maker-view">
-        <div class="guess-banner">
-          <h3>{{ uiLabels.WhosWish }} {{ selectedWish?.text }}?</h3>
-          
-          <div class="guess-options">
-            <button 
-              v-for="member in otherMembers"
-              :key="member.id"
-              class="member-button"
-              :class="{ 'selected': selectedMemberId === member.id }"
-              @click="selectedMemberId = member.id">
-              {{ member.name }}
-            </button>
-          </div>
-
-          <div class="guess-actions">
-            <button @click="submitGuess" :disabled="!selectedMemberId">{{ uiLabels.Guess }}</button>
-            <button @click="closeModal">{{ uiLabels.Cancel }}</button>
-          </div>
-        </div>
-      </div>
-                    
     </div>
 
-    <div>
-      <router-link to="/">{{ uiLabels.ReturnToHomepage }}</router-link>
+    <div class="main-game">
+      <h1>Vem önskade vad?</h1>
+      
+      <div v-if="!gameIsOver">
+          <p>Gissa vem som önskat vad i listan nedan!</p>
+          
+          <div class="wishes-grid">
+            <div v-for="(wishItem, index) in wishes" :key="index" 
+                 class="wish-card" 
+                 :class="{ 'my-wish': wishItem.ownerName === myName }">
+                
+                <p class="wish-text">"{{ wishItem.text }}"</p>
+
+                <div v-if="wishItem.ownerName === myName" class="own-tag">
+                    (Din önskning)
+                </div>
+
+                <div v-else>
+                    <select v-model="myGuesses[wishItem.text]" :disabled="hasSubmitted">
+                        <option disabled value="">Välj person...</option>
+                        <option v-for="member in otherMembers" :key="member.name" :value="member.name">
+                            {{ member.name }}
+                        </option>
+                    </select>
+                </div>
+            </div>
+          </div>
+
+          <div class="actions">
+              <button @click="sendGuesses" :disabled="hasSubmitted || !allGuessed" class="submit-btn">
+                  {{ hasSubmitted ? 'Gissningar skickade!' : 'Skicka in gissningar' }}
+              </button>
+              
+              <p v-if="!allGuessed && !hasSubmitted" style="color:red; font-weight:bold;">
+                  Du måste gissa på alla (utom dina egna)!
+              </p>
+          </div>
+      </div>
+
+      <div v-else class="result-screen">
+          <h2>Spelet är slut!</h2>
+          <h1>🏆 Vinnaren är: {{ sortedMembers[0]?.name || 'Ingen' }}!</h1>
+          
+          <div class="result-list">
+              <h3>Rätt svar:</h3>
+              <ul>
+                  <li v-for="wish in wishes" :key="wish.text">
+                      "{{ wish.text }}" önskades av <strong>{{ wish.ownerName }}</strong>
+                  </li>
+              </ul>
+          </div>
+      </div>
+
     </div>
   </div>
 </template>
 
 <script>
-import io from 'socket.io-client';
-const socket = io(sessionStorage.getItem("serverIP"));
+import socket from '@/socket';
 
 export default {
   name: "WishlistGame",
-
-  data: function () {
+  data() {
     return {
-      uiLabels: {},
-      lang: localStorage.getItem("lang") || "en",
-      
-      currentUserId: 1,
-      assignedPersonName: 'Elvin',
-      
-      members: [
-          { id: 1, name: 'Elvin', points: 999 },
-          { id: 2, name: 'Ida', points: 15 },
-          { id: 3, name: 'Estelle', points: 8 },
-          { id: 4, name: 'Linn', points: 12 },
-          { id: 5, name: 'Ingrid', points: 20 }
-      ],
-
-      wishes: [
-          { id: 101, text: 'Cykel', userId: 2, ownerName: 'Ida', status: 'pending' },
-          { id: 201, text: 'Bok om Vue.js', userId: 3, ownerName: 'Estelle', status: 'pending' },
-          { id: 301, text: 'Spelkonsol', userId: 4, ownerName: 'Linn', status: 'pending' }
-      ],
-
-      newWishText: '', 
-      errorMessage: '',
-      hasInputError: false,
-
-      showModal: false, 
-      selectedWish: null,
-      selectedMemberId: null,
-
-      timeRemaining: 600, 
+      groupCode: localStorage.getItem("myGroupCode"),
+      myName: localStorage.getItem("myName"),
+      members: [],
+      wishes: [], // Håller alla önskningar
+      myGuesses: {}, 
+      hasSubmitted: false,
+      gameIsOver: false
     };
   },
-
   computed: {
-    sortedLeaderboard() {
-      return [...this.members].sort((a, b) => b.points - a.points);
+    sortedMembers() {
+        return [...this.members].sort((a, b) => (b.score || 0) - (a.score || 0));
     },
-    
     otherMembers() {
-      return this.members.filter(m => m.id !== this.currentUserId);
+        return this.members.filter(m => m.name !== this.myName);
     },
-
-    formattedTime() {
-      const m = Math.floor(this.timeRemaining / 60);
-      const s = this.timeRemaining % 60;
-      return `${m}:${s < 10 ? '0' + s : s}`;
+    amIAdmin() {
+        if(!this.members.length) return false;
+        const me = this.members.find(m => m.name === this.myName);
+        return me ? me.isAdmin : false;
+    },
+    allGuessed() {
+        // Filtrera fram andras önskningar
+        const othersWishes = this.wishes.filter(w => w.ownerName !== this.myName);
+        if (othersWishes.length === 0) return true;
+        
+        // Kolla att vi har en gissning för varje
+        return othersWishes.every(w => this.myGuesses[w.text]);
     }
   },
+  created() {
+    // Hämta info direkt när sidan laddas
+    socket.emit("getGroupInfo", { groupCode: this.groupCode });
 
-  created: function () {
-    socket.on("uiLabels", labels => this.uiLabels = labels);
-    socket.emit("getUILabels", this.lang);
-
-    setInterval(() => {
-      if (this.timeRemaining > 0) this.timeRemaining--;
-    }, 1000);
-  },
-
-  methods: {
-    switchLanguage: function() {
-      if (this.lang === "en") {
-        this.lang = "sv"
-      } else {
-        this.lang = "en"
-      }
-      localStorage.setItem("lang", this.lang);
-      socket.emit("getUILabels", this.lang);
-    },
-
-    addWish() {
-      this.errorMessage = "";
-      this.hasInputError = false;
-      const text = this.newWishText.trim();
-
-      if (text.length < 2) return;
-    
-      const regex = /^[a-zA-Z0-9 åäöÅÄÖ]*$/;
-      if (!regex.test(text)) {
-          this.triggerError(this.uiLabels.NoSpecialChars || "Inga specialtecken");
-          return;
-      }
-
-      this.wishes.push({
-          id: Date.now(),
-          text: text,
-          userId: this.currentUserId,
-          ownerName: "Jag",
-          status: 'pending'
-      });
-      this.newWishText = "";
-    },
-
-    triggerError(msg) {
-        this.errorMessage = msg;
-        this.hasInputError = true;
-        setTimeout(() => { this.hasInputError = false; }, 500);
-    },
-
-    openGuessModal(wish) {
-        // Man får inte klicka på sina egna eller redan avklarade
-        if (wish.userId === this.currentUserId || wish.status !== 'pending') return;
-        
-        this.selectedWish = wish;
-        this.selectedMemberId = null;
-        this.showModal = true;
-    },
-
-    closeModal() {
-        this.showModal = false;
-        this.selectedWish = null;
-    },
-
-    submitGuess() {
-        if (!this.selectedMemberId || !this.selectedWish) return;
-      
-        const isCorrect = this.selectedWish.userId === this.selectedMemberId;
-        
-        if (isCorrect) {
-          this.selectedWish.status = 'correct';
-          const me = this.members.find(m => m.id === this.currentUserId);
-          if (me) me.points += 1;
-        } else {
-          this.selectedWish.status = 'incorrect';
+    // Ta emot uppdateringar (poäng, nya gissningar etc)
+    socket.on("updateGame", (group) => {
+        this.members = group.members || [];
+        // Blanda önskningarna så man inte ser vem som är vem via ordningen
+        if (group.wishes) {
+            // Spara en blandad kopia om vi inte redan har laddat dem
+            if(this.wishes.length === 0 || this.wishes.length !== group.wishes.length) {
+                 this.wishes = [...group.wishes].sort(() => Math.random() - 0.5);
+            }
         }
-        this.closeModal();
+    });
+
+    socket.on("gameEnded", () => {
+        this.gameIsOver = true;
+    });
+  },
+  methods: {
+    sendGuesses() {
+        socket.emit("submitGuesses", {
+            groupCode: this.groupCode,
+            userName: this.myName,
+            guesses: this.myGuesses
+        });
+        this.hasSubmitted = true;
+    },
+    endGame() {
+        if(confirm("Vill du avsluta spelet och visa rätt svar för alla?")) {
+            socket.emit("endGame", { groupCode: this.groupCode });
+        }
     }
-  } 
-}; 
+  }
+};
 </script>
+
+<style>
+
+</style>

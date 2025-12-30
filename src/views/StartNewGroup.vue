@@ -2,95 +2,79 @@
     <header>
         <h1>{{ uiLabels.StartNewGroup }}</h1>
         <div class="header-buttons">
-            <router-link to='/'>
-                <button class="return-home-button"> 
-                    {{ uiLabels.ReturnToHomepage}}
-                </button>
-            </router-link>
+            <button class="return-home-button" @click="ReturnToHomepage">Hem</button>
         </div>
     </header>
 
     <div class="main-wrapper">
         <div class="input-section">
-            <h3>{{ uiLabels.EnterNameBox}}</h3>
-                <input type="text" v-model="userName">
-            <h3>{{ uiLabels.EnterGroupName }}</h3>
-                <input type="text" v-model="groupName">
+            <h3>Ditt namn (Du blir Admin):</h3>
+            <input type="text" v-model="userName" placeholder="Namn">
+
+            <h3>Gruppens namn:</h3>
+            <input type="text" v-model="groupName" placeholder="Gruppnamn">
         </div>
 
         <div class="wish-section">
-            <h3>{{ uiLabels.YourWishes }}</h3>
-                <input type="text" v-model="wish1">
-                <input type="text" v-model="wish2">
-                <input type="text" v-model="wish3"> 
+            <h3>Dina önskningar:</h3>
+            <input type="text" v-model="wish1" placeholder="Önskning 1">
+            <input type="text" v-model="wish2" placeholder="Önskning 2">
+            <input type="text" v-model="wish3" placeholder="Önskning 3"> 
         </div>
 
         <div>
-            <button class="create-button" v-on:click="CreateGroup">
-                {{ uiLabels.CreateGroup }}
+            <button class="create-button" @click="CreateGroup">
+                Starta Grupp
             </button>
         </div>
     </div>
 </template>
 
 <script>
-import ResponsiveNav from '@/components/ResponsiveNav.vue';
-import io from 'socket.io-client';
-const socket = io(sessionStorage.getItem("serverIP"));
+import socket from '@/socket';
 
 export default{
     name:'StartNewGroup',
-    components:{
-        ResponsiveNav
-    },
     data:function(){
         return{
             userName:"",
             groupName:"",
-            wish1:"",
-            wish2:"",
-            wish3:"",
+            wish1:"", wish2:"", wish3:"",
             uiLabels: {},
             lang: localStorage.getItem( "lang") || "en",
         }
     },
     created:function(){
-        socket.on("groupCreated", (data)=> {
+        socket.on("uiLabels", labels => this.uiLabels = labels);
+        socket.emit("getUILabels", this.lang);
 
+        socket.on("groupCreated", (data)=> {
+            localStorage.setItem("myName", this.userName);
+            localStorage.setItem("myGroupCode", data.groupCode);
             this.$router.push('/grouppage/'+ data.groupCode);
         });
-        socket.on( "uiLabels", labels => {
-            this.uiLabels = labels;
-            console.log(labels) ;
-        });
-        socket.emit( "getUILabels", this.lang );
     },
     methods:{
+        ReturnToHomepage() { this.$router.push('/'); },
+        
         CreateGroup:function () {
             if (!this.groupName || !this.userName) {
-                alert(this.uiLabels.PleaseEnterGroupName);
+                alert("Fyll i både ditt namn och gruppnamn!");
                 return;
             }
-            if (!this.userName) {
-                alert(this.uiLabels.PleaseEnterUserName);
-                return;
-            }
-            if (!this.wish1 && !this.wish2 && !this.wish3) {
-                alert(this.uiLabels.PleaseEnterWish);
+            const wishes = [this.wish1, this.wish2, this.wish3].filter(w => w.trim() !== "");
+            if (wishes.length === 0) {
+                alert("Skriv minst en önskning!");
                 return;
             }
             
-            localStorage.setItem("myName", this.userName);
-
             socket.emit("createGroup", {
                 groupName: this.groupName,
-                userName: this.userName,
-                wishes: [this.wish1, this.wish2, this.wish3].filter(w => w.trim() !== "")
+                userName: this.userName, 
+                wishes: wishes
             });
-
         }
-    },
-
+    }
 }
 </script>
 
