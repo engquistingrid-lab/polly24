@@ -1,57 +1,41 @@
 {
-	"AddWish": "Add Wish",
-	"AddWishPlaceholder": "Enter your wish here...",
-	"AllWishes": "All Wishes",
-	"Assigned": "You have been assigned to:",
-
-	"BackToHomepage": "🥵 Back to homepage",
-
-	"Cancel": "Cancel",
-	"ChangeLanguage": "Byt till svenska",
-	"Continue": "Continue",
-	"Correct": "Correct",
-	"CreateGroup": "Create group",
-	
-	"EnterGroupName": "Enter groupname:",
-	"EnterNameBox": "Enter your name:",
-	"EnterYourCode": "Enter your group code:",
-	
-	"Generate": "Generate Secret Santa assignment",
-	"GoToGame": "Go to wishlistgame",
-	"GoToWishlist": "🎁Go to wishlist🎁",
-	"Group": "Group: ",
-	"GroupIs": "The group code is: ",
-	"Guess": "Guess",
-	
-	"Incorrect": "Incorrect",
-
-	"JoinGroup": "Join group",
-
-	"Leaderboard": "Leaderboard",
-
-	"Members": "Members",
-
-	"NoSpecialChars": "No special characters!",
-
-	"ObsAboutGenerating": "Note! Once you have generated the assignment you can no longer play the game",
-
-	"PleaseEnterGroupCode": "Please Enter Groupcode",
-	"PleaseEnterGroupName": "Please Enter Groupname",
-	"PleaseEnterName": "Please enter your name",
-
-	"ReturnToHomepage": "Return to homepage",
-
-	"ShareWith": "Share this with the members who want to join!",
-	"ShowMyGroup": "Show my groups",
-	"StartNewGroup": "Start new group",
-
-	"TimeState": "Time Remaining",
-
-	"WaitingForAdmin": "Waiting for admin to generate Secret Santa...",
-	"WhosWish": "Who wishes for this:",
-	"Wishes": "Wishes",
-
-	"YourAssigned": "You have been assigned:",
-	"YourName": "Your name",
-	"YourWishes": "Write three christmas wishes:"
+    "AddWish": "Add Wish",
+    "AddWishPlaceholder": "Enter your wish here...",
+    "AllWishes": "All Wishes",
+    "Assigned": "You have been assigned to:",
+    "BackToHomePage": "Home",
+    "Cancel": "Cancel",
+    "ChangeLanguage": "Byt till svenska",
+    "Continue": "Continue",
+    "Correct": "Correct",
+    "CreateGroup": "Create group",
+    "EnterGroupName": "Enter group name",
+    "EnterNameBox": "Enter your name",
+    "EnterYourCode": "Enter group code",
+    "Generate": "Generate Secret Santa assignment",
+    "GoToGame": "Go to wishlist game",
+    "GoToWishlist": "🎁 Go to wishlist game 🎁",
+    "Group": "Group: ",
+    "GroupIs": "The group code is: ",
+    "Guess": "Guess",
+    "Incorrect": "Incorrect",
+    "JoinGroup": "Join group",
+    "Leaderboard": "Leaderboard",
+    "Members": "Members",
+    "NoSpecialChars": "No special characters!",
+    "ObsAboutGenerating": "Note! Once you have generated the assignment you can no longer play the game",
+    "PleaseEnterGroupCode": "Please enter group code",
+    "PleaseEnterGroupName": "Please fill in name and group name!",
+    "PleaseEnterName": "Please enter your name",
+    "ReturnToHomepage": "Return to homepage",
+    "ShareWith": "Share this with the members who want to join!",
+    "ShowMyGroup": "Show my groups",
+    "StartNewGroup": "Start new group",
+    "TimeState": "Time Remaining",
+    "WaitingForAdmin": "Waiting for admin to generate Secret Santa...",
+    "WhosWish": "Who wishes for this:",
+    "Wishes": "Wishes",
+    "YourAssigned": "You have been assigned:",
+    "YourName": "Your name",
+    "YourWishes": "Write three christmas wishes:"
 }

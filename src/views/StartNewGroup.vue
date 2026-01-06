@@ -1,30 +1,32 @@
 <template>
     <header>
-        <h1>{{ uiLabels.StartNewGroup }}</h1>
+        <h1>{{ uiLabels.StartNewGroup || 'Start New Group' }}</h1>
         <div class="header-buttons">
-            <button class="return-home-button" @click="ReturnToHomepage">Hem</button>
+            <button class="return-home-button" @click="ReturnToHomepage">
+                {{ uiLabels.ReturnToHomepage || 'Hem' }}
+            </button>
         </div>
     </header>
 
     <div class="main-wrapper">
         <div class="input-section">
-            <h3>Ditt namn (Du blir Admin):</h3>
-            <input type="text" v-model="userName" placeholder="Namn">
+            <h3>{{ uiLabels.EnterNameBox || 'Ditt namn' }} (Admin):</h3>
+            <input type="text" v-model="userName" :placeholder="uiLabels.YourName || 'Namn'">
 
-            <h3>Gruppens namn:</h3>
-            <input type="text" v-model="groupName" placeholder="Gruppnamn">
+            <h3>{{ uiLabels.EnterGroupName || 'Gruppnamn' }}:</h3>
+            <input type="text" v-model="groupName" :placeholder="uiLabels.EnterGroupName || 'Gruppnamn'">
         </div>
 
         <div class="wish-section">
-            <h3>Dina önskningar:</h3>
-            <input type="text" v-model="wish1" placeholder="Önskning 1">
-            <input type="text" v-model="wish2" placeholder="Önskning 2">
-            <input type="text" v-model="wish3" placeholder="Önskning 3"> 
+            <h3>{{ uiLabels.YourWishes || 'Dina önskningar' }}:</h3>
+            <input type="text" v-model="wish1" :placeholder="uiLabels.AddWishPlaceholder || 'Önskning 1'">
+            <input type="text" v-model="wish2" :placeholder="uiLabels.AddWishPlaceholder || 'Önskning 2'">
+            <input type="text" v-model="wish3" :placeholder="uiLabels.AddWishPlaceholder || 'Önskning 3'"> 
         </div>
 
         <div>
             <button class="create-button" @click="CreateGroup">
-                Starta Grupp
+                {{ uiLabels.CreateGroup || 'Starta Grupp' }}
             </button>
         </div>
     </div>
@@ -36,12 +38,15 @@ import socket from '@/socket';
 export default{
     name:'StartNewGroup',
     data:function(){
-        return{
-            userName:"",
-            groupName:"",
-            wish1:"", wish2:"", wish3:"",
+        return {
+            userName: "",
+            groupName: "",
+            // HÄR FIXAR VI SYNTAXFELET (Varje variabel på egen rad):
+            wish1: "", 
+            wish2: "", 
+            wish3: "",
             uiLabels: {},
-            lang: localStorage.getItem( "lang") || "en",
+            lang: localStorage.getItem("lang") || "en"
         }
     },
     created:function(){
@@ -59,12 +64,13 @@ export default{
         
         CreateGroup:function () {
             if (!this.groupName || !this.userName) {
-                alert("Fyll i både ditt namn och gruppnamn!");
+                alert(this.uiLabels.PleaseEnterGroupName || "Fyll i namn och gruppnamn!");
                 return;
             }
-            const wishes = [this.wish1, this.wish2, this.wish3].filter(w => w.trim() !== "");
+            const wishes = [this.wish1, this.wish2, this.wish3].filter(w => w && w.trim() !== "");
+            
             if (wishes.length === 0) {
-                alert("Skriv minst en önskning!");
+                alert(this.uiLabels.AddWish || "Skriv minst en önskning!");
                 return;
             }
             
@@ -79,5 +85,4 @@ export default{
 </script>
 
 <style>
-
 </style>

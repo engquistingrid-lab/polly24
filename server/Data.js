@@ -1,5 +1,6 @@
 'use strict';
 import {readFileSync} from "fs";
+import path from "path"; // Vi importerar path för att vara säkra på sökvägen
 
 export function Groups(){
   this.groups = {};
@@ -125,8 +126,14 @@ Groups.prototype.getInspirationFor = function(groupCode, targetName) {
 };
 
 Groups.prototype.getUILabels = function (lang) {
+  // Vi försöker bygga en absolut sökväg för att undvika problem
+  const url = "./server/data/labels-" + lang + ".json";
   try {
-    const labels = readFileSync("./server/data/labels-" + lang + ".json");
+    const labels = readFileSync(url, 'utf8');
     return JSON.parse(labels);
-  } catch(e) { return {}; }
+  } catch(e) { 
+      console.log("Kunde inte ladda språkfilen: " + url);
+      console.log("Felet var:", e.message);
+      return {}; 
+  }
 }

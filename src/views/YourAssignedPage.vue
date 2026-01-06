@@ -1,6 +1,10 @@
 <template>
     <header>
-        <router-link to='/'>{{ uiLabels.BackToHomePage || 'Hem' }}</router-link>
+        <router-link to='/'>
+            <button class="return-home-button">
+                {{ uiLabels.ReturnToHomepage || 'Hem' }}
+            </button>
+        </router-link>
         <h1>{{uiLabels.YourAssigned}}</h1>     
     </header>
 
@@ -8,14 +12,14 @@
         <div class="assigned-section" v-if="assignedPerson"> 
             
             <div class="info-card">
-                <h2>Du ska köpa julklapp till:</h2>
+                <h2>{{ uiLabels.Assigned || 'Du ska köpa julklapp till:' }}</h2>
                 <h1 class="highlight">{{ assignedPerson.name }}</h1>
-                <img src="/img/ElvinsGlad.jpeg" class="AssignedImg">
+                <img src="/img/ElvinsGlad.jpeg" class="AssignedImg" alt="Glad Elvin">
             </div>
             
             <div class="inspiration-box">
                 <h3>🔍 Inspiration</h3>
-                <p>Här är vad andra tror att {{ assignedPerson.name }} önskat sig:</p>
+                <p>{{ uiLabels.WhosWish || 'Här är vad andra tror personen önskat sig:' }}</p>
                 
                 <ul v-if="inspirationList.length > 0">
                     <li v-for="wish in inspirationList" :key="wish">🎁 {{ wish }}</li>
@@ -29,7 +33,6 @@
                         {{uiLabels.GoToWishlist || 'Gå till Gissningsspelet'}}
                     </button>
                 </router-link>
-                <p>Gå hit för att gissa på vem som önskat vad!</p>
             </div>
         </div>
 
@@ -68,7 +71,6 @@ export default {
             }
         });
 
-        // Ta emot inspiration
         socket.on("inspirationData", (data) => {
             this.inspirationList = data;
         });
@@ -79,7 +81,6 @@ export default {
             if (me && me.assignedTo) {
                 this.assignedPerson = this.members.find(m => m.name === me.assignedTo);
                 
-                // Hämta inspiration
                 socket.emit("getInspiration", { 
                     groupCode: this.groupCode, 
                     targetName: this.assignedPerson.name 
@@ -91,5 +92,4 @@ export default {
 </script>
 
 <style>
-
 </style>
