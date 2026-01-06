@@ -43,7 +43,9 @@
 </template>
 
 <script>    
-import socket from '@/socket';
+import io from 'socket.io-client';
+const serverUrl = sessionStorage.getItem("serverIP") || "http://localhost:3000";
+const socket = io(serverUrl);
 
 export default {
     name: "YourAssignedPage",

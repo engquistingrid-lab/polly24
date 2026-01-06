@@ -21,5 +21,5 @@ io.on('connection', function (socket) {
 
 const PORT = process.env.PORT || 3000;
 httpServer.listen(PORT, function() {
-    console.log("Socket.io server running on http://localhost:" + PORT);
+    console.log("Socket.io server running on port " + PORT);
 });

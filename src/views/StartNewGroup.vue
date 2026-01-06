@@ -33,7 +33,9 @@
 </template>
 
 <script>
-import socket from '@/socket';
+import io from 'socket.io-client';
+const serverUrl = sessionStorage.getItem("serverIP") || "http://localhost:3000";
+const socket = io(serverUrl);
 
 export default{
     name:'StartNewGroup',
@@ -41,7 +43,7 @@ export default{
         return {
             userName: "",
             groupName: "",
-            // HÄR FIXAR VI SYNTAXFELET (Varje variabel på egen rad):
+            // Syntax-fixen vi gjorde:
             wish1: "", 
             wish2: "", 
             wish3: "",

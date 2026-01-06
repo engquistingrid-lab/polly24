@@ -3,8 +3,11 @@
   "version": "1.0.0",
   "type": "module",
   "scripts": {
-    "start": "node index.js",
-    "dev": "nodemon index.js"
+    "dev": "vite",
+    "dev:backend": "nodemon server/index.js",
+    "dev:frontendhost": "vite --host",
+    "build": "vite build",
+    "preview": "vite preview"
   },
 
   "dependencies": {

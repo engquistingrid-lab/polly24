@@ -16,11 +16,12 @@
       <button class="menu-button join-group" @click="goToJoin">
           {{ uiLabels.JoinGroup || 'Gå med i grupp' }}
       </button>
+    
     </div>
 </template>
 
 <script>
-import socket from '@/socket';
+import io from 'socket.io-client';
 
 export default {
   name: "HomePage",
@@ -28,21 +29,30 @@ export default {
     return {
       uiLabels: {},
       lang: localStorage.getItem("lang") || "en",
-      serverIP: import.meta.env.VITE_SERVER_URL
+      // ÄNDRA DIN IP HÄR:
+      myIp: "192.168.0.103", 
+      socket: null
     }
   },
-
   created: function () {
-    socket.on("uiLabels", labels => this.uiLabels = labels);
-    socket.emit("getUILabels", this.lang);
+    // 1. Skapa hela adressen
+    const fullAddress = "http://" + this.myIp + ":3000";
+    
+    // 2. Spara den så andra sidor hittar den (Gruppens metod)
+    sessionStorage.setItem("serverIP", fullAddress);
+    
+    // 3. Starta anslutningen
+    this.socket = io(fullAddress);
+    
+    this.socket.on("uiLabels", labels => this.uiLabels = labels);
+    this.socket.emit("getUILabels", this.lang);
   },
-
   methods: {
     switchLanguage: function() {
       if (this.lang === "en") this.lang = "sv";
       else this.lang = "en";
       localStorage.setItem("lang", this.lang);
-      socket.emit("getUILabels", this.lang);
+      this.socket.emit("getUILabels", this.lang);
     },
     goToCreate() { this.$router.push('/StartNewGroup/'); },
     goToJoin() { this.$router.push('/joingroup/'); }
@@ -51,5 +61,4 @@ export default {
 </script>
 
 <style>
-
 </style>
