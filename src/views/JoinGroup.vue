@@ -1,16 +1,13 @@
 <template>
     <header>
         <h1>{{ uiLabels.JoinGroup || 'Gå med i grupp' }}</h1>
-        <div class="header-buttons">
-            <button class="return-home-button" @click="ReturnToHomepage">
-                {{ uiLabels.ReturnToHomepage || 'Hem' }}
-            </button>
-        </div>
+        <button @click="ReturnToHomepage">
+            {{ uiLabels.ReturnToHomepage || 'Hem' }}
+        </button>
     </header>
 
-    <div class="main-wrapper">
-
-        <div class="input-section">
+    <div>
+        <div>
             <h3>{{ uiLabels.EnterNameBox || 'Ditt namn' }}:</h3>
             <input type="text" v-model="userName" :placeholder="uiLabels.YourName || 'Namn'">
             
@@ -18,17 +15,17 @@
             <input type="text" v-model="groupCode" :placeholder="uiLabels.PleaseEnterGroupCode || 'Kod'">
         </div>
 
-        <div class="wish-section">
+        <div>
             <h3>{{ uiLabels.YourWishes || 'Dina önskningar' }}:</h3>
             <input type="text" v-model="wish1" :placeholder="uiLabels.AddWishPlaceholder || 'Önskning 1'">
             <input type="text" v-model="wish2" :placeholder="uiLabels.AddWishPlaceholder || 'Önskning 2'">
             <input type="text" v-model="wish3" :placeholder="uiLabels.AddWishPlaceholder || 'Önskning 3'"> 
         </div>
 
-        <p v-if="errorMessage" class="error-msg">{{ errorMessage }}</p>
+        <p v-if="errorMessage" style="color: red;">{{ errorMessage }}</p>
 
         <div>
-            <button class="continue-button" @click="joinGame" :disabled="!isConnected">
+            <button @click="joinGame">
                 {{ uiLabels.JoinGroup || 'GÅ MED' }}
             </button>
         </div>
@@ -37,48 +34,41 @@
 
 <script>
 import io from 'socket.io-client';
-const serverUrl = sessionStorage.getItem("serverIP") || "http://localhost:3000";
-const socket = io(serverUrl);
 
 export default {
     name: "JoinGroup",
     data() {
         return {
+            socket: null,
             uiLabels: {},
             lang: localStorage.getItem("lang") || "en",
             groupCode: "",
             userName: "",
             wish1: "", wish2: "", wish3: "",
-            errorMessage: "",
-            isConnected: false
+            errorMessage: ""
         }
     },
     created() {
-        // Hämta språk
-        socket.on("uiLabels", labels => this.uiLabels = labels);
-        socket.emit("getUILabels", this.lang);
+        // 1. Hämta IP och anslut
+        const serverUrl = sessionStorage.getItem("serverIP") || "http://localhost:3000";
+        this.socket = io(serverUrl);
 
-        socket.on("connect", () => { 
-            this.isConnected = true; 
-            this.errorMessage = ""; 
-        });
-        
-        socket.on("disconnect", () => { this.isConnected = false; });
-        
-        socket.on("connect_error", (err) => {
-            console.log("Connection Error:", err);
-            this.isConnected = false;
-        });
+        // 2. Lyssna på events
+        this.socket.on("uiLabels", labels => this.uiLabels = labels);
+        this.socket.emit("getUILabels", this.lang);
 
-        socket.on("joinedSuccess", (data) => {
+        this.socket.on("joinedSuccess", (data) => {
             localStorage.setItem("myName", this.userName);
             localStorage.setItem("myGroupCode", this.groupCode);
             this.$router.push('/grouppage/' + this.groupCode);
         });
 
-        socket.on("joinedError", (data) => {
+        this.socket.on("joinedError", (data) => {
             this.errorMessage = data.message;
         });
+    },
+    beforeUnmount() {
+        if (this.socket) this.socket.disconnect();
     },
     methods: {
         ReturnToHomepage() { this.$router.push('/'); },
@@ -92,7 +82,7 @@ export default {
                 return;
             }
 
-            socket.emit("joinGame", {
+            this.socket.emit("joinGame", {
                 groupCode: this.groupCode,
                 userName: this.userName,
                 wishes: wishes
@@ -101,7 +91,3 @@ export default {
     }
 }
 </script>
-
-<style>
-
-</style>

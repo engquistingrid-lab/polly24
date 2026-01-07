@@ -12,7 +12,6 @@ const router = createRouter({
       component: HomePage
     
     },
-
      {
       path:'/joingroup/',
       name: 'JoinGroup',

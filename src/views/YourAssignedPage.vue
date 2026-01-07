@@ -2,7 +2,7 @@
     <header>
         <router-link to='/'>
             <button class="return-home-button">
-                {{ uiLabels.ReturnToHomepage || 'Hem' }}
+                {{ uiLabels.ReturnToHomepage }}
             </button>
         </router-link>
         <h1>{{uiLabels.YourAssigned}}</h1>     
@@ -12,14 +12,14 @@
         <div class="assigned-section" v-if="assignedPerson"> 
             
             <div class="info-card">
-                <h2>{{ uiLabels.Assigned || 'Du ska köpa julklapp till:' }}</h2>
+                <h2>{{ uiLabels.Assigned }}</h2>
                 <h1 class="highlight">{{ assignedPerson.name }}</h1>
                 <img src="/img/ElvinsGlad.jpeg" class="AssignedImg" alt="Glad Elvin">
             </div>
             
             <div class="inspiration-box">
                 <h3>🔍 Inspiration</h3>
-                <p>{{ uiLabels.WhosWish || 'Här är vad andra tror personen önskat sig:' }}</p>
+                <p>{{ uiLabels.WhosWish }}</p>
                 
                 <ul v-if="inspirationList.length > 0">
                     <li v-for="wish in inspirationList" :key="wish">🎁 {{ wish }}</li>
@@ -30,7 +30,7 @@
             <div style="margin-top: 30px;">
                 <router-link to='/wishlist'>
                     <button class="game-btn"> 
-                        {{uiLabels.GoToWishlist || 'Gå till Gissningsspelet'}}
+                        {{uiLabels.GoToWishlist }}
                     </button>
                 </router-link>
             </div>

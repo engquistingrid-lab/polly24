@@ -4,16 +4,16 @@
       
       <div class="header-left">
           <router-link to="/">
-              <button class="nav-btn home-btn">Hem</button>
+              <button class="nav-btn home-btn">{{ uiLabels.ReturnToHomepage }}</button>
           </router-link>
           
           <router-link :to="'/yourassignedpage/' + groupCode">
-              <button class="nav-btn santa-btn">🎅 Min Secret Santa</button>
+              <button class="nav-btn santa-btn">🎅 {{ uiLabels.YourAssignedShort }}</button>
           </router-link>
       </div>
 
       <div class="leaderboard-section">
-        <h3>Topplista</h3>
+        <h3>{{ uiLabels.Leaderboard }}</h3>
         <ul>
             <li v-for="m in sortedMembers" :key="m.name">
                 {{ m.name }}: {{ m.score || 0 }}%
@@ -22,17 +22,18 @@
       </div>
 
       <div v-if="amIAdmin" class="admin-controls">
-          <button @click="endGame" class="end-btn">AVSLUTA SPELET</button>
+          <button @click="endGame" class="end-btn">{{ uiLabels.EndGame }}</button>
       </div>
 
     </div>
 
     <div class="main-game">
-      <h1>Vem önskade vad?</h1>
+      <h1>{{ uiLabels.WhoWishedWhat }}</h1>
       
       <div v-if="!gameIsOver">
-          <p>Gissa vem som önskat vad i listan nedan!</p>
           
+          <p>{{ uiLabels.GuessInstructions }}</p>
+
           <div class="wishes-grid">
             <div v-for="(wishItem, index) in wishes" :key="index" 
                  class="wish-card" 
@@ -41,12 +42,12 @@
                 <p class="wish-text">"{{ wishItem.text }}"</p>
 
                 <div v-if="wishItem.ownerName === myName" class="own-tag">
-                    (Din önskning)
+                    {{ uiLabels.YourWishTag }}
                 </div>
 
                 <div v-else>
                     <select v-model="myGuesses[wishItem.text]" :disabled="hasSubmitted">
-                        <option disabled value="">Välj person...</option>
+                        <option disabled value="">{{ uiLabels.ChoosePerson }}</option>
                         <option v-for="member in otherMembers" :key="member.name" :value="member.name">
                             {{ member.name }}
                         </option>
@@ -57,24 +58,24 @@
 
           <div class="actions">
               <button @click="sendGuesses" :disabled="hasSubmitted || !allGuessed" class="submit-btn">
-                  {{ hasSubmitted ? 'Gissningar skickade!' : 'Skicka in gissningar' }}
+                  {{ hasSubmitted ? uiLabels.GuessesSubmitted : uiLabels.SubmitGuesses }}
               </button>
               
               <p v-if="!allGuessed && !hasSubmitted" style="color:red; font-weight:bold;">
-                  Du måste gissa på alla (utom dina egna)!
+                  {{ uiLabels.MustGuessAll }}
               </p>
           </div>
       </div>
 
       <div v-else class="result-screen">
-          <h2>Spelet är slut!</h2>
-          <h1>🏆 Vinnaren är: {{ sortedMembers[0]?.name || 'Ingen' }}!</h1>
-          
+          <h2>{{ uiLabels.GameEnded }}</h2>
+          <h1>🏆 {{ uiLabels.WinnerIs }} {{ sortedMembers[0]?.name }}!</h1>
+
           <div class="result-list">
-              <h3>Rätt svar:</h3>
+              <h3>{{ uiLabels.CorrectAnswers }}</h3>
               <ul>
                   <li v-for="wish in wishes" :key="wish.text">
-                      "{{ wish.text }}" önskades av <strong>{{ wish.ownerName }}</strong>
+                      "{{ wish.text }}" {{ uiLabels.WishedBy }} <strong>{{ wish.ownerName }}</strong>
                   </li>
               </ul>
           </div>
@@ -86,66 +87,71 @@
 
 <script>
 import io from 'socket.io-client';
-const serverUrl = sessionStorage.getItem("serverIP") || "http://localhost:3000";
-const socket = io(serverUrl);
 
 export default {
   name: "WishlistGame",
   data() {
     return {
+      socket: null,
       groupCode: localStorage.getItem("myGroupCode"),
       myName: localStorage.getItem("myName"),
       members: [],
-      wishes: [], // Håller alla önskningar
+      wishes: [], 
       myGuesses: {}, 
       hasSubmitted: false,
-      gameIsOver: false
+      gameIsOver: false,
+      uiLabels: {},
+      lang: localStorage.getItem("lang") || "en"
     };
   },
   computed: {
     sortedMembers() {
+        if (!this.members) return [];
         return [...this.members].sort((a, b) => (b.score || 0) - (a.score || 0));
     },
     otherMembers() {
+        if (!this.members) return [];
         return this.members.filter(m => m.name !== this.myName);
     },
     amIAdmin() {
-        if(!this.members.length) return false;
+        if(!this.members || !this.members.length) return false;
         const me = this.members.find(m => m.name === this.myName);
         return me ? me.isAdmin : false;
     },
     allGuessed() {
-        // Filtrera fram andras önskningar
         const othersWishes = this.wishes.filter(w => w.ownerName !== this.myName);
         if (othersWishes.length === 0) return true;
-        
-        // Kolla att vi har en gissning för varje
         return othersWishes.every(w => this.myGuesses[w.text]);
     }
   },
   created() {
-    // Hämta info direkt när sidan laddas
-    socket.emit("getGroupInfo", { groupCode: this.groupCode });
+    const serverUrl = sessionStorage.getItem("serverIP") || "http://localhost:3000";
+    this.socket = io(serverUrl);
 
-    // Ta emot uppdateringar (poäng, nya gissningar etc)
-    socket.on("updateGame", (group) => {
+    this.socket.on("uiLabels", labels => this.uiLabels = labels);
+    this.socket.emit("getUILabels", this.lang);
+
+    this.socket.emit("getGroupInfo", { groupCode: this.groupCode });
+
+    this.socket.on("updateGame", (group) => {
         this.members = group.members || [];
-        // Blanda önskningarna så man inte ser vem som är vem via ordningen
         if (group.wishes) {
-            // Spara en blandad kopia om vi inte redan har laddat dem
             if(this.wishes.length === 0 || this.wishes.length !== group.wishes.length) {
                  this.wishes = [...group.wishes].sort(() => Math.random() - 0.5);
             }
         }
     });
 
-    socket.on("gameEnded", () => {
+    this.socket.on("gameEnded", () => {
         this.gameIsOver = true;
     });
   },
+  beforeUnmount() {
+      if(this.socket) this.socket.disconnect();
+  },
   methods: {
     sendGuesses() {
-        socket.emit("submitGuesses", {
+        this.socket.emit("submitGuesses", {
             groupCode: this.groupCode,
             userName: this.myName,
             guesses: this.myGuesses
@@ -153,14 +159,17 @@ export default {
         this.hasSubmitted = true;
     },
     endGame() {
-        if(confirm("Vill du avsluta spelet och visa rätt svar för alla?")) {
-            socket.emit("endGame", { groupCode: this.groupCode });
+        // Använd label för confirm-rutan, eller fallback
+        const msg = this.uiLabels.EndGameConfirm;
+        if(confirm(msg)) {
+            this.socket.emit("endGame", { groupCode: this.groupCode });
         }
     }
   }
 };
 </script>
 
-<style>
+<style scoped>
 
 </style>
+

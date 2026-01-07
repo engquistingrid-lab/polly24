@@ -3,37 +3,39 @@
         <h2>Secret Santa</h2>
         <div class="header-buttons">
             <router-link to='/'>
-                <button class="return-home-button">Hem</button>
+                <button class="return-home-button">
+                    {{ uiLabels.ReturnToHomepage}}
+                </button>
             </router-link>
         </div>
-        <h1>Grupp: {{ groupName }}</h1>
-        <h3>Kod: {{ groupCode }}</h3>
+        <h1>{{ uiLabels.Group }}: {{ groupName }}</h1>
+        <h3>{{ uiLabels.GroupIs }}: {{ groupCode }}</h3>
     </header>
 
     <div class="main-wrapper">
         <div class="member-list">
-            <h2>Deltagare i lobbyn:</h2>
+            <h2>{{ uiLabels.MembersInLobby }}</h2>
             <ul>    
                 <li v-for="member in members" :key="member.id || member.name">
                     {{ member.name }}
-                    <span v-if="member.isAdmin"> (Admin)</span>
+                    <span v-if="member.isAdmin" class="admin-tag"> (Admin)</span>
                 </li>
             </ul>
         </div>
 
         <div class="admin-section" v-if="amIAdmin">
-            <h3>👑 Admin Panel</h3>
-            <p>Du styr spelet! Vänta tills alla vänner syns i listan ovan.</p>
-            <p>När alla är med, klicka på knappen för att starta:</p>
+            <h3>👑 {{ uiLabels.AdminPanel }}</h3>
+            <p>{{ uiLabels.AdminInstructions }}</p>
+            <p>{{ uiLabels.ClickToStart }}</p>
             
             <button class="generate-button" @click="generateSecretSanta">
-                Dela ut tomtar & Starta spelet
+                {{ uiLabels.Generate }}
             </button>
         </div>
         
         <div v-else class="waiting-message">
-            <h3>Väntar på att Admin ska starta spelet...</h3>
-            <p>Stanna kvar på denna sida. Sidan uppdateras automatiskt.</p>
+            <h3>{{ uiLabels.WaitingForAdmin }}</h3>
+            <p>{{ uiLabels.StayOnPage }}</p>
             <div class="spinner">🎁</div>
         </div>
     </div>
@@ -41,56 +43,65 @@
 
 <script>    
 import io from 'socket.io-client';
-const serverUrl = sessionStorage.getItem("serverIP") || "http://localhost:3000";
-const socket = io(serverUrl);
 
 export default {
     name: "GroupPage",
     data: function () {
         return {
+            socket: null,
             groupCode: this.$route.params.groupCode,
             groupName: "",
-            // Måste vara en tom lista från början för att undvika krasch
             members: [], 
-            myName: localStorage.getItem("myName") || ""
+            myName: localStorage.getItem("myName") || "",
+            uiLabels: {},
+            lang: localStorage.getItem("lang") || "en"
         }
    },
    computed: {
         amIAdmin() {
-            // Om listan inte laddat än, returnera false
             if (!this.members || this.members.length === 0) return false;
-
             const me = this.members.find(m => m.name === this.myName);
             return me ? me.isAdmin : false;
         }
     },
     created: function () {
-        // 1. Gå med i rummet för att lyssna
-        socket.emit("getGroupInfo", {groupCode: this.groupCode});
+        // 1. Koppla upp mot servern (inuti created för att klara refresh)
+        const serverUrl = sessionStorage.getItem("serverIP") || "http://localhost:3000";
+        this.socket = io(serverUrl);
 
-        // 2. Ta emot grundinfo
-        socket.on("groupInfo", (data)=>{
+        // 2. Hämta språk
+        this.socket.on("uiLabels", labels => this.uiLabels = labels);
+        this.socket.emit("getUILabels", this.lang);
+
+        // 3. Gå med i rummet
+        this.socket.emit("getGroupInfo", {groupCode: this.groupCode});
+
+        // 4. Ta emot grundinfo
+        this.socket.on("groupInfo", (data)=>{
             if (data.success) {
                 this.groupName = data.groupName;
-                this.members = data.members || []; // Skydd om det är tomt
+                this.members = data.members || []; 
             }
         });
 
-        // 3. LYSSNA PÅ UPPDATERINGAR 
-        socket.on("updateGame", (group) => {
+        // 5. Lyssna på när nya medlemmar går med
+        this.socket.on("updateGame", (group) => {
              console.log("Uppdatering mottagen!", group);
              this.groupName = group.name;
              this.members = group.members || [];
         });
 
-        // 4. Starta spelet
-        socket.on("secretSantaGenerated", () => {
+        // 6. När spelet startar -> Skicka vidare alla
+        this.socket.on("secretSantaGenerated", () => {
             this.$router.push('/yourassignedpage/' + this.groupCode);
         });
     },
+    beforeUnmount() {
+        if(this.socket) this.socket.disconnect();
+    },
     methods: {
         generateSecretSanta() {
-            socket.emit("generateSecretSanta", { groupCode: this.groupCode });
+            this.socket.emit("generateSecretSanta", { groupCode: this.groupCode });
         }
     }
 }
