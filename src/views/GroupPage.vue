@@ -52,7 +52,9 @@ export default {
             groupName: "",
             // Måste vara en tom lista från början för att undvika krasch
             members: [], 
-            myName: localStorage.getItem("myName") || ""
+            myName: localStorage.getItem("myName") || "",
+            uiLabels: {},
+            lang: localStorage.getItem("lang") || "en"
         }
    },
    computed: {

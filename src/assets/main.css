@@ -6,3 +6,56 @@
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
 }
+
+body {
+  background-color: var(--main-color-light-green);
+  color: var(--main-color-text);
+}
+
+button {
+  background-color: var(--main-color-red);
+  color: var(--button-text-color);
+  border: none;
+  padding: 10px 20px;
+  cursor: pointer;
+  font-size: 16px;
+  border-radius: 5px;
+  margin: 5px;
+}
+
+header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1rem 2rem;
+  background-color: var(--main-color-green);
+  position: relative;
+  min-height: 60px;
+  box-shadow: 0 0 15px var(--main-color-green);
+}
+
+/* 1. Titeln i mitten */
+header h1 {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  margin: 0;
+  font-size: 3rem;
+  color: var(--button-text-color);
+}
+
+/* 2. Språkknappen till höger */
+.language-button-container {
+  margin-left: auto; /* Trycker containern så långt till höger det går */
+  z-index: 10; /* Ser till att knappen ligger ovanpå titeln om de överlappar */
+}
+
+/* 3. Knappens stil (baserat på bilden) */
+.language-button {
+  background-color: #7a2c3a;
+  color: white;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 4px;
+  cursor: pointer;
+}

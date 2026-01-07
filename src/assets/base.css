@@ -1,6 +1,13 @@
 :root {
-  --foreground-color: red;
-  --background-color: green;
+  --main-color-green: #1F3D2B;
+  --main-color-light-green: #397450;
+  --main-color-red: #7A1F2B;
+  --main-color-light-red: #bb4554;
+  --main-color-gold: #FFD700;
+  --main-color-ivory: #F6F2EB;
+  --main-color-text: #2B2B2B;
+  --button-hover-color: #8F2736;
+  --button-text-color: #F6F2EB;
 }
 body {
   margin: 0;
