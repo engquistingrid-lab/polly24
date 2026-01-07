@@ -17,9 +17,8 @@
       <button class="menu-button" @click="goToJoin">
           {{ uiLabels.JoinGroup}}
       </button>
-<img src="https://png.pngtree.com/png-vector/20240813/ourmid/pngtree-3d-merry-christmas-cartoon-character-santa-claus-png-image_13469615.png" alt="santa-claus" id="santa-claus-image"/>
-        <img src="https://i.pinimg.com/originals/a4/d5/30/a4d5308cdb356260d519aea72fdf1003.png" alt="christmas-tree" id="christmas-tree-image"/>
-
+      <img src="https://png.pngtree.com/png-vector/20240813/ourmid/pngtree-3d-merry-christmas-cartoon-character-santa-claus-png-image_13469615.png" alt="santa-claus" id="santa-claus-image"/> 
+      <img src="https://i.pinimg.com/originals/a4/d5/30/a4d5308cdb356260d519aea72fdf1003.png" alt="christmas-tree" id="christmas-tree-image"/>
     </div>
   
 </template>
@@ -34,7 +33,7 @@ export default {
       uiLabels: {},
       lang: localStorage.getItem("lang") || "en",
       // ÄNDRA DIN IP HÄR:
-      myIp: "192.168.0.117", 
+      myIp: "192.168.0.113", 
       socket: null
     }
   },
@@ -102,17 +101,12 @@ export default {
   position: absolute;
   bottom: 10px;
   left: 10px;
-  width: 200px;
-  height: auto;
-  opacity: 0.8;
+  height: 250px;
 }
-
 #christmas-tree-image {
   position: absolute;
   bottom: 10px;
   right: 10px;
-  width: 200px;
-  height: auto;
-  opacity: 0.8;
+  height: 400px;
 }
 </style>
