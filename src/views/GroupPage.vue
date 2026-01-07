@@ -36,7 +36,6 @@
         <div v-else class="waiting-message">
             <h3>{{ uiLabels.WaitingForAdmin }}</h3>
             <p>{{ uiLabels.StayOnPage }}</p>
-            <div class="spinner">🎁</div>
         </div>
     </div>
 </template>
@@ -83,7 +82,6 @@ export default {
                 this.members = data.members || [];
                 const me = this.members.find(m => m.name === this.myName);
                 if (me && me.assignedTo) {
-                    // Skicka mig direkt till AssignedPage istället!
                     this.$router.push('/yourassignedpage/' + this.groupCode);} 
             }
         });
