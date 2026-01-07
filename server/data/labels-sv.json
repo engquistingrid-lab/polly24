@@ -17,6 +17,7 @@
     "GoToWishlist": "🎁 Gå till önskelistespelet 🎁",
     "Group": "Grupp: ",
     "GroupIs": "Gruppkoden är: ",
+	"GroupNotFound": "Gruppkoden hittades inte.",
     "Guess": "Gissa",
     "Incorrect": "Fel",
     "JoinGroup": "Gå med i grupp",

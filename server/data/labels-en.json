@@ -17,6 +17,7 @@
     "GoToWishlist": "🎁 Go to wishlist game 🎁",
     "Group": "Group: ",
     "GroupIs": "The group code is: ",
+	"GroupNotFound": "Group code not found.",
     "Guess": "Guess",
     "Incorrect": "Incorrect",
     "JoinGroup": "Join group",

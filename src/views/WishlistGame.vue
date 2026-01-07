@@ -4,16 +4,16 @@
       
       <div class="header-left">
           <router-link to="/">
-              <button class="nav-btn home-btn">Hem</button>
+              <button class="nav-btn home-btn">{{ uiLabels.ReturnToHomepage }}</button>
           </router-link>
           
           <router-link :to="'/yourassignedpage/' + groupCode">
-              <button class="nav-btn santa-btn">🎅 Min Secret Santa</button>
+              <button class="nav-btn santa-btn">🎅 {{ uiLabels.YourAssigned }}</button>
           </router-link>
       </div>
 
       <div class="leaderboard-section">
-        <h3>Topplista</h3>
+        <h3>{{ uiLabels.Leaderboard }}</h3>
         <ul>
             <li v-for="m in sortedMembers" :key="m.name">
                 {{ m.name }}: {{ m.score || 0 }}%
@@ -28,10 +28,9 @@
     </div>
 
     <div class="main-game">
-      <h1>Vem önskade vad?</h1>
+      <h1>{{ uiLabels.WhoWishedWhat }}</h1>
       
       <div v-if="!gameIsOver">
-          <p>Gissa vem som önskat vad i listan nedan!</p>
           
           <div class="wishes-grid">
             <div v-for="(wishItem, index) in wishes" :key="index" 
@@ -68,7 +67,7 @@
 
       <div v-else class="result-screen">
           <h2>Spelet är slut!</h2>
-          <h1>🏆 Vinnaren är: {{ sortedMembers[0]?.name || 'Ingen' }}!</h1>
+          <h1>🏆 Vinnaren är: {{ sortedMembers[0]?.name }}!</h1>
           
           <div class="result-list">
               <h3>Rätt svar:</h3>
@@ -99,7 +98,9 @@ export default {
       wishes: [], // Håller alla önskningar
       myGuesses: {}, 
       hasSubmitted: false,
-      gameIsOver: false
+      gameIsOver: false,
+      uiLabels: {},
+      lang: localStorage.getItem("lang") || "en"
     };
   },
   computed: {
@@ -156,11 +157,12 @@ export default {
         if(confirm("Vill du avsluta spelet och visa rätt svar för alla?")) {
             socket.emit("endGame", { groupCode: this.groupCode });
         }
-    }
-  }
+    },
+    created: function () {
+     socket.on( "uiLabels", labels => this.uiLabels = labels );
+     socket.emit( "getUILabels", this.lang )
+    },
+}
 };
 </script>
 
-<style>
-
-</style>
