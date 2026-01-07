@@ -160,7 +160,7 @@ export default {
     },
     endGame() {
         // Använd label för confirm-rutan, eller fallback
-        const msg = this.uiLabels.EndGameConfirm || "Vill du avsluta spelet och visa rätt svar för alla?";
+        const msg = this.uiLabels.EndGameConfirm;
         if(confirm(msg)) {
             this.socket.emit("endGame", { groupCode: this.groupCode });
         }
