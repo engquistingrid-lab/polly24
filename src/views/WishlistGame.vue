@@ -93,8 +93,8 @@ export default {
   data() {
     return {
       socket: null,
-      groupCode: localStorage.getItem("myGroupCode"),
-      myName: localStorage.getItem("myName"),
+      groupCode: sessionStorage.getItem("myGroupCode"),
+      myName: sessionStorage.getItem("myName"),
       members: [],
       wishes: [], 
       myGuesses: {}, 
