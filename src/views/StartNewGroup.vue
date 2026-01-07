@@ -55,8 +55,8 @@ export default {
         this.socket.emit("getUILabels", this.lang);
 
         this.socket.on("groupCreated", (data) => {
-            localStorage.setItem("myName", this.userName);
-            localStorage.setItem("myGroupCode", data.groupCode);
+            sessionStorage.setItem("myName", this.userName);
+            sessionStorage.setItem("myGroupCode", data.groupCode);
             this.$router.push('/grouppage/' + data.groupCode);
         });
     },

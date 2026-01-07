@@ -1,32 +1,32 @@
 <template>
     <header>
-        <h1>{{ uiLabels.JoinGroup || 'Gå med i grupp' }}</h1>
+        <h1>{{ uiLabels.JoinGroup }}</h1>
         <button @click="ReturnToHomepage">
-            {{ uiLabels.ReturnToHomepage || 'Hem' }}
+            {{ uiLabels.ReturnToHomepage }}
         </button>
     </header>
 
     <div>
         <div>
-            <h3>{{ uiLabels.EnterNameBox || 'Ditt namn' }}:</h3>
-            <input type="text" v-model="userName" :placeholder="uiLabels.YourName || 'Namn'">
+            <h3>{{ uiLabels.EnterNameBox }}:</h3>
+            <input type="text" v-model="userName" :placeholder="uiLabels.YourName">
             
-            <h3>{{ uiLabels.EnterYourCode || 'Gruppkod' }}:</h3>
-            <input type="text" v-model="groupCode" :placeholder="uiLabels.PleaseEnterGroupCode || 'Kod'">
+            <h3>{{ uiLabels.EnterYourCode }}:</h3>
+            <input type="text" v-model="groupCode" :placeholder="uiLabels.PleaseEnterGroupCode">
         </div>
 
         <div>
-            <h3>{{ uiLabels.YourWishes || 'Dina önskningar' }}:</h3>
-            <input type="text" v-model="wish1" :placeholder="uiLabels.AddWishPlaceholder || 'Önskning 1'">
-            <input type="text" v-model="wish2" :placeholder="uiLabels.AddWishPlaceholder || 'Önskning 2'">
-            <input type="text" v-model="wish3" :placeholder="uiLabels.AddWishPlaceholder || 'Önskning 3'"> 
+            <h3>{{ uiLabels.YourWishes }}:</h3>
+            <input type="text" v-model="wish1" :placeholder="uiLabels.AddWishPlaceholder">
+            <input type="text" v-model="wish2" :placeholder="uiLabels.AddWishPlaceholder">
+            <input type="text" v-model="wish3" :placeholder="uiLabels.AddWishPlaceholder"> 
         </div>
 
         <p v-if="errorMessage" style="color: red;">{{ errorMessage }}</p>
 
         <div>
             <button @click="joinGame">
-                {{ uiLabels.JoinGroup || 'GÅ MED' }}
+                {{ uiLabels.JoinGroup }}
             </button>
         </div>
     </div>
@@ -58,8 +58,8 @@ export default {
         this.socket.emit("getUILabels", this.lang);
 
         this.socket.on("joinedSuccess", (data) => {
-            localStorage.setItem("myName", this.userName);
-            localStorage.setItem("myGroupCode", this.groupCode);
+            sessionStorage.setItem("myName", this.userName);
+            sessionStorage.setItem("myGroupCode", this.groupCode);
             this.$router.push('/grouppage/' + this.groupCode);
         });
 

@@ -6,6 +6,11 @@
           <button class="lang-button" v-on:click="switchLanguage">
               {{ uiLabels.ChangeLanguage }}
           </button>
+
+          <button v-if="hasActiveGroup" class="rejoin-button" @click="rejoinGroup">
+              {{ uiLabels.BackToGroup }}
+          </button>
+
         </div>
     </header>
    
@@ -37,6 +42,7 @@ export default {
       socket: null
     }
   },
+
   created: function () {
     // 1. Skapa hela adressen
     const fullAddress = "http://" + this.myIp + ":3000";
@@ -50,6 +56,11 @@ export default {
     this.socket.on("uiLabels", labels => this.uiLabels = labels);
     this.socket.emit("getUILabels", this.lang);
   },
+
+  mounted() {
+      this.checkActiveGroup();
+  },
+
   methods: {
     switchLanguage: function() {
       if (this.lang === "en") this.lang = "sv";
@@ -57,8 +68,28 @@ export default {
       localStorage.setItem("lang", this.lang);
       this.socket.emit("getUILabels", this.lang);
     },
-    goToCreate() { this.$router.push('/StartNewGroup/'); },
-    goToJoin() { this.$router.push('/joingroup/'); }
+  
+    goToCreate() { 
+      this.$router.push('/StartNewGroup/'); 
+    },
+
+    goToJoin() { 
+      this.$router.push('/joingroup/'); 
+    },
+
+  checkActiveGroup() {
+        const storedCode = sessionStorage.getItem("myGroupCode");
+        if (storedCode && storedCode !== "null" && storedCode !== "undefined") {
+            this.hasActiveGroup = storedCode;
+        } else {
+            this.hasActiveGroup = null;
+        }
+    },
+
+  rejoinGroup() {
+        if (this.hasActiveGroup) {
+            this.$router.push('/grouppage/' + this.hasActiveGroup);}
+    },
   }
 }
 </script>
