@@ -3,18 +3,23 @@
         <h1>Secret Santa</h1>
         <div class="header-buttons">
           <button class="lang-button" v-on:click="switchLanguage">
-              {{ uiLabels.ChangeLanguage || 'Ändra språk' }}
+              {{ uiLabels.ChangeLanguage }}
           </button>
+
+          <button v-if="hasActiveGroup" class="rejoin-button" @click="rejoinGroup">
+              {{ uiLabels.BackToGroup }}
+          </button>
+
         </div>
     </header>
    
     <div class="main-wrapper">
       <button class="menu-button start-new" @click="goToCreate"> 
-            {{ uiLabels.StartNewGroup || 'Starta ny grupp' }}
+            {{ uiLabels.StartNewGroup }}
       </button>
       
       <button class="menu-button join-group" @click="goToJoin">
-          {{ uiLabels.JoinGroup || 'Gå med i grupp' }}
+          {{ uiLabels.JoinGroup }}
       </button>
     
     </div>
@@ -31,9 +36,11 @@ export default {
       lang: localStorage.getItem("lang") || "en",
       // ÄNDRA DIN IP HÄR:
       myIp: "192.168.0.117", 
-      socket: null
+      socket: null,
+      hasActiveGroup: null
     }
   },
+
   created: function () {
     // 1. Skapa hela adressen
     const fullAddress = "http://" + this.myIp + ":3000";
@@ -47,6 +54,11 @@ export default {
     this.socket.on("uiLabels", labels => this.uiLabels = labels);
     this.socket.emit("getUILabels", this.lang);
   },
+
+  mounted() {
+      this.checkActiveGroup();
+  },
+
   methods: {
     switchLanguage: function() {
       if (this.lang === "en") this.lang = "sv";
@@ -54,11 +66,32 @@ export default {
       localStorage.setItem("lang", this.lang);
       this.socket.emit("getUILabels", this.lang);
     },
-    goToCreate() { this.$router.push('/StartNewGroup/'); },
-    goToJoin() { this.$router.push('/joingroup/'); }
+  
+    goToCreate() { 
+      this.$router.push('/StartNewGroup/'); 
+    },
+
+    goToJoin() { 
+      this.$router.push('/joingroup/'); 
+    },
+
+  checkActiveGroup() {
+        const storedCode = sessionStorage.getItem("myGroupCode");
+        if (storedCode && storedCode !== "null" && storedCode !== "undefined") {
+            this.hasActiveGroup = storedCode;
+        } else {
+            this.hasActiveGroup = null;
+        }
+    },
+
+  rejoinGroup() {
+        if (this.hasActiveGroup) {
+            this.$router.push('/grouppage/' + this.hasActiveGroup);}
+    },
   }
 }
 </script>
 
 <style>
+
 </style>

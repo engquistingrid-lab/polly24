@@ -52,7 +52,7 @@ export default {
             groupCode: this.$route.params.groupCode,
             groupName: "",
             members: [], 
-            myName: localStorage.getItem("myName") || "",
+            myName: sessionStorage.getItem("myName") || "",
             uiLabels: {},
             lang: localStorage.getItem("lang") || "en"
         }
@@ -80,13 +80,16 @@ export default {
         this.socket.on("groupInfo", (data)=>{
             if (data.success) {
                 this.groupName = data.groupName;
-                this.members = data.members || []; 
+                this.members = data.members || [];
+                const me = this.members.find(m => m.name === this.myName);
+                if (me && me.assignedTo) {
+                    // Skicka mig direkt till AssignedPage istället!
+                    this.$router.push('/yourassignedpage/' + this.groupCode);} 
             }
         });
 
         // 5. Lyssna på när nya medlemmar går med
         this.socket.on("updateGame", (group) => {
-             console.log("Uppdatering mottagen!", group);
              this.groupName = group.name;
              this.members = group.members || [];
         });

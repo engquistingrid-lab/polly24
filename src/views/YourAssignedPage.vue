@@ -54,7 +54,7 @@ export default {
             uiLabels: {},
             lang: localStorage.getItem("lang") || "en",
             groupCode: this.$route.params.groupCode,
-            myName: localStorage.getItem("myName"),
+            myName: sessionStorage.getItem("myName"),
             members: [],
             assignedPerson: null,
             inspirationList: []
