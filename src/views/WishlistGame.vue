@@ -35,17 +35,11 @@
           <p>{{ uiLabels.GuessInstructions }}</p>
 
           <div class="wishes-grid">
-            <div v-for="(wishItem, index) in wishes" :key="index" 
-                 class="wish-card" 
-                 :class="{ 'my-wish': wishItem.ownerName === myName }">
+            <div v-for="(wishItem, index) in otherPeoplesWishes" :key="index" class="wish-card">
                 
                 <p class="wish-text">"{{ wishItem.text }}"</p>
 
-                <div v-if="wishItem.ownerName === myName" class="own-tag">
-                    {{ uiLabels.YourWishTag }}
-                </div>
-
-                <div v-else>
+                <div>
                     <select v-model="myGuesses[wishItem.text]" :disabled="hasSubmitted">
                         <option disabled value="">{{ uiLabels.ChoosePerson }}</option>
                         <option v-for="member in otherMembers" :key="member.name" :value="member.name">
@@ -109,6 +103,9 @@ export default {
         if (!this.members) return [];
         return [...this.members].sort((a, b) => (b.score || 0) - (a.score || 0));
     },
+    otherPeoplesWishes() {
+        return this.wishes.filter(w => w.ownerName !== this.myName);
+    },
     otherMembers() {
         if (!this.members) return [];
         return this.members.filter(m => m.name !== this.myName);
@@ -159,7 +156,6 @@ export default {
         this.hasSubmitted = true;
     },
     endGame() {
-        // Använd label för confirm-rutan, eller fallback
         const msg = this.uiLabels.EndGameConfirm;
         if(confirm(msg)) {
             this.socket.emit("endGame", { groupCode: this.groupCode });

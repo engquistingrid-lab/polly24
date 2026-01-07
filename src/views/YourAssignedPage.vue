@@ -12,19 +12,16 @@
         <div class="assigned-section" v-if="assignedPerson"> 
             
             <div class="info-card">
-                <h2>{{ uiLabels.Assigned }}</h2>
                 <h1 class="highlight">{{ assignedPerson.name }}</h1>
-                <img src="/img/ElvinsGlad.jpeg" class="AssignedImg" alt="Glad Elvin">
             </div>
             
             <div class="inspiration-box">
-                <h3>🔍 Inspiration</h3>
-                <p>{{ uiLabels.WhosWish }}</p>
+                <h3>{{ uiLabels.Inspiration }}</h3>
                 
                 <ul v-if="inspirationList.length > 0">
                     <li v-for="wish in inspirationList" :key="wish">🎁 {{ wish }}</li>
                 </ul>
-                <p v-else style="font-style:italic;">Ingen har gissat på denna person i spelet än...</p>
+                <p v-else style="font-style:italic;">{{ uiLabels.NoInspiration }}</p>
             </div>
 
             <div style="margin-top: 30px;">
@@ -36,9 +33,6 @@
             </div>
         </div>
 
-        <div v-else>
-            <p>Laddar...</p>
-        </div>
     </div>
 </template>
 
