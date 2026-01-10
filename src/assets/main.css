@@ -26,11 +26,11 @@ button {
 header {
   display: flex;
   align-items: center;
-  justify-content: space-between;
-  padding: 1rem 2rem;
-  background-color: var(--main-color-green);
+  justify-content: flex-end;
+  padding: 10px 20px;
   position: relative;
-  min-height: 60px;
+  min-height: 80px;
+  background-color: var(--main-color-green);
   box-shadow: 0 0 15px var(--main-color-green);
 }
 
@@ -38,10 +38,15 @@ header {
 header h1 {
   position: absolute;
   left: 50%;
-  transform: translateX(-50%);
+  top: 50%;
+  transform: translate(-50%, -50%);
   margin: 0;
-  font-size: 3rem;
-  color: var(--button-text-color);
+  white-space: nowrap;
+  font-size: clamp(1.5rem, 4vw, 3rem);
+  font-family: 'Trebuchet MS', sans-serif;
+  color: white;
+  text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+  z-index: 20;
 }
 
 /* 2. Språkknappen till höger */
@@ -55,7 +60,9 @@ header h1 {
   background-color: #7a2c3a;
   color: white;
   border: none;
-  padding: 8px 16px;
-  border-radius: 4px;
+  padding: 8px 12px;
+  border-radius: 5px;
   cursor: pointer;
+  font-weight: bold;
+  z-index: 30;
 }
