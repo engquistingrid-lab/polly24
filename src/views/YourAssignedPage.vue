@@ -19,7 +19,7 @@
                 <h3>{{ uiLabels.Inspiration }}</h3>
                 
                 <ul v-if="inspirationList.length > 0">
-                    <li v-for="wish in inspirationList" :key="wish">🎁 {{ wish }}</li>
+                    <li v-for="wish in inspirationList" :key="wish"> {{ wish }}</li>
                 </ul>
                 <p v-else style="font-style:italic;">{{ uiLabels.NoInspiration }}</p>
             </div>
