@@ -8,18 +8,18 @@
 
     <div>
         <div>
-            <h3>{{ uiLabels.EnterNameBox }}:</h3>
-            <input type="text" v-model="userName" :placeholder="uiLabels.YourName">
+            <h3 >{{ uiLabels.EnterNameBox }}:</h3>
+            <input class= "text-boxes" type="text" v-model="userName" :placeholder="uiLabels.YourName">
             
             <h3>{{ uiLabels.EnterYourCode }}:</h3>
-            <input type="text" v-model="groupCode" :placeholder="uiLabels.PleaseEnterGroupCode">
+            <input class= "text-boxes" type="text" v-model="groupCode" :placeholder="uiLabels.PleaseEnterGroupCode">
         </div>
 
         <div>
             <h3>{{ uiLabels.YourWishes }}:</h3>
-            <input type="text" v-model="wish1" :placeholder="uiLabels.AddWishPlaceholder">
-            <input type="text" v-model="wish2" :placeholder="uiLabels.AddWishPlaceholder">
-            <input type="text" v-model="wish3" :placeholder="uiLabels.AddWishPlaceholder"> 
+            <input class= "text-boxes" type="text" v-model="wish1" :placeholder="uiLabels.AddWishPlaceholder">
+            <input class= "text-boxes" type="text" v-model="wish2" :placeholder="uiLabels.AddWishPlaceholder">
+            <input class= "text-boxes" type="text" v-model="wish3" :placeholder="uiLabels.AddWishPlaceholder"> 
         </div>
 
         <p v-if="errorMessage" style="color: red;">{{ errorMessage }}</p>
@@ -91,3 +91,10 @@ export default {
     }
 }
 </script>
+
+<style>
+@import "../assets/main.css";
+
+
+
+</style>

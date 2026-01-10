@@ -49,6 +49,10 @@ header h1 {
   z-index: 20;
 }
 
+h3 {
+  color: pink
+}
+
 /* 2. Språkknappen till höger */
 .language-button-container {
   margin-left: auto; /* Trycker containern så långt till höger det går */
@@ -63,6 +67,13 @@ header h1 {
   padding: 8px 12px;
   border-radius: 5px;
   cursor: pointer;
+}
+
+.text-boxes {
+    width: clamp(10rem, 2.5vw, 20rem);
+    margin: 10px;
+    border-radius: 7px;
+    border: 3px solid pink;
   font-weight: bold;
   z-index: 30;
 }
