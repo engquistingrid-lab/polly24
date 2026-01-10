@@ -97,40 +97,6 @@ export default {
 <style scoped>
 @import "../assets/base.css";
 
-/* --- HEADER --- */
-header {
-  display: flex;
-  align-items: center;
-  justify-content: flex-end;
-  padding: 10px 20px;
-  position: relative;
-  min-height: 80px;
-  background-color: transparent; /* Eller din header-färg */
-  z-index: 20;
-}
-
-header h1 {
-  position: absolute;
-  left: 50%;
-  top: 50%;
-  transform: translate(-50%, -50%);
-  margin: 0;
-  white-space: nowrap;
-  font-size: clamp(1.5rem, 4vw, 3rem);
-  font-family: 'Trebuchet MS', sans-serif;
-  color: white; /* Se till att texten syns */
-  text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
-}
-
-.lang-button {
-  background-color: #7a2c3a;
-  color: white;
-  border: none;
-  padding: 8px 12px;
-  border-radius: 5px;
-  cursor: pointer;
-  font-weight: bold;
-}
 
 /* --- CONTAINER --- */
 .menu-buttons-container {
