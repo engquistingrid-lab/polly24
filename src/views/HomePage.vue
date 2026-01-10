@@ -38,7 +38,7 @@ export default {
       uiLabels: {},
       lang: localStorage.getItem("lang") || "en",
       // ÄNDRA DIN IP HÄR:
-      myIp: "192.168.0.113", 
+      myIp: "192.168.0.114", 
       socket: null
     }
   },

@@ -9,17 +9,17 @@
     <div>
         <div>
             <h3>{{ uiLabels.EnterNameBox }} (Admin):</h3>
-            <input type="text" v-model="userName" :placeholder="uiLabels.YourName">
+            <input class= "text-boxes" type="text" v-model="userName" :placeholder="uiLabels.YourName">
 
             <h3>{{ uiLabels.EnterGroupName }}:</h3>
-            <input type="text" v-model="groupName" :placeholder="uiLabels.EnterGroupName">
+            <input class= "text-boxes" type="text" v-model="groupName" :placeholder="uiLabels.EnterGroupName">
         </div>
 
         <div>
             <h3>{{ uiLabels.YourWishes }}:</h3>
-            <input type="text" v-model="wish1" :placeholder="uiLabels.AddWishPlaceholder">
-            <input type="text" v-model="wish2" :placeholder="uiLabels.AddWishPlaceholder">
-            <input type="text" v-model="wish3" :placeholder="uiLabels.AddWishPlaceholder"> 
+            <input class= "text-boxes" type="text" v-model="wish1" :placeholder="uiLabels.AddWishPlaceholder">
+            <input class= "text-boxes" type="text" v-model="wish2" :placeholder="uiLabels.AddWishPlaceholder">
+            <input class= "text-boxes" type="text" v-model="wish3" :placeholder="uiLabels.AddWishPlaceholder"> 
         </div>
 
         <div>
@@ -89,3 +89,11 @@ export default {
     }
 }
 </script>
+
+
+<style>
+@import "../assets/base.css";
+
+
+
+</style>
