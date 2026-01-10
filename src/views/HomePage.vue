@@ -3,9 +3,7 @@
     <header>
         <h1>SECRET SANTA</h1>
         <div class="language-button-container">
-          <button class="lang-button" v-on:click="switchLanguage">
-              {{ uiLabels.ChangeLanguage }}
-          </button>
+          <LanguageButton />
 
           <button v-if="hasActiveGroup" class="rejoin-button" @click="rejoinGroup">
               {{ uiLabels.BackToGroup }}
@@ -30,6 +28,7 @@
 
 <script>
 import io from 'socket.io-client';
+import LanguageButton from '../components/LanguageButton.vue';
 
 export default {
   name: "HomePage",
