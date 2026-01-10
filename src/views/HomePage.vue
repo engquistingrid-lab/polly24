@@ -1,8 +1,7 @@
 <template>
-  
     <header>
-        <h1>SECRET SANTA</h1>
-        <div class="language-button-container">
+        <h1>Secret Santa</h1>
+        <div class="header-buttons">
           <button class="lang-button" v-on:click="switchLanguage">
               {{ uiLabels.ChangeLanguage }}
           </button>
@@ -14,18 +13,16 @@
         </div>
     </header>
    
-    <div class="menu-buttons-container">
-      <button class="menu-button" @click="goToCreate"> 
-            {{ uiLabels.StartNewGroup}}
+    <div class="main-wrapper">
+      <button class="menu-button start-new" @click="goToCreate"> 
+            {{ uiLabels.StartNewGroup }}
       </button>
-
-      <button class="menu-button" @click="goToJoin">
-          {{ uiLabels.JoinGroup}}
+      
+      <button class="menu-button join-group" @click="goToJoin">
+          {{ uiLabels.JoinGroup }}
       </button>
-      <img src="https://png.pngtree.com/png-vector/20240813/ourmid/pngtree-3d-merry-christmas-cartoon-character-santa-claus-png-image_13469615.png" alt="santa-claus" id="santa-claus-image"/> 
-      <img src="https://i.pinimg.com/originals/a4/d5/30/a4d5308cdb356260d519aea72fdf1003.png" alt="christmas-tree" id="christmas-tree-image"/>
+    
     </div>
-  
 </template>
 
 <script>
