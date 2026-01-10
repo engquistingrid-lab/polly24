@@ -16,11 +16,14 @@ button {
   background-color: var(--main-color-red);
   color: var(--button-text-color);
   border: none;
-  padding: 10px 20px;
+  border-radius: 5px;
   cursor: pointer;
   font-size: 16px;
-  border-radius: 5px;
   margin: 5px;
+  padding: 8px 12px;
+  font-weight: bold;
+
+  
 }
 
 header {
@@ -32,6 +35,7 @@ header {
   min-height: 80px;
   background-color: var(--main-color-green);
   box-shadow: 0 0 15px var(--main-color-green);
+  z-index: 20;
 }
 
 /* 1. Titeln i mitten */
@@ -47,6 +51,7 @@ header h1 {
   color: white;
   text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
   z-index: 20;
+
 }
 
 /* 2. Språkknappen till höger */
