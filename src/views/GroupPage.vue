@@ -1,43 +1,55 @@
 <template>
     <header>
-        <h2>Secret Santa</h2>
-        <div class="header-buttons">
+        <div>
+              <button class="lang-button" v-on:click="switchLanguage">
+              {{ uiLabels.ChangeLanguage }}
+          </button>
             <router-link to='/'>
-                <button class="return-home-button">
+                <button>
                     {{ uiLabels.ReturnToHomepage}}
                 </button>
             </router-link>
         </div>
-        <h1>{{ uiLabels.Group }}: {{ groupName }}</h1>
-        <h3>{{ uiLabels.GroupIs }}: {{ groupCode }}</h3>
+        <h1>Secret Santa</h1>
+        
     </header>
 
-    <div class="main-wrapper">
+    <div class="page-wrapper">
+    <div class="group-wrapper">
+        <h1> {{ groupName }}</h1>
+        <h3>{{ uiLabels.GroupIs }}: {{ groupCode }}</h3>
         <div class="member-list">
             <h2>{{ uiLabels.MembersInLobby }}</h2>
+            <h4>
             <ul>    
                 <li v-for="member in members" :key="member.id || member.name">
                     {{ member.name }}
                     <span v-if="member.isAdmin" class="admin-tag"> (Admin)</span>
                 </li>
             </ul>
+            </h4>
+        </div>
         </div>
 
-        <div class="admin-section" v-if="amIAdmin">
-            <h3>👑 {{ uiLabels.AdminPanel }}</h3>
-            <p>{{ uiLabels.AdminInstructions }}</p>
-            <p>{{ uiLabels.ClickToStart }}</p>
+        <div class="generate-santa-wrapper">
+            <div class="admin-section" v-if="amIAdmin">
+                <h5>👑 {{ uiLabels.AdminPanel }}</h5>
+                <h5>{{ uiLabels.AdminInstructions }}</h5>
+                <h5>{{ uiLabels.ClickToStart }}</h5>
             
-            <button class="generate-button" @click="generateSecretSanta">
-                {{ uiLabels.Generate }}
-            </button>
-        </div>
+                <button class="generate-button" @click="generateSecretSanta">
+                    {{ uiLabels.Generate }}
+                </button>
+            </div>
         
-        <div v-else class="waiting-message">
-            <h3>{{ uiLabels.WaitingForAdmin }}</h3>
-            <p>{{ uiLabels.StayOnPage }}</p>
+            <div v-else class="waiting-message">
+                <h5>{{ uiLabels.WaitingForAdmin }}</h5>
+                <h5>{{ uiLabels.StayOnPage }}</h5>
+            </div>
         </div>
     </div>
+
+   
 </template>
 
 <script>    
@@ -109,5 +121,66 @@ export default {
 </script>
 
 <style>
+
+@import "../assets/base.css";
+
+.group-wrapper {
+    border: 2px solid pink;
+    border-radius: 30px;
+    background-color: #4e8565;
+    flex-grow: 1;
+
+}
+
+.generate-santa-wrapper {
+    background-color: #4e8565;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 2px 10px;
+    box-sizing: border-box;
+    border-radius: 10px;
+    line-height: 1.4;
+    white-space: nowrap;
+    box-sizing: border-box;
+}
+
+.page-wrapper {
+    display: flex;
+    flex-direction: column;
+    height: 90vh; /* Tar hela skärmens höjd */
+    padding: 20px;
+    box-sizing: border-box;
+    gap: 20px; 
+}
+
+@media (max-width: 700px) {
+  
+  /* 1. FIX FÖR HEADERN: Stapla rubrik och knapp på hög */
+  header {
+    flex-direction: column; /* Lägg dem under varandra */
+    height: auto;           /* Låt headern växa på höjden */
+    padding-top: 20px;
+    padding-bottom: 20px;
+    gap: 15px;              /* Luft mellan rubrik och knapp */
+  }
+
+  header h1 {
+    /* Stäng av den absoluta positioneringen på mobil */
+    position: static; 
+    transform: none;
+    
+    /* Justera texten lite */
+    font-size: 2.5rem; 
+    order: 1; /* Se till att rubriken hamnar överst */
+  }
+
+.generate-santa-wrapper {
+    margin-top: 90px;
+
+}
+}
+
+
 
 </style>
