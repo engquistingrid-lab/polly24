@@ -179,14 +179,13 @@ export default {
 };
 </script>
 
+
 <style scoped>
+/* Vi behöver inte importera main.css om den laddas globalt i main.js, 
+   men behåll den om du vill vara säker på variablerna */
 @import "../assets/main.css";
 
 /* --- LAYOUT --- */
-.page-container {
-  min-height: 100vh;
-}
-
 .game-layout {
   display: grid;
   /* Vänster (Liten) - Mitten (Stor) - Höger (Liten) */
@@ -198,34 +197,36 @@ export default {
   align-items: start;
 }
 
-/* --- TEXT & RUBRIKER --- */
-.page-title {
-  color: white; 
-  text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
-  margin-top: 0;
-}
-
-.instruction-text {
+/* --- GEMENSAM TEXT & FÄRG (Överskriver main.css rosa rubriker) --- */
+.page-title, 
+.instruction-text, 
+.leaderboard-item, 
+.result-screen h1 {
   color: white;
-  font-weight: bold;
-  margin-bottom: 20px;
+  text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
 }
 
-/* --- MITTEN: ÖNSKNINGAR (GRID 2 KOLUMNER) --- */
+.leaderboard-card h3 {
+  color: var(--main-color-gold);
+  border-bottom: 1px solid rgba(255,255,255,0.3);
+  margin-top: 0;
+  padding-bottom: 10px;
+}
+
+/* --- KORT & GRID --- */
 .wishes-grid {
   display: grid;
-  grid-template-columns: 1fr 1fr; /* Tvingar fram 2 kolumner */
+  grid-template-columns: 1fr 1fr;
   gap: 20px;
-  width: 100%;
 }
 
-/* KORTDESIGN */
 .wish-card {
-  background-color: var(--main-color-ivory); /* Ljus bakgrund */
+  background-color: var(--main-color-ivory);
   border: 2px solid var(--main-color-light-red);
   border-radius: 10px;
   padding: 15px;
   box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+  height: 100%; /* Samma höjd på korten */
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -234,64 +235,15 @@ export default {
 .wish-text {
   font-size: 1.2rem;
   font-weight: bold;
-  color: var(--main-color-text); /* Mörk text så det syns */
+  color: var(--main-color-text);
   margin-bottom: 15px;
 }
 
-select {
-  width: 100%;
-  padding: 8px;
-  border-radius: 5px;
-  border: 1px solid #ccc;
-  font-size: 1rem;
-}
-
-/* --- KNAPPAR --- */
-/* (Ärver röd färg från main.css "button", men vi säkrar upp här) */
-.santa-btn {
-  width: 100%;
-  background-color: var(--main-color-light-red); /* Mörkröd */
-}
-
-.submit-game-btn {
-  margin-top: 30px;
-  padding: 15px 30px;
-  font-size: 1.2rem;
-  background-color: #27ae60; /* Grön för att skicka */
-  color: white;
-}
-
-.submit-game-btn:disabled {
-  background-color: #7f8c8d;
-  cursor: not-allowed;
-}
-
-.warning-text {
-  color: var(--main-color-red); /* Ljus röd text så det syns mot grön bakgrund */
-  font-weight: bold;
-  margin-top: 10px;
-}
-
-/* --- HÖGER: TOPPLISTA --- */
 .leaderboard-card {
-  /* Genomskinlig vit bakgrund som du bad om */
-  background-color: rgba(255, 255, 255, 0.4); 
+  background-color: rgba(255, 255, 255, 0.4);
   border: 2px solid rgba(255,255,255, 0.6);
   border-radius: 10px;
   padding: 15px;
-  color: white; /* Vit text på den mörka bakgrunden */
-}
-
-.leaderboard-card h3 {
-  color: var(--main-color-gold); /* Guld för rubriken */
-  margin-top: 0;
-  border-bottom: 1px solid rgba(255,255,255,0.3);
-  padding-bottom: 10px;
-}
-
-.leaderboard-card ul {
-  list-style: none;
-  padding: 0;
 }
 
 .leaderboard-item {
@@ -299,9 +251,29 @@ select {
   justify-content: space-between;
   padding: 8px 0;
   border-bottom: 1px solid rgba(255,255,255,0.2);
-  font-weight: bold;
-  color: white; /* Tvingar texten att vara vit */
 }
+
+/* --- FORMULÄR & KNAPPAR (Ärver grundstil från main.css) --- */
+select {
+  width: 100%;
+  padding: 8px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+}
+
+
+.submit-game-btn {
+  margin-top: 60px;
+  padding: 15px 30px; /* Lite större än standardknappen */
+  background-color: #27ae60; 
+}
+
+.submit-game-btn:disabled {
+  background-color: #7f8c8d;
+  cursor: not-allowed;
+  transform: none; /* Stänger av hover-effekten från main.css */
+}
+
 
 /* --- RESULTATVY --- */
 .result-screen {
@@ -318,43 +290,29 @@ select {
 
 /* --- MOBILANPASSNING --- */
 @media (max-width: 900px) {
-  
-  /* 1. HEADER FIX - Gör så att de staplas och inte krockar */
+  /* Header blir flex-column så saker staplas */
   header {
-    flex-direction: column; /* Stapla på höjden */
+    flex-direction: column;
     height: auto;
-    padding: 20px;
-    gap: 15px; /* Luft mellan text och knappar */
+    gap: 15px;
   }
 
-  /* Återställ rubriken så den inte ligger "absolut" ovanpå allt */
+  /* Återställ absolut positionering från main.css */
   header h1 {
     position: static;
     transform: none;
-    order: 1; /* Rubrik först */
-    margin-bottom: 5px;
-  }
-
-  .header-buttons {
-    order: 2; /* Knappar sen */
-    width: 100%;
-    justify-content: center;
-  }
-
-  /* 2. Layouten staplas på mobil */
-  .game-layout {
-    grid-template-columns: 1fr;
-    gap: 30px;
+    order: 1;
   }
   
-  .wishes-grid {
-    grid-template-columns: 1fr; /* 1 kolumn för korten på mobil */
-  }
+  .header-buttons { order: 2; }
 
-  /* Ordning: Spelet först, Topplista sen, Meny sist */
+  /* Stapla spelplanen */
+  .game-layout { grid-template-columns: 1fr; }
+  .wishes-grid { grid-template-columns: 1fr; }
+
+  /* Ändra ordning på blocken i mobilen */
   .center-game-area { order: 1; }
   .right-sidebar { order: 2; }
   .left-sidebar { order: 3; }
 }
 </style>
-

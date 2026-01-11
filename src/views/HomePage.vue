@@ -6,7 +6,7 @@
               {{ uiLabels.ChangeLanguage }}
           </button>
 
-          <button v-if="hasActiveGroup" class="rejoin-button" @click="rejoinGroup">
+          <button v-if="hasActiveGroup"  @click="rejoinGroup">
               {{ uiLabels.BackToGroup }}
           </button>
 
@@ -14,11 +14,11 @@
     </header>
    
     <div class="menu-buttons-container">
-      <button class="menu-button start-new" @click="goToCreate"> 
+      <button class="menu-button" @click="goToCreate"> 
             {{ uiLabels.StartNewGroup }}
       </button>
       
-      <button class="menu-button join-group" @click="goToJoin">
+      <button class="menu-button" @click="goToJoin">
           {{ uiLabels.JoinGroup }}
       </button>
     
@@ -167,12 +167,6 @@ export default {
     order: 1; /* Se till att rubriken hamnar överst */
   }
 
-  .language-button-container {
-    order: 2; /* Knappen hamnar under rubriken */
-    width: 100%;
-    display: flex;
-    justify-content: center; /* Centrera knappen */
-  }
 
   /* 2. FIX FÖR KNAPPARNA: Anpassa storlek */
   .menu-button {
