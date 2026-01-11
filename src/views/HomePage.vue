@@ -2,9 +2,7 @@
     <header>
         <h1>Secret Santa</h1>
         <div class="header-buttons">
-          <button class="lang-button" v-on:click="switchLanguage">
-              {{ uiLabels.ChangeLanguage }}
-          </button>
+          <LanguageButton @language-changed="onLanguageChanged" />
 
           <button v-if="hasActiveGroup" class="rejoin-button" @click="rejoinGroup">
               {{ uiLabels.BackToGroup }}
@@ -27,15 +25,19 @@
 
 <script>
 import io from 'socket.io-client';
+import LanguageButton from '../components/LanguageButton.vue';
 
 export default {
   name: "HomePage",
+  components: {           // ✅ LÄGG TILL DETTA!
+    LanguageButton
+  },
   data: function () {
     return {
       uiLabels: {},
       lang: localStorage.getItem("lang") || "en",
       // ÄNDRA DIN IP HÄR:
-      myIp: "192.168.0.102", 
+      myIp: "172.20.10.3", 
       socket: null,
       hasActiveGroup: null
     }
@@ -43,6 +45,7 @@ export default {
 
   created: function () {
     // 1. Skapa hela adressen
+    
     const fullAddress = "http://" + this.myIp + ":3000";
     
     // 2. Spara den så andra sidor hittar den (Gruppens metod)
@@ -60,6 +63,10 @@ export default {
   },
 
   methods: {
+    onLanguageChanged(newLang) {
+    this.lang = newLang;
+    this.socket.emit("getUILabels", newLang);
+  },
     switchLanguage: function() {
       if (this.lang === "en") this.lang = "sv";
       else this.lang = "en";
