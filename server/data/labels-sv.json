@@ -5,8 +5,10 @@
     "AdminPanel": "Admin Panel",
     "AllWishes": "Alla önskningar",
     "Assigned": "Du är Secret Santa till:",
+
 	"BackToGroup": "Tillbaka till gruppen",
     "BackToHomePage": "Hem",
+
     "Cancel": "Avbryt",
     "ChangeLanguage": "Change to English 🇬🇧",
     "ChoosePerson": "Välj person...",
@@ -15,46 +17,59 @@
     "Correct": "Rätt",
     "CorrectAnswers": "Rätt svar:",
     "CreateGroup": "Starta grupp",
+
     "EndGame": "Avsluta spelet",
     "EndGameConfirm": "Vill du avsluta spelet och visa rätt svar för alla?",
     "EnterGroupName": "Ange gruppnamn",
     "EnterNameBox": "Ange ditt namn",
     "EnterYourCode": "Ange din gruppkod",
+
     "GameEnded": "Spelet är slut!",
     "Generate": "Dela ut tomtar & Starta",
     "GoToGame": "Gå till önskelistespelet",
     "GoToWishlist": "🎁 Gå till önskelistespelet 🎁",
     "Group": "Grupp",
-    "GroupIs": "Kod",
+    "GroupIs": "Gruppkod",
     "GroupNotFound": "Gruppkoden hittades inte.",
     "Guess": "Gissa",
     "GuessesSubmitted": "Gissningar skickade!",
     "GuessInstructions": "Gissa vem som önskat vad i listan nedan!",
+
     "Incorrect": "Fel",
 	"Inspiration": "Vad folk tror att din tilldelade person har önskat sig",
-	"NoInspiration": "Ingen har gissat på denna person i spelet än...",
+
     "JoinGroup": "Gå med i grupp",
+
     "Leaderboard": "Topplista",
+
     "Members": "Medlemmar",
     "MembersInLobby": "Deltagare i lobbyn:",
     "MustGuessAll": "Du måste gissa på alla!",
+
     "NoSpecialChars": "Inga specialtecken!",
+    "NoInspiration": "Ingen har gissat på denna person i spelet än...",
+
     "PleaseEnterGroupCode": "Vänligen ange gruppkod",
     "PleaseEnterGroupName": "Fyll i både namn och gruppnamn!",
     "PleaseEnterName": "Vänligen ange ditt namn",
+
     "ReturnToHomepage": "Återvänd till startsidan",
+
     "ShareWith": "Dela denna med de medlemmar som vill vara med!",
     "ShowMyGroup": "Visa mina grupper",
     "StartNewGroup": "Starta ny grupp",
     "StayOnPage": "Stanna kvar på denna sida. Sidan uppdateras automatiskt.",
     "SubmitGuesses": "Skicka in gissningar",
+
     "TimeState": "Återstående tid",
+
     "WaitingForAdmin": "Väntar på att administratör ska starta spelet...",
     "WhoWishedWhat": "Vem önskade vad?",
     "WhosWish": "Vem önskar sig detta:",
     "WinnerIs": "Vinnaren är:",
     "WishedBy": "önskades av",
     "Wishes": "Önskningar",
+
     "YourAssigned": "Du har blivit tilldelad:",
     "YourAssignedShort": "Min Secret Santa",
     "YourName": "Ditt namn",

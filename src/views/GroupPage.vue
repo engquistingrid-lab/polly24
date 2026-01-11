@@ -19,15 +19,15 @@
         <h1> {{ groupName }}</h1>
         <h3>{{ uiLabels.GroupIs }}: {{ groupCode }}</h3>
         <div class="member-list">
-            <h2>{{ uiLabels.MembersInLobby }}</h2>
-            <h4>
+            <h3>{{ uiLabels.Members }}</h3>
+            <h5>
             <ul>    
                 <li v-for="member in members" :key="member.id || member.name">
                     {{ member.name }}
                     <span v-if="member.isAdmin" class="admin-tag"> (Admin)</span>
                 </li>
             </ul>
-            </h4>
+            </h5>
         </div>
         </div>
 
@@ -128,21 +128,29 @@ export default {
     border: 2px solid pink;
     border-radius: 30px;
     background-color: #4e8565;
-    flex-grow: 1;
+    flex-grow: 0;
+    width: 99%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+    box-sizing: border-box;
 
 }
 
 .generate-santa-wrapper {
     background-color: #4e8565;
     display: inline-flex;
+    flex-direction: column;
     align-items: center;
     justify-content: center;
     padding: 2px 10px;
     box-sizing: border-box;
     border-radius: 10px;
-    line-height: 1.4;
+    line-height: 0.7;
     white-space: nowrap;
     box-sizing: border-box;
+    max-width: fit-content;
+    align-self: center;
 }
 
 .page-wrapper {
@@ -152,6 +160,30 @@ export default {
     padding: 20px;
     box-sizing: border-box;
     gap: 20px; 
+
+}
+
+.member-list {
+display: inline-block;     /* ← Viktigast! Gör att bredden anpassas efter innehållet */
+  background-color: rgba(170, 180, 174, 0.5);
+  padding: 4px 8px;          /* Liten luft runt texten – justera efter smak */
+  border-radius: 6px;
+  box-sizing: border-box;
+  line-height: 1.2;          /* Undvik onödig höjd */
+  white-space: nowrap;       /* ← Om du vill ha allt på EN rad */
+  height: 300px;
+  border: 2px solid pink;
+
+}
+
+.member-list ul {
+    list-style: none;
+}
+
+.member-list li {
+    border-bottom: 1px solid rgba(255, 255, 255, 0.4);
+    text-align: center;
+    margin-right: 40px;
 }
 
 @media (max-width: 700px) {
@@ -175,10 +207,8 @@ export default {
     order: 1; /* Se till att rubriken hamnar överst */
   }
 
-.generate-santa-wrapper {
-    margin-top: 90px;
 
-}
+
 }
 
 
