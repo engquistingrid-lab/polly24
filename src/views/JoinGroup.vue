@@ -22,10 +22,10 @@
             <input class= "text-boxes" type="text" v-model="wish3" :placeholder="uiLabels.AddWishPlaceholder"> 
         </div>
 
-        <p v-if="errorMessage" style="color: red;">{{ errorMessage }}</p>
+        <p v-if="errorMessage" class="warning-text">{{ errorMessage }}</p>
 
         <div>
-            <button class="join-button" @click="joinGame">
+            <button  class="join-button" @click="joinGame">
                 {{ uiLabels.JoinGroup }}
             </button>
         </div>
@@ -106,14 +106,6 @@ export default {
     box-sizing: border-box;
 }
 
-.text-boxes {
-    width: 300px;
-    padding: 10px;
-    margin: 10px 10px;
-    font-size: 16px;
-    border-color: var(main-color-text);
-    border-radius: 10px;
-}
 
 .join-button {
     width: 250px;
@@ -133,7 +125,11 @@ export default {
     header h1 {
     /* Stäng av den absoluta positioneringen på mobil */
     position: static; 
-    transform: none;}
+    transform: none;
+    font-size: 2.5rem; 
+    order: 1
+}
+
 }
 
 </style>

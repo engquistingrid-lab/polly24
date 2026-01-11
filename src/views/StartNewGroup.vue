@@ -23,6 +23,8 @@
             <input class= "text-boxes" type="text" v-model="wish3" :placeholder="uiLabels.AddWishPlaceholder"> 
         </div>
 
+        <p v-if="errorMessage" class="warning-text">{{ errorMessage }}</p>
+
         <div>
             <button class="create-button" @click="CreateGroup">
                 {{ uiLabels.CreateGroup }}
@@ -42,6 +44,7 @@ export default {
             userName: "",
             groupName: "",
             wish1: "", wish2: "", wish3: "",
+            errorMessage: "",
             uiLabels: {},
             lang: localStorage.getItem("lang") || "en"
         }
@@ -70,13 +73,13 @@ export default {
         
         CreateGroup: function() {
             if (!this.groupName || !this.userName) {
-                alert(this.uiLabels.PleaseEnterGroupName);
+                this.errorMessage = this.uiLabels.PleaseEnterGroupName;
                 return;
             }
             const wishes = [this.wish1, this.wish2, this.wish3].filter(w => w && w.trim() !== "");
             
             if (wishes.length === 0) {
-                alert(this.uiLabels.AddWish);
+                this.errorMessage = this.uiLabels.AddWish;
                 return;
             }
             
@@ -93,6 +96,7 @@ export default {
 
 
 <style>
+
 @import "../assets/base.css";
 
 .content-wrapper {
@@ -104,15 +108,6 @@ export default {
     width: 100%;
     padding: 2rem;
     box-sizing: border-box;
-}
-
-.text-boxes {
-    width: 300px;
-    padding: 10px;
-    margin: 10px 10px;
-    font-size: 16px;
-    border-color: var(main-color-text);
-    border-radius: 10px;
 }
 
 .create-button {
