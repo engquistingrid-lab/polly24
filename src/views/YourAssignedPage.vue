@@ -5,10 +5,11 @@
                 {{ uiLabels.ReturnToHomepage }}
             </button>
         </router-link>
-        <h1>{{uiLabels.YourAssigned}}</h1>     
+        <h1>Secret Santa</h1>  
     </header>
 
     <div class="main-wrapper">
+        <h2>{{uiLabels.YourAssigned}}</h2>  
         <div class="assigned-section" v-if="assignedPerson"> 
             
             <div class="info-card">
@@ -19,9 +20,9 @@
                 <h3>{{ uiLabels.Inspiration }}</h3>
                 
                 <ul v-if="inspirationList.length > 0">
-                    <li v-for="wish in inspirationList" :key="wish"> {{ wish }}</li>
+                    <li v-for="wish in inspirationList" :key="wish" class="inspiration-item"> {{ wish }}</li>
                 </ul>
-                <p v-else style="font-style:italic;">{{ uiLabels.NoInspiration }}</p>
+                <p v-else class="inspiration-item">{{ uiLabels.NoInspiration }}</p>
             </div>
 
             <div style="margin-top: 30px;">
@@ -87,7 +88,40 @@ export default {
 }
 </script>
 
-<style scooped>
+<style scoped>
+    .inspiration-item{
+        color: rgb(199, 197, 197);
+
+    }
+    
+
+    .inspiration-box {
+
+     border: 2px solid pink;
+    border-radius: 30px;
+    background-color: #4e8565;
+    flex-grow: 1;
+    }
+
+
+    @media (max-width: 700px) {
+     header {
+    flex-direction: column; /* Lägg dem under varandra */
+    height: auto;           /* Låt headern växa på höjden */
+    padding-top: 20px;
+    padding-bottom: 20px;
+    gap: 15px;              /* Luft mellan rubrik och knapp */
+  }
+
+    header h1 {
+    /* Stäng av den absoluta positioneringen på mobil */
+    position: static; 
+    transform: none;
+    font-size: 2.5rem; 
+    order: 1
+}
+
+}
 
     
 </style>
