@@ -6,24 +6,25 @@
         </button>
     </header>
 
-    <div>
+    <div class="content-wrapper">
+
         <div>
-            <h3>{{ uiLabels.EnterNameBox }} (Admin):</h3>
+            <h2>{{ uiLabels.EnterNameBox }}:</h2>
             <input class= "text-boxes" type="text" v-model="userName" :placeholder="uiLabels.YourName">
 
-            <h3>{{ uiLabels.EnterGroupName }}:</h3>
+            <h2>{{ uiLabels.EnterGroupName }}:</h2>
             <input class= "text-boxes" type="text" v-model="groupName" :placeholder="uiLabels.EnterGroupName">
         </div>
 
         <div>
-            <h3>{{ uiLabels.YourWishes }}:</h3>
+            <h2>{{ uiLabels.YourWishes }}</h2>
             <input class= "text-boxes" type="text" v-model="wish1" :placeholder="uiLabels.AddWishPlaceholder">
             <input class= "text-boxes" type="text" v-model="wish2" :placeholder="uiLabels.AddWishPlaceholder">
             <input class= "text-boxes" type="text" v-model="wish3" :placeholder="uiLabels.AddWishPlaceholder"> 
         </div>
 
         <div>
-            <button @click="CreateGroup">
+            <button class="create-button" @click="CreateGroup">
                 {{ uiLabels.CreateGroup }}
             </button>
         </div>
@@ -93,6 +94,34 @@ export default {
 
 <style>
 @import "../assets/base.css";
+
+.content-wrapper {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: center;
+    min-height: 80vh; /* Tar upp minst 80% av skärmhöjden */
+    width: 100%;
+    padding: 2rem;
+    box-sizing: border-box;
+}
+
+.text-boxes {
+    width: 300px;
+    padding: 10px;
+    margin: 10px 10px;
+    font-size: 16px;
+    border-color: var(main-color-text);
+    border-radius: 10px;
+}
+
+.create-button {
+    width: 200px;
+    height:60px;
+    font-size: 1.5rem;
+}
+
+
 
 
 

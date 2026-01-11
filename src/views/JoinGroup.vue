@@ -6,7 +6,7 @@
         </button>
     </header>
 
-    <div>
+    <div class="content-wrapper">
         <div>
             <h3 >{{ uiLabels.EnterNameBox }}:</h3>
             <input class= "text-boxes" type="text" v-model="userName" :placeholder="uiLabels.YourName">
@@ -16,7 +16,7 @@
         </div>
 
         <div>
-            <h3>{{ uiLabels.YourWishes }}:</h3>
+            <h3>{{ uiLabels.YourWishes }}</h3>
             <input class= "text-boxes" type="text" v-model="wish1" :placeholder="uiLabels.AddWishPlaceholder">
             <input class= "text-boxes" type="text" v-model="wish2" :placeholder="uiLabels.AddWishPlaceholder">
             <input class= "text-boxes" type="text" v-model="wish3" :placeholder="uiLabels.AddWishPlaceholder"> 
@@ -25,7 +25,7 @@
         <p v-if="errorMessage" style="color: red;">{{ errorMessage }}</p>
 
         <div>
-            <button @click="joinGame">
+            <button class="join-button" @click="joinGame">
                 {{ uiLabels.JoinGroup }}
             </button>
         </div>
@@ -95,6 +95,31 @@ export default {
 <style>
 @import "../assets/main.css";
 
+.content-wrapper {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: center;
+    min-height: 80vh; /* Tar upp minst 80% av skärmhöjden */
+    width: 100%;
+    padding: 2rem;
+    box-sizing: border-box;
+}
+
+.text-boxes {
+    width: 300px;
+    padding: 10px;
+    margin: 10px 10px;
+    font-size: 16px;
+    border-color: var(main-color-text);
+    border-radius: 10px;
+}
+
+.join-button {
+    width: 200px;
+    height:60px;
+    font-size: 1.5rem;
+}
 
 
 </style>

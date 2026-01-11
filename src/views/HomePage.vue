@@ -13,7 +13,7 @@
         </div>
     </header>
    
-    <div class="main-wrapper">
+    <div class="menu-buttons-container">
       <button class="menu-button start-new" @click="goToCreate"> 
             {{ uiLabels.StartNewGroup }}
       </button>
@@ -35,8 +35,9 @@ export default {
       uiLabels: {},
       lang: localStorage.getItem("lang") || "en",
       // ÄNDRA DIN IP HÄR:
-      myIp: "192.168.0.103", 
-      socket: null
+      myIp: "192.168.0.102", 
+      socket: null,
+      hasActiveGroup: null
     }
   },
 
@@ -140,10 +141,6 @@ export default {
   z-index: 10;
 }
 
-.menu-button:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 15px 25px rgba(0,0,0,0.4);
-}
 
 /* --- BILDER --- */
 #santa-claus-image {
