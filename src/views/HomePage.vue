@@ -1,7 +1,7 @@
 <template>
     <header>
         <h1>Secret Santa</h1>
-        <div class="header-buttons">
+        <div>
           <button class="lang-button" v-on:click="switchLanguage">
               {{ uiLabels.ChangeLanguage }}
           </button>
@@ -35,7 +35,7 @@ export default {
       uiLabels: {},
       lang: localStorage.getItem("lang") || "en",
       // ÄNDRA DIN IP HÄR:
-      myIp: "172.20.10.3", 
+      myIp: "192.168.0.114", 
       socket: null,
       hasActiveGroup: null
     }
