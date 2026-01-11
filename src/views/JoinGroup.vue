@@ -116,10 +116,24 @@ export default {
 }
 
 .join-button {
-    width: 200px;
+    width: 250px;
     height:60px;
     font-size: 1.5rem;
 }
 
+@media (max-width: 700px) {
+     header {
+    flex-direction: column; /* Lägg dem under varandra */
+    height: auto;           /* Låt headern växa på höjden */
+    padding-top: 20px;
+    padding-bottom: 20px;
+    gap: 15px;              /* Luft mellan rubrik och knapp */
+  }
+
+    header h1 {
+    /* Stäng av den absoluta positioneringen på mobil */
+    position: static; 
+    transform: none;}
+}
 
 </style>
