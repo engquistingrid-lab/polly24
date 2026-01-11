@@ -35,7 +35,7 @@ export default {
       uiLabels: {},
       lang: localStorage.getItem("lang") || "en",
       // ÄNDRA DIN IP HÄR:
-      myIp: "192.168.0.102", 
+      myIp: "172.20.10.3", 
       socket: null,
       hasActiveGroup: null
     }
@@ -142,26 +142,6 @@ export default {
 }
 
 
-/* --- BILDER --- */
-#santa-claus-image {
-  position: absolute;
-  bottom: 10px;
-  left: 10px;
-  width: 18vw; 
-  min-width: 120px;
-  max-width: 250px;
-  z-index: 5;
-}
-
-#christmas-tree-image {
-  position: absolute;
-  bottom: 10px;
-  right: 10px;
-  width: 18vw;
-  min-width: 120px;
-  max-width: 250px;
-  z-index: 5;
-}
 
 /* --- MOBILANPASSNING --- */
 /* Endast små justeringar för väldigt små skärmar */

@@ -68,10 +68,9 @@ h2,h3 {
 }
 
 /* 3. Knappens stil (baserat på bilden) */
-.language-button {
-  background-color: #7a2c3a;
-  color: white;
-  border: none;
+.lang-button{
+  background-color: transparent;
+  border: 2px solid var(--main-color-text);
   padding: 8px 12px;
   border-radius: 5px;
   cursor: pointer;
