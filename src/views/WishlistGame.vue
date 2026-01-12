@@ -175,7 +175,6 @@ export default {
 };
 </script>
 
-
 <style scoped>
 
 .game-layout {

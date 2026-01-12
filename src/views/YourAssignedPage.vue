@@ -96,7 +96,6 @@ export default {
         color: var(--main-color-ivory);
     }
     
-
     .inspiration-box {
     border: 2px solid var(--border-color);
     border-radius: 30px;

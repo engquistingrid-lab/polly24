@@ -169,14 +169,16 @@ export default {
 
 .member-list {
 display: inline-block;     
+display: inline-block; 
   background-color: var(--box-background-color-light);
   padding: 4px 8px;          
   border-radius: 6px;
   box-sizing: border-box;
   line-height: 1.2;          
   white-space: nowrap;      
+  white-space: nowrap;       
   height: 300px;
-  border: 2px solid pink;
+  border: 2px solid var(--border-color);
 
 }
 
@@ -195,6 +197,25 @@ display: inline-block;
   cursor: not-allowed;
   transform: none;
   box-shadow: none;
+}
+
+@media (max-width: 700px) {
+  
+  header {
+    flex-direction: column; 
+    height: auto;           
+    padding-top: 20px;
+    padding-bottom: 20px;
+    gap: 15px;           
+  }
+
+  header h1 {
+    position: static; 
+    transform: none;
+    
+    font-size: 2.5rem; 
+    order: 1; 
+  }
 }
 
 </style>
