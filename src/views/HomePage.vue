@@ -96,16 +96,15 @@ export default {
 @import "../assets/base.css";
 
 
-/* --- CONTAINER --- */
 .menu-buttons-container {
   display: flex;
-  flex-wrap: wrap;       /* Låt dem hoppa ner om det blir för trångt */
+  flex-wrap: wrap;      
   justify-content: center;
   align-items: center;
   
   
-  width: 100%;           /* Utnyttja hela bredden */
-  margin: 0 auto;        /* Centrera hela containern */
+  width: 100%;           
+  margin: 0 auto;       
   
   min-height: calc(100vh - 80px); 
   padding: 20px;
@@ -114,7 +113,6 @@ export default {
   position: relative;
 }
 
-/* --- KNAPPAR (Den snygga kort-designen) --- */
 .menu-button {
   
   width: clamp(200px, 40vw, 280px);
@@ -136,45 +134,38 @@ export default {
   border-radius: 20px;
   cursor: pointer;
   
-  box-shadow: 0 10px 20px rgba(0,0,0,0.3);
+  box-shadow: 0 10px 20px var(--shadow-color);
   transition: transform 0.2s, box-shadow 0.2s;
   z-index: 10;
 }
 
 
-/* Endast små justeringar för väldigt små skärmar */
-/* --- MOBILANPASSNING --- */
 @media (max-width: 700px) {
   
-  /* 1. FIX FÖR HEADERN: Stapla rubrik och knapp på hög */
   header {
-    flex-direction: column; /* Lägg dem under varandra */
-    height: auto;           /* Låt headern växa på höjden */
+    flex-direction: column; 
+    height: auto;          
     padding-top: 20px;
     padding-bottom: 20px;
-    gap: 15px;              /* Luft mellan rubrik och knapp */
+    gap: 15px;             
   }
 
   header h1 {
-    /* Stäng av den absoluta positioneringen på mobil */
     position: static; 
     transform: none;
     
-    /* Justera texten lite */
     font-size: 2.5rem; 
-    order: 1; /* Se till att rubriken hamnar överst */
+    order: 1; 
   }
 
-  /* 2. FIX FÖR KNAPPARNA: Anpassa storlek */
   .menu-button {
     width: 100%;
     max-width: 320px;
     height: 140px;
   }
   
-  /* 3. FIX FÖR LAYOUTEN: Justera padding */
   .menu-buttons-container {
-    padding-bottom: 250px; /* Mer plats för tomten i botten */
+    padding-bottom: 250px; 
   }
 }
 </style>

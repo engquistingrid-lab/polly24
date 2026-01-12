@@ -204,17 +204,16 @@ export default {
 .leaderboard-item, 
 .result-screen h1 {
   color: white;
-  text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
+  text-shadow: 1px 1px 2px var(--text-shadow-color);
 }
 
 .leaderboard-card h3 {
   color: var(--main-color-gold);
-  border-bottom: 1px solid rgba(255,255,255,0.3);
+  border-bottom: 1px solid var(--border-color);
   margin-top: 0;
   padding-bottom: 10px;
 }
 
-/* --- KORT & GRID --- */
 .wishes-grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -226,8 +225,8 @@ export default {
   border: 2px solid var(--main-color-light-red);
   border-radius: 10px;
   padding: 15px;
-  box-shadow: 0 4px 8px rgba(0,0,0,0.2);
-  height: 100%; /* Samma höjd på korten */
+  box-shadow: 0 4px 8px var(--shadow-color);
+  height: 100%; 
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -241,8 +240,8 @@ export default {
 }
 
 .leaderboard-card {
-  background-color: rgba(255, 255, 255, 0.4);
-  border: 2px solid rgba(255,255,255, 0.6);
+  background-color: var(--box-background-color-light);
+  border: 2px solid var(--border-color);
   border-radius: 10px;
   padding: 15px;
 }
@@ -251,37 +250,37 @@ export default {
   display: flex;
   justify-content: space-between;
   padding: 8px 0;
-  border-bottom: 1px solid rgba(255,255,255,0.2);
+  border-bottom: 1px solid var(--border-color);
 }
 
-/* --- FORMULÄR & KNAPPAR (Ärver grundstil från main.css) --- */
 select {
   width: 100%;
   padding: 8px;
   border-radius: 5px;
-  border: 1px solid #ccc;
+  border: 1px solid var(--border-color);
 }
 
 
 .submit-game-btn {
   margin-top: 60px;
-  padding: 15px 30px; /* Lite större än standardknappen */
-  background-color: #27ae60; 
+  padding: 15px 30px; 
+  background-color: var(--submit-button-color); 
 }
 
 .submit-game-btn:disabled {
-  background-color: #7f8c8d;
+  opacity: 0.6;
   cursor: not-allowed;
-  transform: none; /* Stänger av hover-effekten från main.css */
+  transform: none;
+  box-shadow: none;
 }
 
 
-/* --- RESULTATVY --- */
 .result-screen {
-  background-color: rgba(255, 255, 255, 0.9);
+  background-color: var(--box-background-color);
   padding: 30px;
   border-radius: 15px;
   color: var(--main-color-text);
+  border-color: var(--border-color);
 }
 
 .result-list {
@@ -289,16 +288,13 @@ select {
   display: inline-block;
 }
 
-/* --- MOBILANPASSNING --- */
 @media (max-width: 900px) {
-  /* Header blir flex-column så saker staplas */
   header {
     flex-direction: column;
     height: auto;
     gap: 15px;
   }
 
-  /* Återställ absolut positionering från main.css */
   header h1 {
     position: static;
     transform: none;
