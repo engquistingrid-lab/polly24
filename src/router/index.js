@@ -25,27 +25,7 @@ const router = createRouter({
       {
       path:'/StartNewGroup/',
       name: 'StartNewGroup',
-      component: () => import ('../views/StartNewGroup.vue')},
-
-      {
-      path: '/poll/:id',
-      name: 'PollView',
-      component: () => import('../views/PollView.vue')
-    },
-    {
-      path: '/lobby/:id',
-      name: 'LobbyView',
-      component: () => import('../views/LobbyView.vue')
-    },
-    {
-      path: '/create/',
-      name: 'CreateView',
-      component: () => import('../views/CreateView.vue')
-    },
-    {
-      path: '/result/:id',
-      name: 'ResultView',
-      component: () => import('../views/ResultView.vue')
+      component: () => import ('../views/StartNewGroup.vue')
     },
     {
     path: '/wishlist/',
