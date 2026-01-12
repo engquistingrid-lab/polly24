@@ -181,15 +181,11 @@ export default {
 
 
 <style scoped>
-/* Vi behöver inte importera main.css om den laddas globalt i main.js, 
-   men behåll den om du vill vara säker på variablerna */
 @import "../assets/main.css";
 @import "../assets/base.css";
 
-/* --- LAYOUT --- */
 .game-layout {
   display: grid;
-  /* Vänster (Liten) - Mitten (Stor) - Höger (Liten) */
   grid-template-columns: 200px 1fr 250px;
   gap: 20px;
   padding: 20px;
@@ -198,7 +194,6 @@ export default {
   align-items: start;
 }
 
-/* --- GEMENSAM TEXT & FÄRG (Överskriver main.css rosa rubriker) --- */
 .page-title, 
 .instruction-text, 
 .leaderboard-item, 
@@ -216,8 +211,8 @@ export default {
 
 .wishes-grid {
   display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 20px;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 10px;
 }
 
 .wish-card {
@@ -227,6 +222,8 @@ export default {
   padding: 15px;
   box-shadow: 0 4px 8px var(--shadow-color);
   height: 100%; 
+  box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+  height: 70%;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -303,11 +300,9 @@ select {
   
   .header-buttons { order: 2; }
 
-  /* Stapla spelplanen */
   .game-layout { grid-template-columns: 1fr; }
   .wishes-grid { grid-template-columns: 1fr; }
 
-  /* Ändra ordning på blocken i mobilen */
   .center-game-area { order: 1; }
   .right-sidebar { order: 2; }
   .left-sidebar { order: 3; }
