@@ -10,7 +10,7 @@
     "BackToHomePage": "Home",
 
     "Cancel": "Cancel",
-    "ChangeLanguage": "Byt till svenska 🇸🇪",
+    "ChangeLanguage": "Byt till svenska",
     "ChoosePerson": "Choose person...",
     "ClickToStart": "When everyone is ready, click below:",
     "Continue": "Continue",
@@ -27,7 +27,7 @@
     "GameEnded": "The game has ended!",
     "Generate": "Start Game & Distribute",
     "GoToGame": "Go to wishlist game",
-    "GoToWishlist": "🎁 Go to wishlist game 🎁",
+    "GoToWishlist": "Go to wishlist game",
     "Group": "Group",
     "GroupIs": "Code name",
     "GroupNotFound": "Group code not found.",
