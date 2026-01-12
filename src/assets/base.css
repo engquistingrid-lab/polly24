@@ -5,10 +5,16 @@
   --main-color-light-red: #4a1018;
   --main-color-gold: #FFD700;
   --main-color-ivory: #F6F2EB;
-  --main-color-grey: #898181;
+  --main-color-gray: #898181;
   --button-hover-color: #8F2736;
+  --main-color-text: #fff8eb;
   --button-text-color: #fff8eb;
-  --main-color-background: #4e8565;
+  --box-background-color: #4e8565;
+  --box-background-color-light: #aab4ae80;
+  --border-color: #e7bbc3;
+  --shadow-color: #00000066;
+  --text-shadow-color: #00000080;
+  --submit-button-color: #35975b;
 }
 body {
   margin: 0;
