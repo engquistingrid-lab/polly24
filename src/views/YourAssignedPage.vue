@@ -96,14 +96,12 @@ export default {
 
     }
     
-
     .inspiration-box {
     border: 2px solid pink;
     border-radius: 30px;
     background-color: var(--box-background-color);
     flex-grow: 1;
     }
-
 
     @media (max-width: 700px) {
      header {
@@ -120,8 +118,6 @@ export default {
     font-size: 2.5rem; 
     order: 1
 }
-
 }
-
-    
+ 
 </style>

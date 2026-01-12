@@ -108,7 +108,6 @@ export default {
 
 <style scoped>
 
-
 .content-wrapper {
     display: flex;
     flex-direction: column;
@@ -120,12 +119,10 @@ export default {
     box-sizing: border-box;
 }
 
-
 .join-button {
     width: 250px;
     height:60px;
     font-size: 1.5rem;
 }
-
 
 </style>
