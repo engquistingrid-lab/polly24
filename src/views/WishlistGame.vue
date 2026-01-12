@@ -255,13 +255,6 @@ export default {
   border-bottom: 1px solid var(--border-color);
 }
 
-select {
-  width: 100%;
-  padding: 8px;
-  border-radius: 5px;
-  border: 1px solid var(--border-color);
-}
-
 .submit-game-btn {
   margin-top: 60px;
   padding: 15px 30px; 
@@ -286,6 +279,13 @@ select {
 .result-list {
   text-align: left;
   display: inline-block;
+}
+
+select {
+  width: 100%;
+  padding: 8px;
+  border-radius: 5px;
+  border: 1px solid var(--border-color);
 }
 
 @media (max-width: 700px) {
