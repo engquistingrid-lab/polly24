@@ -122,4 +122,5 @@ export default {
     height:60px;
     font-size: 1.5rem;
 }
+
 </style>

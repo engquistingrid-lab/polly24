@@ -94,6 +94,17 @@ export default {
   align-items: center;
   width: 100%;           
   margin: 0 auto;        
+
+.menu-buttons-container {
+  display: flex;
+  flex-wrap: wrap;      
+  justify-content: center;
+  align-items: center;
+  
+  
+  width: 100%;           
+  margin: 0 auto;       
+  
   min-height: calc(100vh - 80px); 
   padding: 20px;
   padding-bottom: 200px;
@@ -119,6 +130,8 @@ export default {
   border-radius: 20px;
   cursor: pointer;
   box-shadow: 0 10px 20px rgba(0,0,0,0.3);
+  
+  box-shadow: 0 10px 20px var(--shadow-color);
   transition: transform 0.2s, box-shadow 0.2s;
   z-index: 10;
 }
@@ -127,6 +140,24 @@ export default {
 
 @media (max-width: 700px) {
   
+@media (max-width: 700px) {
+  
+  header {
+    flex-direction: column; 
+    height: auto;          
+    padding-top: 20px;
+    padding-bottom: 20px;
+    gap: 15px;             
+  }
+
+  header h1 {
+    position: static; 
+    transform: none;
+    
+    font-size: 2.5rem; 
+    order: 1; 
+  }
+
   .menu-button {
     width: 100%;
     max-width: 320px;
@@ -135,6 +166,7 @@ export default {
   
   .menu-buttons-container {
     padding-bottom: 250px;
+    padding-bottom: 250px; 
   }
 }
 </style>
