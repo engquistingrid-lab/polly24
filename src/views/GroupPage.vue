@@ -171,15 +171,15 @@ export default {
 }
 
 .member-list {
-display: inline-block;     /* ← Viktigast! Gör att bredden anpassas efter innehållet */
+display: inline-block; 
   background-color: var(--box-background-color-light);
-  padding: 4px 8px;          /* Liten luft runt texten – justera efter smak */
+  padding: 4px 8px;          
   border-radius: 6px;
   box-sizing: border-box;
-  line-height: 1.2;          /* Undvik onödig höjd */
-  white-space: nowrap;       /* ← Om du vill ha allt på EN rad */
+  line-height: 1.2;          
+  white-space: nowrap;       
   height: 300px;
-  border: 2px solid pink;
+  border: 2px solid var(--border-color);
 
 }
 
@@ -204,26 +204,21 @@ display: inline-block;     /* ← Viktigast! Gör att bredden anpassas efter inn
 
 @media (max-width: 700px) {
   
-  /* 1. FIX FÖR HEADERN: Stapla rubrik och knapp på hög */
   header {
-    flex-direction: column; /* Lägg dem under varandra */
-    height: auto;           /* Låt headern växa på höjden */
+    flex-direction: column; 
+    height: auto;           
     padding-top: 20px;
     padding-bottom: 20px;
-    gap: 15px;              /* Luft mellan rubrik och knapp */
+    gap: 15px;           
   }
 
   header h1 {
-    /* Stäng av den absoluta positioneringen på mobil */
     position: static; 
     transform: none;
     
-    /* Justera texten lite */
     font-size: 2.5rem; 
-    order: 1; /* Se till att rubriken hamnar överst */
+    order: 1; 
   }
 }
-
-
 
 </style>

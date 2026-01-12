@@ -181,10 +181,8 @@ export default {
 };
 </script>
 
-
 <style scoped>
 @import "../assets/main.css";
-@import "../assets/base.css";
 
 .game-layout {
   display: grid;
@@ -283,7 +281,6 @@ select {
   transform: none;
   box-shadow: none;
 }
-
 
 .result-screen {
   background-color: var(--box-background-color);
