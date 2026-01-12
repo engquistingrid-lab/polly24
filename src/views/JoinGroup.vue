@@ -1,9 +1,14 @@
 <template>
     <header>
         <h1>{{ uiLabels.JoinGroup }}</h1>
-        <button @click="ReturnToHomepage">
-            {{ uiLabels.ReturnToHomepage }}
-        </button>
+        <div>
+            <button class="lang-button" v-on:click="switchLanguage">
+                {{ uiLabels.ChangeLanguage }}
+            </button>
+            <button @click="ReturnToHomepage">
+                {{ uiLabels.ReturnToHomepage }}
+            </button>
+        </div>
     </header>
 
     <div class="content-wrapper">
@@ -87,7 +92,13 @@ export default {
                 userName: this.userName,
                 wishes: wishes
             });
-        } 
+        },
+        switchLanguage: function() {
+            if (this.lang === "en") this.lang = "sv";
+            else this.lang = "en";
+            localStorage.setItem("lang", this.lang);
+            this.socket.emit("getUILabels", this.lang);
+        }
     }
 }
 </script>

@@ -35,7 +35,7 @@ export default {
       uiLabels: {},
       lang: localStorage.getItem("lang") || "en",
       // ÄNDRA DIN IP HÄR:
-      myIp: "172.20.10.3", 
+      myIp: "192.168.0.113", 
       socket: null,
       hasActiveGroup: null
     }
@@ -142,8 +142,6 @@ export default {
 }
 
 
-
-/* --- MOBILANPASSNING --- */
 /* Endast små justeringar för väldigt små skärmar */
 /* --- MOBILANPASSNING --- */
 @media (max-width: 700px) {
@@ -166,7 +164,6 @@ export default {
     font-size: 2.5rem; 
     order: 1; /* Se till att rubriken hamnar överst */
   }
-
 
   /* 2. FIX FÖR KNAPPARNA: Anpassa storlek */
   .menu-button {
