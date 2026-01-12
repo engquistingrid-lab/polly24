@@ -78,7 +78,7 @@ h2,h3, h4, h5 {
 /* 3. Knappens stil (baserat på bilden) */
 .lang-button{
   background-color: transparent;
-  border: 2px solid var(--main-color-text);
+  border: 2px solid var(--main-color-grey);
   padding: 8px 12px;
   border-radius: 5px;
   cursor: pointer;

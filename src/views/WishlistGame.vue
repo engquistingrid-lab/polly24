@@ -8,10 +8,6 @@
           <router-link to="/">
               <button>{{ uiLabels.ReturnToHomepage }}</button>
           </router-link>
-          
-          <button v-if="amIAdmin" @click="endGame" class="admin-btn">
-              {{ uiLabels.EndGame }}
-          </button>
       </div>
     </header>
 
@@ -21,6 +17,8 @@
           <router-link :to="'/yourassignedpage/' + groupCode">
               <button class="santa-btn"> {{ uiLabels.YourAssignedShort }}</button>
           </router-link>
+
+          <h4 class="InfoGame">{{ uiLabels.GameRules }}</h4>
       </aside>
 
       <main class="center-game-area">
@@ -87,6 +85,10 @@
               </li>
           </ul>
         </div>
+
+        <button v-if="amIAdmin" @click="endGame" class="admin-btn">
+              {{ uiLabels.EndGame }}
+          </button>
       </aside>
 
     </div>
@@ -215,6 +217,20 @@ export default {
   gap: 10px;
 }
 
+.left-sidebar {
+    border: var(--main-color-ivory) 2px solid;
+    padding: 15px;
+    border-radius: 15px;
+    line-height: 1.2;
+    background-color: var(--box-background-color-light);
+}
+
+.InfoGame {
+    text-align: left;
+    white-space: pre-wrap;
+    color: var(--main-color-text);
+}
+
 .wish-card {
   background-color: var(--main-color-ivory);
   border: 2px solid var(--main-color-light-red);
@@ -254,7 +270,6 @@ select {
   border-radius: 5px;
   border: 1px solid #ccc;
 }
-
 
 .submit-game-btn {
   margin-top: 60px;
