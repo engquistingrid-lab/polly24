@@ -37,9 +37,13 @@
                 <h5>{{ uiLabels.AdminInstructions }}</h5>
                 <h5>{{ uiLabels.ClickToStart }}</h5>
             
-                <button class="generate-button" @click="generateSecretSanta">
+                <button class="generate-button" @click="generateSecretSanta" :disabled="members.length <2">
                     {{ uiLabels.Generate }}
                 </button>
+
+                <p v-if="members.length <2" class="warning-text">
+                    {{ uiLabels.NeedAtLeastTwo }}
+                </p>
             </div>
         
             <div v-else class="waiting-message">
@@ -130,7 +134,7 @@ export default {
 .group-wrapper {
     border: 2px solid pink;
     border-radius: 30px;
-    background-color: #4e8565;
+    background-color: var(--box-background-color);
     flex-grow: 0;
     width: 99%;
     max-width: 1200px;
@@ -141,7 +145,7 @@ export default {
 }
 
 .generate-santa-wrapper {
-    background-color: var(--main-color-background);
+    background-color: var(--box-background-color);
     display: inline-flex;
     flex-direction: column;
     align-items: center;
@@ -159,7 +163,7 @@ export default {
 .page-wrapper {
     display: flex;
     flex-direction: column;
-    height: 90vh; /* Tar hela skärmens höjd */
+    height: 90vh; 
     padding: 20px;
     box-sizing: border-box;
     gap: 20px; 
@@ -168,7 +172,7 @@ export default {
 
 .member-list {
 display: inline-block;     /* ← Viktigast! Gör att bredden anpassas efter innehållet */
-  background-color: rgba(170, 180, 174, 0.5);
+  background-color: var(--box-background-color-light);
   padding: 4px 8px;          /* Liten luft runt texten – justera efter smak */
   border-radius: 6px;
   box-sizing: border-box;
@@ -184,9 +188,18 @@ display: inline-block;     /* ← Viktigast! Gör att bredden anpassas efter inn
 }
 
 .member-list li {
-    border-bottom: 1px solid rgba(255, 255, 255, 0.4);
+    border-bottom: 1px solid var(--border-color);
     text-align: center;
     margin-right: 40px;
+}
+
+
+
+.generate-button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  transform: none;
+  box-shadow: none;
 }
 
 @media (max-width: 700px) {
@@ -209,9 +222,6 @@ display: inline-block;     /* ← Viktigast! Gör att bredden anpassas efter inn
     font-size: 2.5rem; 
     order: 1; /* Se till att rubriken hamnar överst */
   }
-
-
-
 }
 
 

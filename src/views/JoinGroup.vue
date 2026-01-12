@@ -47,34 +47,32 @@ export default {
             socket: null,
             uiLabels: {},
             lang: localStorage.getItem("lang") || "en",
-            groupCode: "",
             userName: "",
+            groupCode: "",
             wish1: "", wish2: "", wish3: "",
             errorMessage: ""
         }
     },
+
     created() {
-        // 1. Hämta IP och anslut
         const serverUrl = sessionStorage.getItem("serverIP") || "http://localhost:3000";
         this.socket = io(serverUrl);
-
-        // 2. Lyssna på events
         this.socket.on("uiLabels", labels => this.uiLabels = labels);
         this.socket.emit("getUILabels", this.lang);
-
         this.socket.on("joinedSuccess", (data) => {
             sessionStorage.setItem("myName", this.userName);
             sessionStorage.setItem("myGroupCode", this.groupCode);
             this.$router.push('/grouppage/' + this.groupCode);
         });
-
         this.socket.on("joinedError", (data) => {
             this.errorMessage = data.message;
         });
     },
+
     beforeUnmount() {
         if (this.socket) this.socket.disconnect();
     },
+    
     methods: {
         ReturnToHomepage() { this.$router.push('/'); },
         
@@ -82,8 +80,13 @@ export default {
             this.errorMessage = "";
             const wishes = [this.wish1, this.wish2, this.wish3].filter(w => w && w.trim() !== "");
             
-            if (!this.groupCode || !this.userName || wishes.length === 0) {
-                this.errorMessage = this.uiLabels.AddWish || "Fyll i alla fält!";
+            if (!this.userName || !this.groupCode) {
+                this.errorMessage = this.uiLabels.PleaseEnterGroupCode;
+                return;
+            }
+
+            if ( wishes.length === 0) {
+                this.errorMessage = this.uiLabels.AddWish;
                 return;
             }
 
@@ -103,15 +106,15 @@ export default {
 }
 </script>
 
-<style>
-@import "../assets/main.css";
+<style scoped>
+
 
 .content-wrapper {
     display: flex;
     flex-direction: column;
     justify-content: space-evenly;
     align-items: center;
-    min-height: 80vh; /* Tar upp minst 80% av skärmhöjden */
+    min-height: 80vh; 
     width: 100%;
     padding: 2rem;
     box-sizing: border-box;
@@ -124,23 +127,5 @@ export default {
     font-size: 1.5rem;
 }
 
-@media (max-width: 700px) {
-     header {
-    flex-direction: column; /* Lägg dem under varandra */
-    height: auto;           /* Låt headern växa på höjden */
-    padding-top: 20px;
-    padding-bottom: 20px;
-    gap: 15px;              /* Luft mellan rubrik och knapp */
-  }
-
-    header h1 {
-    /* Stäng av den absoluta positioneringen på mobil */
-    position: static; 
-    transform: none;
-    font-size: 2.5rem; 
-    order: 1
-}
-
-}
 
 </style>

@@ -26,7 +26,7 @@ button {
 }
 button:hover {
   transform: translateY(-5px);
-  box-shadow: 0 15px 25px rgba(0,0,0,0.4);
+  box-shadow: 0 15px 25px var(--shadow-color);
 }
 
 header {
@@ -41,7 +41,6 @@ header {
   z-index: 20;
 }
 
-/* 1. Titeln i mitten */
 header h1 {
   position: absolute;
   left: 50%;
@@ -52,7 +51,7 @@ header h1 {
   font-size: clamp(1.5rem, 4vw, 3rem);
   font-family: 'Trebuchet MS', sans-serif;
   color: white;
-  text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+  text-shadow: 2px 2px 4px var(--text-shadow-color);
   z-index: 20;
 
 }
@@ -60,42 +59,57 @@ header h1 {
 h1 {
   font-family: 'Trebuchet MS', sans-serif;
   color: white;
-  text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+  text-shadow: 2px 2px 4px var(--text-shadow-color);
 }
 
 h2,h3, h4, h5 {
   color: white;
-  text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+  text-shadow: 2px 2px 4px var(--text-shadow-color);
 }
 
 
-/* 2. Språkknappen till höger */
 .language-button-container {
-  margin-left: auto; /* Trycker containern så långt till höger det går */
-  z-index: 10; /* Ser till att knappen ligger ovanpå titeln om de överlappar */
+  margin-left: auto; 
+  z-index: 10; 
 }
 
-/* 3. Knappens stil (baserat på bilden) */
 .lang-button{
   background-color: transparent;
-  border: 2px solid var(--main-color-grey);
+  border: 2px solid var(--main-color-gray);
   padding: 8px 12px;
   border-radius: 5px;
   cursor: pointer;
 }
 
 .text-boxes {
-    width: clamp(15rem, 2.5vw, 30rem);
-    height: 25px;
-    margin: 10px;
-    border-radius: 10px;
-    border: 3px solid pink;
+  width: clamp(15rem, 2.5vw, 30rem);
+  height: 25px;
+  margin: 10px;
+  border-radius: 10px;
+  border: 3px solid var(--border-color);
   font-weight: bold;
   z-index: 30;
 }
 
 .warning-text {
-  color: rgb(242, 76, 76);
+  color: var(--main-color-red); 
+  font-size: 0.9em;
   font-weight: bold;
   margin-top: 10px;
 }
+@media  (max-width: 700px) {
+
+  header {
+    flex-direction: column; 
+    height: auto;           
+    padding-top: 20px;
+    padding-bottom: 20px;
+    gap: 15px;              
+  }
+
+  header h1 {
+    position: static; 
+    transform: none;
+    font-size: 2.5rem; 
+    order: 1; 
+  }}

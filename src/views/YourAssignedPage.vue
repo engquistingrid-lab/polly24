@@ -98,25 +98,23 @@ export default {
     
 
     .inspiration-box {
-
-     border: 2px solid pink;
+    border: 2px solid pink;
     border-radius: 30px;
-    background-color: #4e8565;
+    background-color: var(--box-background-color);
     flex-grow: 1;
     }
 
 
     @media (max-width: 700px) {
      header {
-    flex-direction: column; /* Lägg dem under varandra */
-    height: auto;           /* Låt headern växa på höjden */
+    flex-direction: column; 
+    height: auto;           
     padding-top: 20px;
     padding-bottom: 20px;
-    gap: 15px;              /* Luft mellan rubrik och knapp */
+    gap: 15px;              
   }
 
     header h1 {
-    /* Stäng av den absoluta positioneringen på mobil */
     position: static; 
     transform: none;
     font-size: 2.5rem; 
