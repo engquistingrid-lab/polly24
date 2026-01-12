@@ -181,15 +181,11 @@ export default {
 
 
 <style scoped>
-/* Vi behöver inte importera main.css om den laddas globalt i main.js, 
-   men behåll den om du vill vara säker på variablerna */
 @import "../assets/main.css";
 @import "../assets/base.css";
 
-/* --- LAYOUT --- */
 .game-layout {
   display: grid;
-  /* Vänster (Liten) - Mitten (Stor) - Höger (Liten) */
   grid-template-columns: 200px 1fr 250px;
   gap: 20px;
   padding: 20px;
@@ -198,7 +194,6 @@ export default {
   align-items: start;
 }
 
-/* --- GEMENSAM TEXT & FÄRG (Överskriver main.css rosa rubriker) --- */
 .page-title, 
 .instruction-text, 
 .leaderboard-item, 
@@ -214,11 +209,10 @@ export default {
   padding-bottom: 10px;
 }
 
-/* --- KORT & GRID --- */
 .wishes-grid {
   display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 20px;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 10px;
 }
 
 .wish-card {
@@ -227,7 +221,7 @@ export default {
   border-radius: 10px;
   padding: 15px;
   box-shadow: 0 4px 8px rgba(0,0,0,0.2);
-  height: 100%; /* Samma höjd på korten */
+  height: 70%;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -242,7 +236,7 @@ export default {
 
 .leaderboard-card {
   background-color: rgba(255, 255, 255, 0.4);
-  border: 2px solid rgba(255,255,255, 0.6);
+  border: 2px solid var(--main-color-ivory);
   border-radius: 10px;
   padding: 15px;
 }
@@ -254,7 +248,6 @@ export default {
   border-bottom: 1px solid rgba(255,255,255,0.2);
 }
 
-/* --- FORMULÄR & KNAPPAR (Ärver grundstil från main.css) --- */
 select {
   width: 100%;
   padding: 8px;
@@ -265,23 +258,21 @@ select {
 
 .submit-game-btn {
   margin-top: 60px;
-  padding: 15px 30px; /* Lite större än standardknappen */
+  padding: 15px 30px; 
   background-color: #27ae60; 
 }
 
 .submit-game-btn:disabled {
   background-color: #7f8c8d;
   cursor: not-allowed;
-  transform: none; /* Stänger av hover-effekten från main.css */
+  transform: none; 
 }
 
-
-/* --- RESULTATVY --- */
 .result-screen {
-  background-color: rgba(255, 255, 255, 0.9);
+  background-color: var(--main-color-background);
   padding: 30px;
   border-radius: 15px;
-  color: var(--main-color-text);
+  color: var(--main-color-ivory);
 }
 
 .result-list {
@@ -289,16 +280,13 @@ select {
   display: inline-block;
 }
 
-/* --- MOBILANPASSNING --- */
 @media (max-width: 900px) {
-  /* Header blir flex-column så saker staplas */
   header {
     flex-direction: column;
     height: auto;
     gap: 15px;
   }
 
-  /* Återställ absolut positionering från main.css */
   header h1 {
     position: static;
     transform: none;
@@ -307,11 +295,9 @@ select {
   
   .header-buttons { order: 2; }
 
-  /* Stapla spelplanen */
   .game-layout { grid-template-columns: 1fr; }
   .wishes-grid { grid-template-columns: 1fr; }
 
-  /* Ändra ordning på blocken i mobilen */
   .center-game-area { order: 1; }
   .right-sidebar { order: 2; }
   .left-sidebar { order: 3; }
