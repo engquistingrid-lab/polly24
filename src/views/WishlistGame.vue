@@ -181,6 +181,7 @@ export default {
 
 <style scoped>
 @import "../assets/main.css";
+@import "../assets/base.css";
 
 /* --- LAYOUT --- */
 .page-container {
