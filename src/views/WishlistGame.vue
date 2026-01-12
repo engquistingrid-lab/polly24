@@ -184,6 +184,7 @@ export default {
 /* Vi behöver inte importera main.css om den laddas globalt i main.js, 
    men behåll den om du vill vara säker på variablerna */
 @import "../assets/main.css";
+@import "../assets/base.css";
 
 /* --- LAYOUT --- */
 .game-layout {

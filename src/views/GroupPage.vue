@@ -33,7 +33,7 @@
 
         <div class="generate-santa-wrapper">
             <div class="admin-section" v-if="amIAdmin">
-                <h5>👑 {{ uiLabels.AdminPanel }}</h5>
+                <h5>{{ uiLabels.AdminPanel }}</h5>
                 <h5>{{ uiLabels.AdminInstructions }}</h5>
                 <h5>{{ uiLabels.ClickToStart }}</h5>
             
