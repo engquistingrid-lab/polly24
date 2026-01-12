@@ -76,18 +76,17 @@ export default {
         }
     },
     created: function () {
-        // 1. Koppla upp mot servern (inuti created för att klara refresh)
         const serverUrl = sessionStorage.getItem("serverIP") || "http://localhost:3000";
         this.socket = io(serverUrl);
 
-        // 2. Hämta språk
         this.socket.on("uiLabels", labels => this.uiLabels = labels);
         this.socket.emit("getUILabels", this.lang);
 
-        // 3. Gå med i rummet
         this.socket.emit("getGroupInfo", {groupCode: this.groupCode});
 
-        // 4. Ta emot grundinfo
+        this.socket.on("uiLabels", labels => this.uiLabels = labels);
+        this.socket.emit("getUILabels", this.lang);
+
         this.socket.on("groupInfo", (data)=>{
             if (data.success) {
                 this.groupName = data.groupName;
@@ -98,13 +97,11 @@ export default {
             }
         });
 
-        // 5. Lyssna på när nya medlemmar går med
         this.socket.on("updateGame", (group) => {
              this.groupName = group.name;
              this.members = group.members || [];
         });
 
-        // 6. När spelet startar -> Skicka vidare alla
         this.socket.on("secretSantaGenerated", () => {
             this.$router.push('/yourassignedpage/' + this.groupCode);
         });
@@ -115,7 +112,13 @@ export default {
     methods: {
         generateSecretSanta() {
             this.socket.emit("generateSecretSanta", { groupCode: this.groupCode });
-        }
+        },
+        switchLanguage: function() {
+      if (this.lang === "en") this.lang = "sv";
+      else this.lang = "en";
+      localStorage.setItem("lang", this.lang);
+      this.socket.emit("getUILabels", this.lang);
+    }
     }
 }
 </script>
