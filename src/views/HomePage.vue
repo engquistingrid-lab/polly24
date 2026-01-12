@@ -34,23 +34,16 @@ export default {
     return {
       uiLabels: {},
       lang: localStorage.getItem("lang") || "en",
-      // ÄNDRA DIN IP HÄR:
-      myIp: "192.168.0.113", 
+      myIp: "192.168.0.114", 
       socket: null,
       hasActiveGroup: null
     }
   },
 
-  created: function () {
-    // 1. Skapa hela adressen
+  created() {
     const fullAddress = "http://" + this.myIp + ":3000";
-    
-    // 2. Spara den så andra sidor hittar den (Gruppens metod)
     sessionStorage.setItem("serverIP", fullAddress);
-    
-    // 3. Starta anslutningen
     this.socket = io(fullAddress);
-    
     this.socket.on("uiLabels", labels => this.uiLabels = labels);
     this.socket.emit("getUILabels", this.lang);
   },
@@ -93,8 +86,14 @@ export default {
 </script>
 
 <style scoped>
-@import "../assets/base.css";
 
+.menu-buttons-container {
+  display: flex;
+  flex-wrap: wrap;       
+  justify-content: center;
+  align-items: center;
+  width: 100%;           
+  margin: 0 auto;        
 
 .menu-buttons-container {
   display: flex;
@@ -113,26 +112,24 @@ export default {
   position: relative;
 }
 
+
 .menu-button {
   
   width: clamp(200px, 40vw, 280px);
-  
   height: 160px; 
   margin: 20px;
-  
   display: flex;
   align-items: center;
   justify-content: center;
   text-align: center;
-  
   font-size: clamp(1.2rem, 2.5vw, 1.6rem);
   font-weight: bold;
-  
   background: linear-gradient(30deg, var(--main-color-red), var(--main-color-light-red));
   color: var(--main-color-ivory);
   border: none;
   border-radius: 20px;
   cursor: pointer;
+  box-shadow: 0 10px 20px rgba(0,0,0,0.3);
   
   box-shadow: 0 10px 20px var(--shadow-color);
   transition: transform 0.2s, box-shadow 0.2s;
@@ -140,6 +137,9 @@ export default {
 }
 
 
+
+@media (max-width: 700px) {
+  
 @media (max-width: 700px) {
   
   header {
@@ -165,6 +165,7 @@ export default {
   }
   
   .menu-buttons-container {
+    padding-bottom: 250px;
     padding-bottom: 250px; 
   }
 }

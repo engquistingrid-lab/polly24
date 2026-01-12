@@ -1,5 +1,5 @@
 {
-    "AddWish": "Add Wish",
+    "AddWish": "Add at least one wish",
     "AddWishPlaceholder": "Enter your wish here...",
     "AdminInstructions": "You control the game! Wait until everyone has joined.",
     "AdminPanel": "Admin Panel",
@@ -50,9 +50,9 @@
     "NoSpecialChars": "No special characters!",
     "NoInspiration": "No one has guessed for this person yet...",
 
-    "PleaseEnterGroupCode": "Please enter group code",
     "PleaseEnterGroupName": "Please fill in name and group name!",
     "PleaseEnterName": "Please enter your name",
+    "PleaseEnterGroupCode": "Please enter your name and the group code!",
 
     "ReturnToHomepage": "Return to homepage",
 
