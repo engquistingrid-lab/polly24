@@ -23,7 +23,7 @@
 
       <main class="center-game-area">
         
-        <h2 class="page-title">{{ uiLabels.WhoWishedWhat }}</h2>
+        <h1 class="page-title">{{ uiLabels.WhoWishedWhat }}</h1>
 
         <div v-if="!gameIsOver">
             <p class="instruction-text">{{ uiLabels.GuessInstructions }}</p>
@@ -246,7 +246,7 @@ export default {
 .wish-text {
   font-size: 1.2rem;
   font-weight: bold;
-  color: var(--main-color-text);
+  color: var(--main-color-text-dark);
   margin-bottom: 15px;
 }
 
