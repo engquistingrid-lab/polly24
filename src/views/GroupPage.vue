@@ -193,14 +193,7 @@ display: inline-block;     /* ← Viktigast! Gör att bredden anpassas efter inn
     margin-right: 40px;
 }
 
-.warning-text {
-  color: var(--main-color-red); 
-  font-size: 0.9em;
-  font-weight: bold;
-  margin-top: 10px;
-  padding: 5px;
-  border-radius: 5px;
-}
+
 
 .generate-button:disabled {
   opacity: 0.6;

@@ -221,8 +221,6 @@ export default {
   border-radius: 10px;
   padding: 15px;
   box-shadow: 0 4px 8px var(--shadow-color);
-  height: 100%; 
-  box-shadow: 0 4px 8px rgba(0,0,0,0.2);
   height: 70%;
   display: flex;
   flex-direction: column;
