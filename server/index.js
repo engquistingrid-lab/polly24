@@ -13,10 +13,10 @@ const io = new Server(httpServer, {
 });
 
 let groups = new Groups();
-let users = {}; 
+
 
 io.on('connection', function (socket) {
-  sockets(this, socket, users, groups);
+  sockets(this, socket, groups);
 });
 
 const PORT = process.env.PORT || 3000;

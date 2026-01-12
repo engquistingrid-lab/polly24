@@ -1,28 +1,23 @@
 <template>
-  <div class="page-container">
-    
     <header>
-      <h1>Secret Santa</h1>
-      
-      <div class="header-buttons">
-          <router-link to="/">
-              <button>{{ uiLabels.ReturnToHomepage }}</button>
-          </router-link>
-      </div>
+       <h1>Secret Santa</h1>  
+        <router-link to='/'>
+            <button>
+                {{ uiLabels.ReturnToHomepage }}
+            </button>
+        </router-link>
     </header>
 
     <div class="game-layout">
 
       <aside class="left-sidebar">
           <router-link :to="'/yourassignedpage/' + groupCode">
-              <button class="santa-btn"> {{ uiLabels.YourAssignedShort }}</button>
+              <button> {{ uiLabels.YourAssignedShort }}</button>
           </router-link>
-
           <h4 class="InfoGame">{{ uiLabels.GameRules }}</h4>
       </aside>
 
       <main class="center-game-area">
-        
         <h1 class="page-title">{{ uiLabels.WhoWishedWhat }}</h1>
 
         <div v-if="!gameIsOver">
@@ -31,11 +26,11 @@
             <div class="wishes-grid">
               <div v-for="(wishItem, index) in otherPeoplesWishes" :key="index" class="wish-card">
                   
-                  <div class="wish-content">
+                  <div>
                     <p class="wish-text">{{ wishItem.text }}</p>
                   </div>
 
-                  <div class="guess-section">
+                  <div >
                       <select v-model="myGuesses[wishItem.text]" :disabled="hasSubmitted">
                           <option disabled value="">{{ uiLabels.ChoosePerson }}</option>
                           <option v-for="member in otherMembers" :key="member.name" :value="member.name">
@@ -46,7 +41,7 @@
               </div>
             </div>
 
-            <div class="actions">
+            <div>
                 <button @click="sendGuesses" :disabled="hasSubmitted || !allGuessed" class="submit-game-btn">
                     {{ hasSubmitted ? uiLabels.GuessesSubmitted : uiLabels.SubmitGuesses }}
                 </button>
@@ -72,7 +67,6 @@
                 </ul>
             </div>
         </div>
-
       </main>
 
       <aside class="right-sidebar">
@@ -85,14 +79,11 @@
               </li>
           </ul>
         </div>
-
-        <button v-if="amIAdmin" @click="endGame" class="admin-btn">
+        <button v-if="amIAdmin" @click="endGame">
               {{ uiLabels.EndGame }}
           </button>
       </aside>
-
     </div>
-  </div>
 </template>
 
 <script>
@@ -102,7 +93,8 @@ export default {
   name: "WishlistGame",
   data() {
     return {
-      socket: null,
+      uiLabels: {},
+      lang: localStorage.getItem("lang") || "en",
       groupCode: sessionStorage.getItem("myGroupCode"),
       myName: sessionStorage.getItem("myName"),
       members: [],
@@ -110,8 +102,7 @@ export default {
       myGuesses: {}, 
       hasSubmitted: false,
       gameIsOver: false,
-      uiLabels: {},
-      lang: localStorage.getItem("lang") || "en"
+      socket: null
     };
   },
   computed: {
@@ -137,6 +128,7 @@ export default {
         return othersWishes.every(w => this.myGuesses[w.text]);
     }
   },
+
   created() {
     const serverUrl = sessionStorage.getItem("serverIP") || "http://localhost:3000";
     this.socket = io(serverUrl);
@@ -159,9 +151,11 @@ export default {
         this.gameIsOver = true;
     });
   },
+
   beforeUnmount() {
       if(this.socket) this.socket.disconnect();
   },
+
   methods: {
     sendGuesses() {
         this.socket.emit("submitGuesses", {
@@ -183,8 +177,6 @@ export default {
 
 
 <style scoped>
-@import "../assets/main.css";
-@import "../assets/base.css";
 
 .game-layout {
   display: grid;
@@ -200,7 +192,7 @@ export default {
 .instruction-text, 
 .leaderboard-item, 
 .result-screen h1 {
-  color: white;
+  color: var(--main-color-ivory);
   text-shadow: 1px 1px 2px var(--text-shadow-color);
 }
 
@@ -284,7 +276,6 @@ select {
   box-shadow: none;
 }
 
-
 .result-screen {
   background-color: var(--box-background-color);
   padding: 30px;
@@ -298,24 +289,11 @@ select {
   display: inline-block;
 }
 
-@media (max-width: 900px) {
-  header {
-    flex-direction: column;
-    height: auto;
-    gap: 15px;
-  }
-
-  header h1 {
-    position: static;
-    transform: none;
-    order: 1;
-  }
+@media (max-width: 700px) {
   
   .header-buttons { order: 2; }
-
   .game-layout { grid-template-columns: 1fr; }
   .wishes-grid { grid-template-columns: 1fr; }
-
   .center-game-area { order: 1; }
   .right-sidebar { order: 2; }
   .left-sidebar { order: 3; }

@@ -1,6 +1,6 @@
 <template>
     <header>
-        <h1>{{ uiLabels.JoinGroup }}</h1>
+        <h1>Secret Santa</h1>  
         <div>
             <button class="lang-button" v-on:click="switchLanguage">
                 {{ uiLabels.ChangeLanguage }}
@@ -12,6 +12,7 @@
     </header>
 
     <div class="content-wrapper">
+        <h1>{{ uiLabels.JoinGroup }}</h1>
         <div>
             <h3 >{{ uiLabels.EnterNameBox }}:</h3>
             <input class= "text-boxes" type="text" v-model="userName" :placeholder="uiLabels.YourName">
@@ -44,13 +45,13 @@ export default {
     name: "JoinGroup",
     data() {
         return {
-            socket: null,
             uiLabels: {},
             lang: localStorage.getItem("lang") || "en",
             userName: "",
             groupCode: "",
             wish1: "", wish2: "", wish3: "",
-            errorMessage: ""
+            errorMessage: "",
+            socket: null
         }
     },
 
@@ -108,7 +109,6 @@ export default {
 
 <style scoped>
 
-
 .content-wrapper {
     display: flex;
     flex-direction: column;
@@ -119,7 +119,6 @@ export default {
     padding: 2rem;
     box-sizing: border-box;
 }
-
 
 .join-button {
     width: 250px;

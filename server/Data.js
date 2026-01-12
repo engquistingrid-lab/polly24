@@ -1,6 +1,6 @@
 'use strict';
 import {readFileSync} from "fs";
-import path from "path"; // Vi importerar path för att vara säkra på sökvägen
+import path from "path"; 
 
 export function Groups(){
   this.groups = {};
@@ -126,7 +126,6 @@ Groups.prototype.getInspirationFor = function(groupCode, targetName) {
 };
 
 Groups.prototype.getUILabels = function (lang) {
-  // Vi försöker bygga en absolut sökväg för att undvika problem
   const url = "./server/data/labels-" + lang + ".json";
   try {
     const labels = readFileSync(url, 'utf8');

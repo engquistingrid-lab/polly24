@@ -1,5 +1,6 @@
 <template>
     <header>
+        <h1>Secret Santa</h1>
         <div>
               <button class="lang-button" v-on:click="switchLanguage">
               {{ uiLabels.ChangeLanguage }}
@@ -10,8 +11,6 @@
                 </button>
             </router-link>
         </div>
-        <h1>Secret Santa</h1>
-        
     </header>
 
     <div class="page-wrapper">
@@ -129,8 +128,6 @@ export default {
 
 <style>
 
-@import "../assets/base.css";
-
 .group-wrapper {
     border: 2px solid pink;
     border-radius: 30px;
@@ -171,13 +168,13 @@ export default {
 }
 
 .member-list {
-display: inline-block;     /* ← Viktigast! Gör att bredden anpassas efter innehållet */
+display: inline-block;     
   background-color: var(--box-background-color-light);
-  padding: 4px 8px;          /* Liten luft runt texten – justera efter smak */
+  padding: 4px 8px;          
   border-radius: 6px;
   box-sizing: border-box;
-  line-height: 1.2;          /* Undvik onödig höjd */
-  white-space: nowrap;       /* ← Om du vill ha allt på EN rad */
+  line-height: 1.2;          
+  white-space: nowrap;      
   height: 300px;
   border: 2px solid pink;
 
@@ -193,37 +190,11 @@ display: inline-block;     /* ← Viktigast! Gör att bredden anpassas efter inn
     margin-right: 40px;
 }
 
-
-
 .generate-button:disabled {
   opacity: 0.6;
   cursor: not-allowed;
   transform: none;
   box-shadow: none;
 }
-
-@media (max-width: 700px) {
-  
-  /* 1. FIX FÖR HEADERN: Stapla rubrik och knapp på hög */
-  header {
-    flex-direction: column; /* Lägg dem under varandra */
-    height: auto;           /* Låt headern växa på höjden */
-    padding-top: 20px;
-    padding-bottom: 20px;
-    gap: 15px;              /* Luft mellan rubrik och knapp */
-  }
-
-  header h1 {
-    /* Stäng av den absoluta positioneringen på mobil */
-    position: static; 
-    transform: none;
-    
-    /* Justera texten lite */
-    font-size: 2.5rem; 
-    order: 1; /* Se till att rubriken hamnar överst */
-  }
-}
-
-
 
 </style>
