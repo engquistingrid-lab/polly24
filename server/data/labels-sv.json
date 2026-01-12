@@ -1,5 +1,5 @@
 {
-    "AddWish": "Lägg till önskan",
+    "AddWish": "Lägg till åtminstone en önskan",
     "AddWishPlaceholder": "Skriv din önskan här...",
     "AdminInstructions": "Du styr spelet! Vänta tills alla vänner syns i listan.",
     "AdminPanel": "Admin Panel",
@@ -49,7 +49,7 @@
     "NoSpecialChars": "Inga specialtecken!",
     "NoInspiration": "Ingen har gissat på denna person i spelet än...",
 
-    "PleaseEnterGroupCode": "Vänligen ange gruppkod",
+    "PleaseEnterGroupCode": "Vänligen fyll i ditt namn och gruppkod!",
     "PleaseEnterGroupName": "Fyll i både namn och gruppnamn!",
     "PleaseEnterName": "Vänligen ange ditt namn",
 

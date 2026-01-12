@@ -32,7 +32,7 @@
         <p v-if="errorMessage" class="warning-text">{{ errorMessage }}</p>
 
         <div>
-            <button class="create-button" @click="CreateGroup">
+            <button class="create-button" @click="createGroup">
                 {{ uiLabels.CreateGroup }}
             </button>
         </div>
@@ -46,38 +46,36 @@ export default {
     name: 'StartNewGroup',
     data: function() {
         return {
-            socket: null, // Vi sparar kopplingen här
+            socket: null, 
+            uiLabels: {},
+            lang: localStorage.getItem("lang") || "en",
             userName: "",
             groupName: "",
             wish1: "", wish2: "", wish3: "",
-            errorMessage: "",
-            uiLabels: {},
-            lang: localStorage.getItem("lang") || "en"
+            errorMessage: ""
         }
     },
-    created: function() {
-        // 1. Hämta IP från minnet och anslut
+
+    created() {
         const serverUrl = sessionStorage.getItem("serverIP") || "http://localhost:3000";
         this.socket = io(serverUrl);
-
-        // 2. Lyssna på events
         this.socket.on("uiLabels", labels => this.uiLabels = labels);
         this.socket.emit("getUILabels", this.lang);
-
         this.socket.on("groupCreated", (data) => {
             sessionStorage.setItem("myName", this.userName);
             sessionStorage.setItem("myGroupCode", data.groupCode);
             this.$router.push('/grouppage/' + data.groupCode);
         });
     },
+
     beforeUnmount() {
-        // Stänger kopplingen snyggt när vi lämnar sidan
         if (this.socket) this.socket.disconnect();
     },
+
     methods: {
         ReturnToHomepage() { this.$router.push('/'); },
         
-        CreateGroup: function() {
+        createGroup: function() {
             if (!this.groupName || !this.userName) {
                 this.errorMessage = this.uiLabels.PleaseEnterGroupName;
                 return;
@@ -88,8 +86,7 @@ export default {
                 this.errorMessage = this.uiLabels.AddWish;
                 return;
             }
-            
-            // Skicka via this.socket
+         
             this.socket.emit("createGroup", {
                 groupName: this.groupName,
                 userName: this.userName, 
@@ -97,26 +94,24 @@ export default {
             });
         },
         switchLanguage: function() {
-      if (this.lang === "en") this.lang = "sv";
-      else this.lang = "en";
-      localStorage.setItem("lang", this.lang);
-      this.socket.emit("getUILabels", this.lang);
-    }
+            if (this.lang === "en") this.lang = "sv";
+            else this.lang = "en";
+            localStorage.setItem("lang", this.lang);
+            this.socket.emit("getUILabels", this.lang);
+        }
     }
 }
 </script>
 
 
-<style>
-
-@import "../assets/base.css";
+<style scoped>
 
 .content-wrapper {
     display: flex;
     flex-direction: column;
     justify-content: space-evenly;
     align-items: center;
-    min-height: 80vh; /* Tar upp minst 80% av skärmhöjden */
+    min-height: 80vh; 
     width: 100%;
     padding: 2rem;
     box-sizing: border-box;
@@ -127,9 +122,4 @@ export default {
     height:60px;
     font-size: 1.5rem;
 }
-
-
-
-
-
 </style>
