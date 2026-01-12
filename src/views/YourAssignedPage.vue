@@ -17,6 +17,8 @@
             </div>
             
             <div class="inspiration-box">
+                <h4> {{ uiLabels.ExplainingText }} </h4>
+                
                 <h3>{{ uiLabels.Inspiration }}</h3>
                 
                 <ul v-if="inspirationList.length > 0">

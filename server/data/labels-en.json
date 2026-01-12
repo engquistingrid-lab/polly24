@@ -23,9 +23,11 @@
     "EnterGroupName": "Enter group name",
     "EnterNameBox": "Enter your name",
     "EnterYourCode": "Enter group code",
+	"ExplainingText": "The person above is the one you will buy a Christmas gift for. Below you can see what others think they have wished for. Go to the wishlist game to join in and guess!",
 
     "GameEnded": "The game has ended!",
-    "Generate": "Start Game & Distribute",
+	"GameRules": "How to play:\n\n On the right you can see everyone's wishes, your task is to guess who wished for what.\n\nYou cannot see your own wishes but you click on the banner and guess the member that best matches the wish.\n\nWhen you have guesses for all wishes, click submit guesses and in the Leaderboard it will update how many you guessed correctly.\n\nBy clicking the button above you will return to the page where you see who your Secret Santa is and you will also see what others think your assigned person wishes for!",
+    "Generate": "Generate Secret Santa",
     "GoToGame": "Go to wishlist game",
     "GoToWishlist": "Go to wishlist game",
     "Group": "Group",
@@ -36,7 +38,7 @@
     "GuessInstructions": "Guess who wished for what in the list below!",
 
     "Incorrect": "Incorrect",
-	"Inspiration": "What people think that your assigned person has wished for",
+	"Inspiration": "What people think that your assigned person has wished for:",
 
     "JoinGroup": "Join group",
 
