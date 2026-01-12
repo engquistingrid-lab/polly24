@@ -138,7 +138,7 @@ export default {
 }
 
 .generate-santa-wrapper {
-    background-color: #4e8565;
+    background-color: var(--main-color-background);
     display: inline-flex;
     flex-direction: column;
     align-items: center;
