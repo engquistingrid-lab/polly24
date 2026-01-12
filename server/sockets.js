@@ -1,17 +1,13 @@
-function sockets(io, socket, users, groups) {
+function sockets(io, socket, groups) {
   
   socket.on('getUILabels', function(lang) {
     socket.emit('uiLabels', groups.getUILabels(lang));
   });
 
-  // Skapa grupp först, sen Gå med
+
   socket.on("createGroup", (d) => {
-    // 1. Skapa tom grupp
     const group = groups.createGroup(d.groupName);
-    
-    // 2. Låt Admin gå med i den
     groups.joinGroup(group.code, socket.id, d.userName, d.wishes);
-    
     socket.join(group.code);
     socket.emit("groupCreated", { groupCode: group.code });
     io.to(group.code).emit("updateGame", group);
@@ -19,9 +15,7 @@ function sockets(io, socket, users, groups) {
 
   socket.on("joinGame", (d) => {
     console.log(`--> Tar emot joinGame för grupp: ${d.groupCode} från ${d.userName}`);
-
     const group = groups.joinGroup(d.groupCode, socket.id, d.userName, d.wishes);
-    
     if (group) {
         socket.join(d.groupCode);
         socket.emit("joinedSuccess", { groupCode: group.code });
@@ -34,7 +28,6 @@ function sockets(io, socket, users, groups) {
   socket.on("getGroupInfo", (d) => {
     const group = groups.getGroup(d.groupCode);
     if(group) {
-        // Om användaren laddar om sidan, se till att de hamnar i rummet igen
         socket.join(d.groupCode); 
         socket.emit("updateGame", group);
         socket.emit("groupInfo", { success: true, groupName: group.name, members: group.members }); 

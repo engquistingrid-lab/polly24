@@ -1,5 +1,6 @@
 <template>
     <header>
+        <h1>Secret Santa</h1>
         <div>
               <button class="lang-button" v-on:click="switchLanguage">
               {{ uiLabels.ChangeLanguage }}
@@ -10,8 +11,6 @@
                 </button>
             </router-link>
         </div>
-        <h1>Secret Santa</h1>
-        
     </header>
 
     <div class="page-wrapper">
@@ -129,8 +128,6 @@ export default {
 
 <style>
 
-@import "../assets/base.css";
-
 .group-wrapper {
     border: 2px solid pink;
     border-radius: 30px;
@@ -171,12 +168,14 @@ export default {
 }
 
 .member-list {
+display: inline-block;     
 display: inline-block; 
   background-color: var(--box-background-color-light);
   padding: 4px 8px;          
   border-radius: 6px;
   box-sizing: border-box;
   line-height: 1.2;          
+  white-space: nowrap;      
   white-space: nowrap;       
   height: 300px;
   border: 2px solid var(--border-color);
@@ -192,8 +191,6 @@ display: inline-block;
     text-align: center;
     margin-right: 40px;
 }
-
-
 
 .generate-button:disabled {
   opacity: 0.6;

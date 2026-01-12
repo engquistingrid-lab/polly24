@@ -1,21 +1,20 @@
 <template>
     <header>
+        <h1>Secret Santa</h1>  
         <router-link to='/'>
-            <button class="return-home-button">
+            <button>
                 {{ uiLabels.ReturnToHomepage }}
             </button>
         </router-link>
-        <h1>Secret Santa</h1>  
     </header>
 
-    <div class="main-wrapper">
+    <div>
         <h2>{{uiLabels.YourAssigned}}</h2>  
-        <div class="assigned-section" v-if="assignedPerson"> 
-            
-            <div class="info-card">
-                <h1 class="highlight">{{ assignedPerson.name }}</h1>
+        <div v-if="assignedPerson"> 
+
+            <div>
+                <h1>{{ assignedPerson.name }}</h1>
             </div>
-            
             <div class="inspiration-box">
                 <h4> {{ uiLabels.ExplainingText }} </h4>
                 
@@ -29,18 +28,18 @@
 
             <div style="margin-top: 30px;">
                 <router-link to='/wishlist'>
-                    <button class="game-btn"> 
+                    <button> 
                         {{uiLabels.GoToWishlist }}
                     </button>
                 </router-link>
             </div>
         </div>
-
     </div>
 </template>
 
 <script>    
 import io from 'socket.io-client';
+
 const serverUrl = sessionStorage.getItem("serverIP") || "http://localhost:3000";
 const socket = io(serverUrl);
 
@@ -74,6 +73,7 @@ export default {
             this.inspirationList = data;
         });
     },
+
     methods: {
         findMyAssigned: function() {
             const me = this.members.find(m => m.name === this.myName);
@@ -91,33 +91,16 @@ export default {
 </script>
 
 <style scoped>
+    
     .inspiration-item{
-        color: rgb(199, 197, 197);
-
+        color: var(--main-color-ivory);
     }
     
     .inspiration-box {
-    border: 2px solid pink;
+    border: 2px solid var(--border-color);
     border-radius: 30px;
     background-color: var(--box-background-color);
     flex-grow: 1;
     }
 
-    @media (max-width: 700px) {
-     header {
-    flex-direction: column; 
-    height: auto;           
-    padding-top: 20px;
-    padding-bottom: 20px;
-    gap: 15px;              
-  }
-
-    header h1 {
-    position: static; 
-    transform: none;
-    font-size: 2.5rem; 
-    order: 1
-}
-}
- 
 </style>

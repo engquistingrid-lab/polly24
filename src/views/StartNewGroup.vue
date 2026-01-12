@@ -1,6 +1,6 @@
 <template>
     <header>
-        <h1>{{ uiLabels.StartNewGroup }}</h1>
+        <h1>Secret Santa</h1>  
         <div>
             <button class="lang-button" v-on:click="switchLanguage">
               {{ uiLabels.ChangeLanguage }}
@@ -13,7 +13,7 @@
     </header>
 
     <div class="content-wrapper">
-
+        <h1>{{ uiLabels.StartNewGroup }}</h1>
         <div>
             <h2>{{ uiLabels.EnterNameBox }}:</h2>
             <input class= "text-boxes" type="text" v-model="userName" :placeholder="uiLabels.YourName">
