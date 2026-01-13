@@ -2,7 +2,7 @@
     <header>
         <h1>Secret Santa</h1>  
         <div>
-            <button class="lang-button" v-on:click="switchLanguage">
+            <button class="lang-button" @click="switchLanguage">
                 {{ uiLabels.ChangeLanguage }}
             </button>
             <button @click="ReturnToHomepage">
@@ -82,7 +82,7 @@ export default {
             const wishes = [this.wish1, this.wish2, this.wish3].filter(w => w && w.trim() !== "");
             
             if (!this.userName || !this.groupCode) {
-                this.errorMessage = this.uiLabels.PleaseEnterGroupCode;
+                this.errorMessage = this.uiLabels.PleaseEnterGroupCodeName;
                 return;
             }
 

@@ -52,7 +52,8 @@
     "NoSpecialChars": "Inga specialtecken!",
     "NoInspiration": "Ingen har gissat på denna person i spelet än...",
 
-    "PleaseEnterGroupCode": "Vänligen fyll i ditt namn och gruppkod!",
+    "PleaseEnterGroupCode": "Vänligen fyll i gruppkod",
+    "PleaseEnterGroupCodeName": "Vänligen fyll i ditt namn och gruppkod!",
     "PleaseEnterGroupName": "Fyll i både namn och gruppnamn!",
     "PleaseEnterName": "Vänligen ange ditt namn",
 
