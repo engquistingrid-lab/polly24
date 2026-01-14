@@ -1,7 +1,7 @@
 <template>
     <header>
         <div>
-              <button class="lang-button" v-on:click="switchLanguage">
+              <button class="lang-button" @click="switchLanguage">
               {{ uiLabels.ChangeLanguage }}
           </button>
             <router-link to='/'>
@@ -13,7 +13,6 @@
         <h1>Secret Santa</h1>
         
     </header>
-
     <div class="page-wrapper">
     <div class="group-wrapper">
         <h1> {{ groupName }}</h1>

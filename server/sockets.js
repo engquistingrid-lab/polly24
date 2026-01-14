@@ -1,4 +1,4 @@
-function sockets(io, socket, users, groups) {
+function sockets(io, socket, groups) {
   
   socket.on('getUILabels', function(lang) {
     socket.emit('uiLabels', groups.getUILabels(lang));
@@ -11,7 +11,6 @@ function sockets(io, socket, users, groups) {
     
     // 2. Låt Admin gå med i den
     groups.joinGroup(group.code, socket.id, d.userName, d.wishes);
-    
     socket.join(group.code);
     socket.emit("groupCreated", { groupCode: group.code });
     io.to(group.code).emit("updateGame", group);

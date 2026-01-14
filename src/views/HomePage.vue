@@ -2,7 +2,7 @@
     <header>
         <h1>Secret Santa</h1>
         <div>
-          <button class="lang-button" v-on:click="switchLanguage">
+          <button class="lang-button" @click="switchLanguage">
               {{ uiLabels.ChangeLanguage }}
           </button>
 
@@ -122,9 +122,6 @@ export default {
   transition: transform 0.2s, box-shadow 0.2s;
   z-index: 10;
 }
-
-
-
   
 @media (max-width: 700px) {
 

@@ -2,7 +2,7 @@
     <header>
         <h1>{{ uiLabels.JoinGroup }}</h1>
         <div>
-            <button class="lang-button" v-on:click="switchLanguage">
+            <button class="lang-button" @click="switchLanguage">
                 {{ uiLabels.ChangeLanguage }}
             </button>
             <button @click="ReturnToHomepage">
